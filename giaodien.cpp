@@ -263,5 +263,7 @@ void GiaoDienChinh() {
 		cout << "|";
 		gotoxy(202, 45);
 	}
-	set_color(240);
+		set_color(240);
+	}
+	
 }
