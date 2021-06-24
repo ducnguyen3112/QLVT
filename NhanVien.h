@@ -1,6 +1,7 @@
 
 #include "HoaDon.h"
 #include "mylib.h"
+#include "xulidulieu.h"
 using namespace std;
 //Cau truc nhan vien
 struct NhanVien
@@ -15,22 +16,9 @@ struct NhanVien
 //Cau truc danh sach nhan vien
 struct DSNV
 {
-	NhanVien* dsnv[500];
+	NhanVien* ds[500];
 	int sl = 0;
 };
 //==================================
-
-//Kiem tra trung ma so nhan vien
-int ktTrung(string str,DSNV ds_nv) {
-	for (int i = 0; i < ds_nv.sl; i++)
-	{
-		if (ds_nv.dsnv[i]->maNV == str) {
-			return i;
-		}
-	}
-	return -1;
-}
-//Chuc nang them nhan vien
-void themNhanVien(DSNV& dsnv) {
-	
-}
+bool themNhanVien(DSNV& dsnv, int y);
+void xuatDSNV(DSNV dsnv);

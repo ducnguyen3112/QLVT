@@ -21,19 +21,22 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VatTu.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NhanVien.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HoaDon.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mylib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="xulidulieu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NhanVien.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VatTu.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HoaDon.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NhanVien.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

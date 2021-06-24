@@ -1,3 +1,4 @@
-#include <string>
+#include "mylib.h"
 using namespace std;
-string nhapChuoi(string str,int x,int y);
+string nhapChuoi(int x, int y, int length);
+string nhapMa(int x, int y, int length);

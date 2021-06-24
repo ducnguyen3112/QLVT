@@ -23,6 +23,7 @@
     <ClCompile Include="HoaDon.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mylib.cpp" />
+    <ClCompile Include="NhanVien.cpp" />
     <ClCompile Include="NhanVien.h" />
     <ClCompile Include="xulidulieu.cpp" />
     <ClCompile Include="VatTu.h" />

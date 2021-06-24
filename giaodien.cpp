@@ -1,20 +1,6 @@
-#include<iostream>
+
 #include "mylib.h"
-#include <conio.h>
-#define Enter 13
-#define ESC 27
-#define Tab 9
-#define Up 72
-#define Down 80
-#define Left 75
-#define Right 77
-#define Space 32
-#define Xmenu 4
-#define ymenu 2
-#define Xhuongdan 3
-#define yhuongdan 23
-#define Xthongbao 3
-#define ythongbao 38
+
 
 using namespace std;
 string menuName[14]{"1.  THEM VAT TU ",
@@ -137,7 +123,7 @@ void GiaoDienNhanVien() {
 	gotoxy(162, 8);
 	cout << "TEN";
 	gotoxy(180, 8);
-	cout << "SO LUONG TON";
+	cout << "GIOI TINH";
 }
 void Printmenu(int vt) {
 	int i ;
@@ -158,73 +144,7 @@ void Printmenu(int vt) {
 	}
 	HuongDanMenu();
 }
-void menu(int vt) {
-	char c;
-	do
-	{
-		
-		Printmenu(vt);
-		GiaoDienChinh();
-		c = _getch();
-		switch (c)
-		{
-		case Up:vt--; 
-			if (vt == 0) {
-				vt = 13;
-			}
-			break;
-		case Down:vt++;
-			if (vt == 14) {
-				vt = 1;
-			}
-			break;
-		case ESC:
-			exit(0);
-		}
-		
-	} while (c!=13);
-	switch (vt)
-	{
-	case 1:
-		GiaoDienVatTu();
-		break;
-	case 2:
-		
-		break;
-	case 3:
-		clrscr();
-		cout << 3;
-		break;
-	case 4:
-		GiaoDienNhanVien();
-		break;
-	case 5:
-		clrscr();
-		cout << 5;
-		break;
-	case 6:
-		clrscr();
-		cout << 6;
-		break;
-	case 7:
-		clrscr();
-		cout << 7;
-		break;
 
-	case 8:
-		clrscr();
-		cout << 8;
-		break;
-	case 9:
-		clrscr();
-		cout << 9;
-		break;
-	case 10:
-		clrscr();
-		exit(0);
-		break;
-	}
-}
 void GiaoDienChinh() {
 	set_color(242);
 	gotoxy(2, 2);
