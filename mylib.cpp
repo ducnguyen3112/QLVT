@@ -1,12 +1,13 @@
 
 #include <conio.h>
-
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <dos.h>
 #include <string.h>
 #include <windows.h>
 #include <iostream>
+using namespace std;
 #define Enter 13
 #define widthWindow 1520
 #define heightWindow 800

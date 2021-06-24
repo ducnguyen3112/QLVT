@@ -19,13 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="giaodien.h" />
-    <ClInclude Include="mylib.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="giaodien.cpp" />
+    <ClCompile Include="HoaDon.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mylib.cpp" />
+    <ClCompile Include="NhanVien.h" />
+    <ClCompile Include="xulidulieu.cpp" />
+    <ClCompile Include="VatTu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="giaodien.h" />
+    <ClInclude Include="mylib.h" />
+    <ClInclude Include="xulidulieu.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

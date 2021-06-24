@@ -266,4 +266,3 @@ void GiaoDienChinh() {
 		set_color(240);
 	}
 	
-}
