@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <dos.h>
 #include <windows.h>
+#include <fstream>
 
 using namespace std;
 #define widthWindow 1520
@@ -21,9 +22,8 @@ using namespace std;
 #define ymenu 2
 #define Xhuongdan 3
 #define yhuongdan 23
-#define Xthongbao 3
+#define Xthongbao 4
 #define ythongbao 38
-#define xdulieu1 52
 #define xdulieu2 62
 #define xdulieu3 82
 #define xdulieu4 158
@@ -34,6 +34,7 @@ using namespace std;
 #define xkedoc4 156
 #define xkedoc5 176
 #define xkedoc6 196
+#define xstt 54
 using namespace std;
 #define widthWindow 1520
 #define heightWindow 800

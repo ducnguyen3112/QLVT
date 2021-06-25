@@ -6,8 +6,8 @@ using namespace std;
 
 void menu(int vt, DSNV& dsnv) {
 	char c;
-	char c1;
 	int dong;
+	int index;
 	bool b=true;
 	while (true)
 	{
@@ -45,7 +45,7 @@ void menu(int vt, DSNV& dsnv) {
 			set_color(240);
 			gotoxy(35, 15);
 			Sleep(10000);
-			xuatDSNV(dsnv);
+			xuatDSNV(dsnv,1);
 			break;
 		case 2:
 
@@ -55,23 +55,62 @@ void menu(int vt, DSNV& dsnv) {
 			cout << 3;
 			break;
 		case 4:
-			dong = 10;
+			dong = dsnv.sl + 10;
+			xuatDSNV(dsnv,-1);
+			huongDanThemNhanVien(240);
 			while (true)
 			{
+				duongKeDuoi(dong,255);
+				set_color(240);
 				GiaoDienNhanVien();
+				duongKeNganCach(dong);
+				duongKeDuoi(dong + 1,240);
+				gotoxy(xstt, dong);
+				cout << dong-9;
 				ShowCur(1);
 				if (!themNhanVien(dsnv,dong))
 				{
+					huongDanThemNhanVien(255);
 					break;
 				}
+				set_color(240);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "-Them nhan vien moi thanh cong.";
+				Sleep(1000);
+				set_color(255);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "-Them nhan vien moi thanh cong.";
 				dong++;
+				
 			}
 				
 				
 			break;
 		case 5:
-			clrscr();
-			cout << 5;
+			if (dsnv.sl==0)
+			{
+				set_color(240);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "Khong the xoa!Danh sach rong.";
+				Sleep(2000);
+				xoaKhungThongBao();
+				break;
+			}
+			while (true)
+			{
+				GiaoDienNhanVien();
+				index = chonNhanVien(dsnv);
+				if (xacNhan("Ban chac chan muon xoa?"))
+				{
+					//xoaNhanVien(dsnv, index);
+					thongBaoXoa();
+				}
+				else
+				{
+					break;
+				}
+			}
+			
 			break;
 		case 6:
 			clrscr();
@@ -99,7 +138,6 @@ void menu(int vt, DSNV& dsnv) {
 }
 int main(){
 	DSNV ds_nv;
-	
 	khoiTaoManHinh();
 	menu(1,ds_nv);
 	

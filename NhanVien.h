@@ -21,4 +21,6 @@ struct DSNV
 };
 //==================================
 bool themNhanVien(DSNV& dsnv, int y);
-void xuatDSNV(DSNV dsnv);
+void xuatDSNV(DSNV dsnv,int index);
+int chonNhanVien(DSNV dsnv);
+//void xoaNhanVien(DSNV& dsnv, int index);
