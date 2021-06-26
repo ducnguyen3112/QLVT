@@ -41,13 +41,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="giaodien.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mylib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="xulidulieu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="giaodien.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

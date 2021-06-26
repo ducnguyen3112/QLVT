@@ -100,25 +100,33 @@ void menu(int vt, DSNV& dsnv) {
 			{
 				GiaoDienNhanVien();
 				index = chonNhanVien(dsnv);
-				if (xacNhan("Ban chac chan muon xoa?"))
+				int check = xacNhan("Ban chac chan muon xoa?");
+				if (check==1)
 				{
-					//xoaNhanVien(dsnv, index);
+					xoaNhanVien(dsnv, index);
 					thongBaoXoa();
+					xoaKhungDuLieu();
 				}
-				else
+				else if (check == 0) {
+					xoaKhungThongBao();
+					index = chonNhanVien(dsnv);
+				}
+				else if (check==-1)
 				{
 					break;
 				}
+
+				
 			}
 			
 			break;
 		case 6:
-			clrscr();
-			cout << 6;
+			GiaoDienNhanVien();
+			index = chonNhanVien(dsnv);
+			khungHieuChinh(90, 10);
+			hieuChinhNhanVien(dsnv, index, 90, 10);
 			break;
 		case 7:
-			clrscr();
-			cout << 7;
 			break;
 
 		case 8:
@@ -138,6 +146,7 @@ void menu(int vt, DSNV& dsnv) {
 }
 int main(){
 	DSNV ds_nv;
+	docFileNhanVien(ds_nv);
 	khoiTaoManHinh();
 	menu(1,ds_nv);
 	

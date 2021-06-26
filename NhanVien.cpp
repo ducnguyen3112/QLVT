@@ -18,7 +18,7 @@ bool themNhanVien(DSNV& dsnv,int y) {
 	{
 		gotoxy(xdulieu2, y);
 		cout << "          ";
-		str = nhapMa(xdulieu2, y, 10);
+		str = nhapMa(xdulieu2, y, 10,"",240);
 		if (ktTrungNV(str,dsnv)==-1)
 		{
 			nv->maNV = str;
@@ -35,17 +35,17 @@ bool themNhanVien(DSNV& dsnv,int y) {
 	{
 		return false;
 	}
-	nv->hoNV = nhapChuoi(xdulieu3, y, 20);
+	nv->hoNV = nhapChuoi(xdulieu3, y, 20,"", 240);
 	if (nv->hoNV.empty())
 	{
 		return false;
 	}
-	nv->tenNV = nhapChuoi(xdulieu4, y, 10);
+	nv->tenNV = nhapChuoi(xdulieu4, y, 10,"", 240);
 	if (nv->tenNV.empty())
 	{
 		return false;
 	}
-	nv->phai = nhapChuoi2(xdulieu5, y, 3);
+	nv->phai = nhapChuoi2(xdulieu5, y, 3,"", 240);
 	if (nv->phai.empty())
 	{
 		return false;
@@ -59,14 +59,15 @@ bool themNhanVien(DSNV& dsnv,int y) {
 void docFileNhanVien(DSNV &dsnv) {
 	ifstream fin;
 	fin.open("dsnv.txt", ios_base::in);
+	string str;
 	while (fin.eof()!=true)
 	{
 		dsnv.ds[dsnv.sl] = new NhanVien;
-		getline(fin, dsnv.ds[dsnv.sl]->maNV, ',');
-		getline(fin, dsnv.ds[dsnv.sl]->hoNV, ',');
-		getline(fin, dsnv.ds[dsnv.sl]->tenNV, ',');
-		getline(fin, dsnv.ds[dsnv.sl]->phai, ',');
-		fin.ignore();
+		getline(fin, dsnv.ds[dsnv.sl]->maNV, '\n');
+		getline(fin, dsnv.ds[dsnv.sl]->hoNV, '\n');
+		getline(fin, dsnv.ds[dsnv.sl]->tenNV, '\n');
+		getline(fin, dsnv.ds[dsnv.sl]->phai, '\n');
+		dsnv.sl++;
 	}
 	fin.close();
 }
@@ -77,7 +78,7 @@ void xuatDSNV(DSNV dsnv,int index) {
 	{
 		if (i==index)
 		{
-			set_color(5*16);
+			set_color(63);
 		}
 		else
 		{
@@ -127,14 +128,52 @@ int chonNhanVien(DSNV dsnv) {
 		return vt;
 }
 //Xoa nhan vien duoc chon
-//void xoaNhanVien(DSNV &dsnv ,int index) {
-//	for (int i = index; i < dsnv.sl; i++)
-//	{
-//		dsnv.ds[i]->maNV = dsnv.ds[i + 1]->maNV;
-//		dsnv.ds[i]->hoNV = dsnv.ds[i + 1]->hoNV;
-//		dsnv.ds[i]->tenNV = dsnv.ds[i + 1]->tenNV;
-//		dsnv.ds[i]->phai = dsnv.ds[i + 1]->phai;
-//	}
-//	NhanVien* nv = dsnv.ds[dsnv.sl - 1];
-//	dsnv.sl--;
-//}
+void xoaNhanVien(DSNV &dsnv ,int index) {
+	for (int i = index; i < dsnv.sl-1; i++)
+	{
+		dsnv.ds[i]->maNV = dsnv.ds[i + 1]->maNV;
+		dsnv.ds[i]->hoNV = dsnv.ds[i + 1]->hoNV;
+		dsnv.ds[i]->tenNV = dsnv.ds[i + 1]->tenNV;
+		dsnv.ds[i]->phai = dsnv.ds[i + 1]->phai;
+	}
+	NhanVien* nv = dsnv.ds[dsnv.sl - 1];
+	dsnv.sl--;
+}
+//Hieu chinh nhan vien duoc chon
+void hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
+	NhanVien* nv = new NhanVien();
+	nv->maNV = dsnv.ds[index]->maNV;
+	nv->hoNV = dsnv.ds[index]->hoNV;
+	nv->tenNV = dsnv.ds[index]->tenNV;
+	nv->phai = dsnv.ds[index]->phai;
+	set_color(63);
+	gotoxy(x + 20, y + 9);
+	cout << nv->hoNV;
+	gotoxy(x + 20, y + 11);
+	cout << nv->tenNV;
+	gotoxy(x + 20, y + 13);
+	cout << nv->phai; 
+	string str;
+	ShowCur(true);
+	do
+	{
+		set_color(63);
+		gotoxy(x + 20, y + 7);
+		cout << "             ";
+		str = "";
+		str=nhapMa(x+20, y+7, 10, nv->maNV,63);
+		if (str== dsnv.ds[index]->maNV)
+		{
+			break;
+		}
+		gotoxy(Xthongbao, ythongbao);
+		set_color(240);
+		cout << "Ma so bi trung!Hay nhap lai.";
+		Sleep(2000);
+		xoaKhungThongBao();
+
+	} while (ktTrungNV(str,dsnv)>-1);
+	nhapChuoi(x+20, y+9, 20, nv->hoNV, 63);
+	nhapChuoi(x+20, y+11, 10, nv->tenNV, 63);
+	nhapChuoi2(x+20, y+13, 3, nv->phai, 63);
+}

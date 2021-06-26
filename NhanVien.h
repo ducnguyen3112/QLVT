@@ -22,5 +22,7 @@ struct DSNV
 //==================================
 bool themNhanVien(DSNV& dsnv, int y);
 void xuatDSNV(DSNV dsnv,int index);
+void docFileNhanVien(DSNV& dsnv);
 int chonNhanVien(DSNV dsnv);
-//void xoaNhanVien(DSNV& dsnv, int index);
+void xoaNhanVien(DSNV& dsnv, int index);
+void hieuChinhNhanVien(DSNV& dsnv, int index, int x, int y);
