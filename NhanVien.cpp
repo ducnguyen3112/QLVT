@@ -64,13 +64,33 @@ void docFileNhanVien(DSNV &dsnv) {
 	{
 		dsnv.ds[dsnv.sl] = new NhanVien;
 		getline(fin, dsnv.ds[dsnv.sl]->maNV, '\n');
+		if (dsnv.ds[dsnv.sl]->maNV.empty())
+		{
+			break;
+		}
 		getline(fin, dsnv.ds[dsnv.sl]->hoNV, '\n');
 		getline(fin, dsnv.ds[dsnv.sl]->tenNV, '\n');
 		getline(fin, dsnv.ds[dsnv.sl]->phai, '\n');
+		string str;
+		
 		dsnv.sl++;
 	}
 	fin.close();
 }
+//ghi file nhan vien
+void ghiFileNhanVien(DSNV dsnv) {
+	ofstream fout;
+	fout.open("dsnv.txt");
+	for (int i = 0; i < dsnv.sl; i++)
+	{
+		fout << dsnv.ds[i]->maNV << endl;
+		fout << dsnv.ds[i]->hoNV << endl;
+		fout << dsnv.ds[i]->tenNV << endl;
+		fout << dsnv.ds[i]->phai<< endl;
+	}
+	fout.close();
+}
+//Xuat ds nhan vien len bang
 void xuatDSNV(DSNV dsnv,int index) {
 	int i;
 	set_color(240);
@@ -140,40 +160,83 @@ void xoaNhanVien(DSNV &dsnv ,int index) {
 	dsnv.sl--;
 }
 //Hieu chinh nhan vien duoc chon
-void hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
+int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 	NhanVien* nv = new NhanVien();
-	nv->maNV = dsnv.ds[index]->maNV;
-	nv->hoNV = dsnv.ds[index]->hoNV;
-	nv->tenNV = dsnv.ds[index]->tenNV;
-	nv->phai = dsnv.ds[index]->phai;
 	set_color(63);
 	gotoxy(x + 20, y + 9);
-	cout << nv->hoNV;
+	cout << dsnv.ds[index]->hoNV;
 	gotoxy(x + 20, y + 11);
-	cout << nv->tenNV;
+	cout << dsnv.ds[index]->tenNV;
 	gotoxy(x + 20, y + 13);
-	cout << nv->phai; 
+	cout << dsnv.ds[index]->phai;
 	string str;
+
 	ShowCur(true);
 	do
 	{
 		set_color(63);
 		gotoxy(x + 20, y + 7);
 		cout << "             ";
-		str = "";
-		str=nhapMa(x+20, y+7, 10, nv->maNV,63);
-		if (str== dsnv.ds[index]->maNV)
+		nv->maNV = "";
+		nv->maNV =nhapMa(x+20, y+7, 10, dsnv.ds[index]->maNV,63);
+		if (nv->maNV == dsnv.ds[index]->maNV)
 		{
+
 			break;
 		}
+		if (ktTrungNV(str, dsnv) > -1)
+		{
 		gotoxy(Xthongbao, ythongbao);
 		set_color(240);
 		cout << "Ma so bi trung!Hay nhap lai.";
 		Sleep(2000);
 		xoaKhungThongBao();
-
+		}
 	} while (ktTrungNV(str,dsnv)>-1);
-	nhapChuoi(x+20, y+9, 20, nv->hoNV, 63);
-	nhapChuoi(x+20, y+11, 10, nv->tenNV, 63);
-	nhapChuoi2(x+20, y+13, 3, nv->phai, 63);
+	nv->hoNV=nhapChuoi(x+20, y+9, 20, dsnv.ds[index]->hoNV, 63);
+	nv->tenNV = nhapChuoi(x+20, y+11, 10, dsnv.ds[index]->tenNV, 63);
+	nv->phai = nhapChuoi2(x+20, y+13, 3, dsnv.ds[index]->phai, 63);
+	ShowCur(false);
+	int confirm = xacNhanHieuChinh(x, y);
+	xoaKhungHuongDan();
+	if (confirm==1)
+	{
+		dsnv.ds[index]->maNV = nv->maNV;
+		dsnv.ds[index]->hoNV = nv->hoNV;
+		dsnv.ds[index]->tenNV = nv->tenNV;
+		dsnv.ds[index]->phai = nv->phai;
+		return 1;
+	}
+	else if (confirm == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
+	return 0;
+}
+//Sap xep nhan vien
+void sapXepNhanVien(DSNV& dsnv) {
+	
+	for (int i = 0; i < dsnv.sl-1; i++)
+	{
+		for (int j = i+1; j < dsnv.sl; j++)
+		{
+
+			
+			if (dsnv.ds[i]->tenNV.compare(dsnv.ds[j]->tenNV)>0)
+			{
+				swap(dsnv.ds[i], dsnv.ds[j]);
+			}
+			if (dsnv.ds[i]->tenNV.compare(dsnv.ds[j]->tenNV) == 0 )
+			{
+				if (dsnv.ds[i]->hoNV.compare(dsnv.ds[j]->hoNV) > 0)
+				{
+					swap(dsnv.ds[i], dsnv.ds[j]);
+				}
+			}
+		}
+	}
 }

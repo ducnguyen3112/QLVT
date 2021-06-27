@@ -15,8 +15,9 @@ string menuName[14]{"1.  THEM VAT TU ",
 					"10. IN HOA DON ",
 					"11. DS HOA DON CUA NHAN VIEN ",
 					"12. THONG KE ",
-					"13. THOAT "};
+					"13. LUU VA THOAT "};
 void GiaoDienChinh();
+//In ra huong dan menu
 void HuongDanMenu() {
 	gotoxy(Xhuongdan, yhuongdan);
 	cout << "- Di chuyen thanh sang bang phim mui ten.";
@@ -46,6 +47,7 @@ void KhungTieude(int x,int y,int dai) {
 		}
 	}
 }
+//In ra khung bang danh sach
 void KhungDS() {
 	for (int i = 50; i <= 196; i++)
 	{
@@ -94,6 +96,7 @@ void KhungDS() {
 	}
 	
 }
+// In ra khung bang danh sach vat tu
 void GiaoDienVatTu() {
 	gotoxy(116, 4);
 	cout << "DANH SACH VAT TU";
@@ -111,6 +114,7 @@ void GiaoDienVatTu() {
 	cout << "SO LUONG TON";
 	
 }
+// In ra khung bang danh sach nhan vien
 void GiaoDienNhanVien() {
 	gotoxy(115, 4);
 	cout << "DANH SACH NHAN VIEN";
@@ -127,6 +131,7 @@ void GiaoDienNhanVien() {
 	gotoxy(180, 8);
 	cout << "GIOI TINH";
 }
+//In menu chinh
 void Printmenu(int vt) {
 	int i ;
 	set_color(240);
@@ -146,7 +151,7 @@ void Printmenu(int vt) {
 	}
 	HuongDanMenu();
 }
-
+//Khung cua cua so chinh
 void GiaoDienChinh() {
 	set_color(242);
 	gotoxy(2, 2);
@@ -221,6 +226,7 @@ void duongKeDuoi(int y,int color) {
 	gotoxy(xkedoc6, y);
 	cout << char(217);
 }
+//in ra huong dan chuc nang them nhan vien
 void huongDanThemNhanVien(int color) {
 	set_color(color);
 	gotoxy(Xhuongdan, yhuongdan);
@@ -240,6 +246,7 @@ void huongDanThemNhanVien(int color) {
 	gotoxy(Xhuongdan, yhuongdan+7);
 	cout << "-Nhan phim 'ESC' de huy them thong tin.";
 }
+//In ra huong dan them vat tu
 void huongDanThemVatTu(int color) {
 	set_color(color);
 	gotoxy(Xhuongdan, yhuongdan);
@@ -247,7 +254,8 @@ void huongDanThemVatTu(int color) {
 	gotoxy(Xhuongdan, yhuongdan + 1);
 	cout << "-Nhan phim 'ESC' de huy them thong tin.";
 }
-int xacNhan(string mess) {
+//In ra chuc nang xac nhan xoa hay khong
+int xacNhanXoa(string mess) {
 	char c;
 	bool chon = 0;
 	set_color(240);
@@ -299,6 +307,7 @@ int xacNhan(string mess) {
 	set_color(240);
 	return chon;
 }
+//Xoa noi dung trong phan thong bao
 void xoaKhungThongBao() {
 	set_color(255);
 	int y=0;
@@ -312,14 +321,16 @@ void xoaKhungThongBao() {
 	}
 	set_color(240);
 }
-void thongBaoXoa() {
+//in ra thong bao co noi dung "str"
+void thongBao(string str) {
 		xoaKhungThongBao();
 		gotoxy(Xthongbao, ythongbao);
 		set_color(240);
-		cout << "Xoa thanh cong.";
+		cout << str;
 		Sleep(2000);
 		xoaKhungThongBao();
 }
+//Xoa phan noi dung trong khung du lieu
 void xoaKhungDuLieu() {
 	set_color(255);
 	int y = 0;
@@ -333,6 +344,7 @@ void xoaKhungDuLieu() {
 	}
 	set_color(240);
 }
+//Xoa phan noi dung trong khung huong dan
 void xoaKhungHuongDan() {
 	set_color(255);
 	int y = 0;
@@ -346,7 +358,8 @@ void xoaKhungHuongDan() {
 	}
 	set_color(240);
 }
-void khungHieuChinh(int x,int y) {
+//In ra khung hieu chinh nhan vien
+void khungHieuChinhNhanVien(int x,int y) {
 	for (int i = y; i < y+20; i++)
 	{
 		for (int j = x; j < x+50; j++)
@@ -367,11 +380,97 @@ void khungHieuChinh(int x,int y) {
 	cout << "TEN NHAN VIEN:";
 	gotoxy(x + 5, y + 13);
 	cout << "PHAI:";
+	gotoxy(x + 12, y + 17);
+	cout << "     ";
 	gotoxy(x + 12, y + 18);
-	cout << "LUU";
+	cout << " LUU ";
+	gotoxy(x + 12, y + 19);
+	cout << "     ";
+	gotoxy(x + 35, y + 17);
+	cout << "     ";
 	gotoxy(x + 35, y + 18);
-	cout << "HUY";
+	cout << " HUY ";
+	gotoxy(x + 35, y + 19);
+	cout << "     ";
 	
 	
 	set_color(240);
+}
+//Chon "YES" ,"NO" trong phan hieu chinh
+int xacNhanHieuChinh(int x,int y) {
+	xoaKhungHuongDan();
+	gotoxy(Xhuongdan, yhuongdan);
+	cout << "-Dung phim mui ten trai phai de di chuyen.";
+	gotoxy(Xhuongdan, yhuongdan+1);
+	cout << "-Nhan phim Enter de chon.";
+	char c;
+	bool chon = 0;
+	do
+	{
+		set_color(63);
+		gotoxy(x + 12, y + 17);
+		cout << "     ";
+		gotoxy(x + 12, y + 18);
+		cout << " LUU ";
+		gotoxy(x + 12, y + 19);
+		cout << "     ";
+		gotoxy(x + 35, y + 17);
+		cout << "     ";
+		gotoxy(x + 35, y + 18);
+		cout << " HUY ";
+		gotoxy(x + 35, y + 19);
+		cout << "     ";
+
+		if (chon == 0)
+		{
+			set_color(240);
+			gotoxy(x + 35, y + 17);
+			cout << "     ";
+			gotoxy(x + 35, y + 18);
+			cout << " HUY ";
+			gotoxy(x + 35, y + 19);
+			cout << "     ";
+		}
+		if (chon==1)
+		{
+			set_color(240);
+			gotoxy(x + 12, y + 17);
+			cout << "     ";
+			gotoxy(x + 12, y + 18);
+			cout << " LUU ";
+			gotoxy(x + 12, y + 19);
+			cout << "     ";
+		}
+		c = _getch();
+		switch (c)
+		{
+		case Left:
+				if (chon == 0)
+				{
+						chon = 1;
+				}
+				break;
+		case Right:
+				if (chon == 1)
+				{
+						chon = 0;
+				}
+				break;
+		case ESC:
+				return -1;
+				break;
+				
+		}
+	} while (c!=Enter);
+	set_color(240);
+	return chon;
+}
+//In huong dan phan hieu chinh
+void huongDanHieuChinh() {
+	gotoxy(Xhuongdan, yhuongdan);
+	set_color(240);
+	cout << "-Nhan Enter de qua thong tin khac.";
+	gotoxy(Xhuongdan, yhuongdan+1);
+	cout << "-Nhan ESC de thoat.";
+
 }

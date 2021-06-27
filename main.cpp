@@ -56,6 +56,7 @@ void menu(int vt, DSNV& dsnv) {
 			break;
 		case 4:
 			dong = dsnv.sl + 10;
+			sapXepNhanVien(dsnv);
 			xuatDSNV(dsnv,-1);
 			huongDanThemNhanVien(240);
 			while (true)
@@ -100,11 +101,15 @@ void menu(int vt, DSNV& dsnv) {
 			{
 				GiaoDienNhanVien();
 				index = chonNhanVien(dsnv);
-				int check = xacNhan("Ban chac chan muon xoa?");
+				if (index==-1)
+				{
+					break;
+				}
+				int check = xacNhanXoa("Ban chac chan muon xoa?");
 				if (check==1)
 				{
 					xoaNhanVien(dsnv, index);
-					thongBaoXoa();
+					thongBao("- Xoa nhan vien thanh cong.");
 					xoaKhungDuLieu();
 				}
 				else if (check == 0) {
@@ -113,6 +118,7 @@ void menu(int vt, DSNV& dsnv) {
 				}
 				else if (check==-1)
 				{
+					set_color(240);
 					break;
 				}
 
@@ -121,10 +127,41 @@ void menu(int vt, DSNV& dsnv) {
 			
 			break;
 		case 6:
-			GiaoDienNhanVien();
-			index = chonNhanVien(dsnv);
-			khungHieuChinh(90, 10);
-			hieuChinhNhanVien(dsnv, index, 90, 10);
+			while (true)
+			{
+				GiaoDienNhanVien();
+				
+				index = chonNhanVien(dsnv);
+				if (index==-1)
+				{
+					xoaKhungDuLieu();	
+					break;
+				}
+				xoaKhungHuongDan();
+				khungHieuChinhNhanVien(90, 10);
+				huongDanHieuChinh();
+				int check =hieuChinhNhanVien(dsnv, index, 90, 10);
+				if (check == 1)
+				{
+					xoaKhungHuongDan();
+					thongBao("-Hieu chinh nhan vien thanh cong.");
+					xoaKhungDuLieu();
+					set_color(240);
+
+				}
+				else if (check == 0) {
+					xoaKhungDuLieu();
+		
+					set_color(240);
+				}
+				else if (check == -1)
+				{
+					xoaKhungDuLieu();
+					set_color(240);
+					break;
+				}
+			}
+			
 			break;
 		case 7:
 			break;
@@ -141,6 +178,19 @@ void menu(int vt, DSNV& dsnv) {
 			clrscr();
 			exit(0);
 			break;
+		case 11:
+			clrscr();
+			exit(0);
+			break;
+		case 12:
+			clrscr();
+			exit(0);
+			break;
+		case 13:
+			sapXepNhanVien(dsnv);
+			ghiFileNhanVien(dsnv);
+			exit(0);
+			break;
 		}
 	}
 }
@@ -149,6 +199,4 @@ int main(){
 	docFileNhanVien(ds_nv);
 	khoiTaoManHinh();
 	menu(1,ds_nv);
-	
-	
 	}
