@@ -100,6 +100,7 @@ void menu(int vt, DSNV& dsnv) {
 			while (true)
 			{
 				GiaoDienNhanVien();
+				duongKeDuoi(dsnv.sl+10, 240);
 				index = chonNhanVien(dsnv);
 				if (index==-1)
 				{
@@ -130,6 +131,7 @@ void menu(int vt, DSNV& dsnv) {
 			while (true)
 			{
 				GiaoDienNhanVien();
+				duongKeDuoi(dsnv.sl + 10, 240);
 				
 				index = chonNhanVien(dsnv);
 				if (index==-1)
