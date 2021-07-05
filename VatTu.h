@@ -11,10 +11,11 @@ struct VatTu
 	VatTu* left;
 	VatTu* right;
 };
+typedef struct VatTu* tree;
 //Cau truc danh sach vat tu
 struct DSVT
 {
-	VatTu* dsvt = NULL;
+	tree dsvt = NULL;
 };
 //==================================
 
