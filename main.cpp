@@ -9,25 +9,29 @@ void menu(int vt, DSNV& dsnv) {
 	int dong;
 	int index;
 	bool b=true;
+	printLogo();
 	while (true)
 	{
 
-		clrscr();
+		xoaKhungDuLieu();
+		xoaKhungHuongDan();
+		xoaKhungThongBao();
+		printLogo();
 		do
 		{
-
 			Printmenu(vt);
 			GiaoDienChinh();
 			c = _getch();
+			
 			switch (c)
 			{
 			case Up:vt--;
 				if (vt == 0) {
-					vt = 13;
+					vt = 14;
 				}
 				break;
 			case Down:vt++;
-				if (vt == 14) {
+				if (vt == 15) {
 					vt = 1;
 				}
 				break;
@@ -42,19 +46,23 @@ void menu(int vt, DSNV& dsnv) {
 		switch (vt)
 		{
 		case 1:
+			xoaKhungDuLieu();
 			set_color(240);
 			gotoxy(35, 15);
 			Sleep(10000);
 			xuatDSNV(dsnv,1);
 			break;
 		case 2:
+			xoaKhungDuLieu();
 
 			break;
 		case 3:
+			xoaKhungDuLieu();
 			clrscr();
 			cout << 3;
 			break;
 		case 4:
+			xoaKhungDuLieu();
 			dong = dsnv.sl + 10;
 			sapXepNhanVien(dsnv);
 			xuatDSNV(dsnv,-1);
@@ -72,6 +80,7 @@ void menu(int vt, DSNV& dsnv) {
 				if (!themNhanVien(dsnv,dong))
 				{
 					huongDanThemNhanVien(255);
+					ShowCur(false);
 					break;
 				}
 				set_color(240);
@@ -88,6 +97,7 @@ void menu(int vt, DSNV& dsnv) {
 				
 			break;
 		case 5:
+			xoaKhungDuLieu();
 			if (dsnv.sl==0)
 			{
 				set_color(240);
@@ -128,6 +138,7 @@ void menu(int vt, DSNV& dsnv) {
 			
 			break;
 		case 6:
+			xoaKhungDuLieu();
 			while (true)
 			{
 				GiaoDienNhanVien();
@@ -166,33 +177,54 @@ void menu(int vt, DSNV& dsnv) {
 			
 			break;
 		case 7:
+			xoaKhungDuLieu();
+			GiaoDienNhanVien();
+			xuatDSNV(dsnv, -1);
+			duongKeDuoi(dsnv.sl+10, 240);
+			gotoxy(Xthongbao, ythongbao);
+			system("pause");
 			break;
 
 		case 8:
+			xoaKhungDuLieu();
 			clrscr();
 			cout << 8;
 			break;
 		case 9:
+			xoaKhungDuLieu();
 			clrscr();
 			cout << 9;
 			break;
 		case 10:
+			xoaKhungDuLieu();
 			clrscr();
 			exit(0);
 			break;
 		case 11:
-			clrscr();
-			exit(0);
+			xoaKhungDuLieu();
+			khungDienNgay(90, 15);
+			gotoxy(Xthongbao, ythongbao);
+			system("pause");
 			break;
 		case 12:
-			clrscr();
-			exit(0);
+			xoaKhungDuLieu();
+			GiaoDienThongKe();
+			gotoxy(Xthongbao, ythongbao);
+			system("pause");
 			break;
 		case 13:
+			xoaKhungDuLieu();
+			GiaoDienTop10VT();
+			gotoxy(Xthongbao, ythongbao);
+			system("pause");
+			break;
+		case 14:
+			xoaKhungDuLieu();
 			sapXepNhanVien(dsnv);
 			ghiFileNhanVien(dsnv);
 			exit(0);
 			break;
+
 		}
 	}
 }

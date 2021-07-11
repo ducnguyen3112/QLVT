@@ -1,11 +1,3 @@
-NV1
-Nguyen Van
-Tung
-Nam
-NV2
-Nguyen Thi
-Trang
-Nu
 NV3
 Ho Si
 Hoang
@@ -18,6 +10,14 @@ NV5
 Nguyen Thi Thuy
 Linh
 Nu
+NV2
+Nguyen Thi
+Trang
+Nu
+NV1
+Nguyen Van
+Tung
+Nam
 NV6
 Phan Thanh
 Tung
