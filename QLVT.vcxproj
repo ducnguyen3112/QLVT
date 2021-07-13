@@ -27,6 +27,7 @@
     <ClCompile Include="mylib.cpp" />
     <ClCompile Include="NhanVien.cpp" />
     <ClCompile Include="NhanVien.h" />
+    <ClCompile Include="VatTu.cpp" />
     <ClCompile Include="xulidulieu.cpp" />
     <ClCompile Include="VatTu.h" />
   </ItemGroup>

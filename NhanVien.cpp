@@ -179,7 +179,7 @@ int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 		gotoxy(x + 20, y + 7);
 		cout << "             ";
 		nv->maNV = "";
-		nv->maNV =nhapMa(x+20, y+7, 10, dsnv.ds[index]->maNV,63);
+		nv->maNV = nhapMa(x + 20, y + 7, 10, dsnv.ds[index]->maNV, 63);
 		if (nv->maNV == dsnv.ds[index]->maNV)
 		{
 
@@ -187,13 +187,14 @@ int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 		}
 		if (ktTrungNV(str, dsnv) > -1)
 		{
-		gotoxy(Xthongbao, ythongbao);
-		set_color(240);
-		cout << "Ma so bi trung!Hay nhap lai.";
-		Sleep(2000);
-		xoaKhungThongBao();
+			gotoxy(Xthongbao, ythongbao);
+			set_color(240);
+			cout << "Ma so bi trung!Hay nhap lai.";
+			Sleep(2000);
+			xoaKhungThongBao();
 		}
-	} while (ktTrungNV(str,dsnv)>-1);
+	}
+	while (ktTrungNV(str,dsnv)>-1);
 	nv->hoNV=nhapChuoi(x+20, y+9, 20, dsnv.ds[index]->hoNV, 63);
 	nv->tenNV = nhapChuoi(x+20, y+11, 10, dsnv.ds[index]->tenNV, 63);
 	nv->phai = nhapChuoi2(x+20, y+13, 3, dsnv.ds[index]->phai, 63);

@@ -1,0 +1,28 @@
+1
+tu lanh
+cai
+1
+2
+ti vi
+cai
+0
+3
+may lanh
+cai
+11
+4
+may giat
+cai
+15
+5
+tu do
+cai
+17
+6
+quat dien
+cai
+0
+7
+aa
+cai
+0

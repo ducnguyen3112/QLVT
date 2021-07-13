@@ -7,6 +7,7 @@
 #include <dos.h>
 #include <windows.h>
 #include <fstream>
+#include <math.h>
 
 using namespace std;
 #define widthWindow 1520
