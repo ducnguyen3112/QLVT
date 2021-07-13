@@ -1,5 +1,6 @@
 #include "mylib.h"
-//Ham nhap chuoi co chu,so va khoang trang
+#include "NhanVien.h"
+//Ham nhap chuoi co chu va khoang trang
 string nhapChuoi(int x,int y,int length,string str, int color) {
     set_color(color);
     int vitri = str.length();
@@ -13,8 +14,15 @@ string nhapChuoi(int x,int y,int length,string str, int color) {
         chr = _getch();
         if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr == ' ')) && (vitri < length))
         {
-    
-            str.push_back(char(chr));
+            if (vitri==0||str.at(vitri-1)==' ')
+            {
+                str.push_back(char(toupper(chr)));
+            }
+            else
+            {
+                str.push_back(char(chr));
+            }
+            
             cout << str.at(vitri);
             vitri++;
         }if (chr == 8 && vitri > 0)
@@ -78,8 +86,14 @@ string nhapChuoi2(int x, int y, int length,string str, int color) {
         chr = _getch();
         if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') ) && (vitri < length))
         {
-            str.push_back(char(chr));
-            cout << str.at(vitri);
+            if (vitri==0)
+            {
+                str.push_back(char(toupper(chr)));
+            }
+            else{
+                    cout << str.at(vitri);
+            }
+ 
             vitri++;
         }if (chr == 8 && vitri > 0)
         {
@@ -88,6 +102,56 @@ string nhapChuoi2(int x, int y, int length,string str, int color) {
             gotoxy(x + vitri, y);
             cout << " ";
             gotoxy(x + vitri, y);
+        }
+        if (chr == 13 && vitri != 0)
+        {
+            return str;
+        }
+    } while (chr != ESC);
+    return "";
+}
+string nhapNgay(int x, int y, int length, string str, int color) {
+    set_color(color);
+    int vitri = str.length();
+    gotoxy(x, y);
+    cout << str;
+    int chr;
+    ShowCur(1);
+    do {
+        
+        gotoxy(x + vitri, y);
+        chr = _getch();
+        if ((chr >= '0' && chr <= '9') && (vitri < length))
+        {
+            str.push_back(char(chr));
+            cout << str.at(vitri);
+            vitri++;
+        }
+        if ((vitri==2|| vitri == 5)&& chr!=8)
+        {
+            str.push_back(char(47));
+            cout << str.at(vitri);
+            vitri++;
+        }
+        if (chr == 8 && vitri > 0)
+        {
+           vitri--;
+           str.pop_back();
+           gotoxy(x + vitri, y);
+           if (vitri == 2 || vitri == 5)
+           {
+               cout << "/";
+               
+               str.pop_back();
+               vitri--;
+               gotoxy(x + vitri, y);
+               cout << "_";
+           }
+           else
+           {
+               cout << "_";
+           }
+           gotoxy(x + vitri, y); 
         }
         if (chr == 13 && vitri != 0)
         {

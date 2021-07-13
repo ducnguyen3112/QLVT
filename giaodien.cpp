@@ -10,12 +10,12 @@ string menuName[15]{"1.  THEM VAT TU ",
 					"5.  XOA NHAN VIEN ",
 					"6.  HIEU CHINH NHAN VIEN ",
 					"7.  IN DANH SACH NHAN VIEN ",
-					"8.  LAP HOA DON NHAP ",
-					"9.  LAP HOA DON XUAT ",
+					"8.  LAP HOA DON XUAT ",
+					"9.  LAP HOA DON NHAP ",
 					"10. IN HOA DON ",
 					"11. DS HOA DON CUA NHAN VIEN ",
-					"12. THONG KE HOA DON ",
-					"13. THONG KE VAT TU DOANH THU CAO NHAT ",
+					"12. IN HOA DON TRONG KHOANG THOI GIAN ",
+					"13. TOP 10 VAT TU DOANH THU CAO NHAT ",
 					"14. LUU VA THOAT "};
 void GiaoDienChinh();
 //In ra huong dan menu
@@ -674,6 +674,144 @@ void khungDienNgay(int x, int y) {
 	gotoxy(x + 35, y + 8);
 	cout << " HUY ";
 	gotoxy(x + 35, y + 9);
+	cout << "     ";
+
+
+	set_color(240);
+}
+int xacNhanLapHoaDon(int x, int y) {
+	xoaKhungHuongDan();
+	gotoxy(Xhuongdan, yhuongdan);
+	cout << "-Dung phim mui ten trai phai de di chuyen.";
+	gotoxy(Xhuongdan, yhuongdan + 1);
+	cout << "-Nhan phim Enter de chon.";
+	char c;
+	bool chon = 0;
+	do
+	{
+		set_color(63);
+		gotoxy(x + 12, y + 17);
+		cout << "     ";
+		gotoxy(x + 12, y + 18);
+		cout << " LAP ";
+		gotoxy(x + 12, y + 19);
+		cout << "     ";
+		gotoxy(x + 35, y + 17);
+		cout << "     ";
+		gotoxy(x + 35, y + 18);
+		cout << " HUY ";
+		gotoxy(x + 35, y + 19);
+		cout << "     ";
+
+		if (chon == 0)
+		{
+			set_color(240);
+			gotoxy(x + 35, y + 17);
+			cout << "     ";
+			gotoxy(x + 35, y + 18);
+			cout << " HUY ";
+			gotoxy(x + 35, y + 19);
+			cout << "     ";
+		}
+		if (chon == 1)
+		{
+			set_color(240);
+			gotoxy(x + 12, y + 17);
+			cout << "     ";
+			gotoxy(x + 12, y + 18);
+			cout << " LAP ";
+			gotoxy(x + 12, y + 19);
+			cout << "     ";
+		}
+		c = _getch();
+		switch (c)
+		{
+		case Left:
+			if (chon == 0)
+			{
+				chon = 1;
+			}
+			break;
+		case Right:
+			if (chon == 1)
+			{
+				chon = 0;
+			}
+			break;
+		case ESC:
+			return -1;
+			break;
+
+		}
+	} while (c != Enter);
+	set_color(240);
+	return chon;
+}
+void giaoDienNhapHoaDonXuat(int x, int y) {
+	for (int i = y; i < y + 12; i++)
+	{
+		for (int j = x; j < x + 50; j++)
+		{
+			set_color(51);
+			gotoxy(j, i);
+			cout << "-";
+		}
+	}
+	set_color(63);
+	gotoxy(x + 18, y + 1);
+	cout << "HOA DON XUAT";
+	gotoxy(x + 10, y + 5);
+	cout << "MA NHAN VIEN:";
+	gotoxy(x + 10, y + 7);
+	cout << "NGAY LAP:";
+	gotoxy(x + 25, y + 7);
+	cout << "__/__/____";
+	gotoxy(x + 12, y + 9);
+	cout << "     ";
+	gotoxy(x + 12, y + 10);
+	cout << " LAP ";
+	gotoxy(x + 12, y + 11);
+	cout << "     ";
+	gotoxy(x + 35, y + 9);
+	cout << "     ";
+	gotoxy(x + 35, y + 10);
+	cout << " HUY ";
+	gotoxy(x + 35, y + 11);
+	cout << "     ";
+
+
+	set_color(240);
+}
+void giaoDienNhapHoaDonNhap(int x, int y) {
+	for (int i = y; i < y + 12; i++)
+	{
+		for (int j = x; j < x + 50; j++)
+		{
+			set_color(51);
+			gotoxy(j, i);
+			cout << "-";
+		}
+	}
+	set_color(63);
+	gotoxy(x + 18, y + 1);
+	cout << "HOA DON NHAP";
+	gotoxy(x + 10, y + 5);
+	cout << "MA NHAN VIEN:";
+	gotoxy(x + 10, y + 7);
+	cout << "NGAY LAP:";
+	gotoxy(x + 25, y + 7);
+	cout << "__/__/____";
+	gotoxy(x + 12, y + 9);
+	cout << "     ";
+	gotoxy(x + 12, y + 10);
+	cout << " LAP ";
+	gotoxy(x + 12, y + 11);
+	cout << "     ";
+	gotoxy(x + 35, y + 9);
+	cout << "     ";
+	gotoxy(x + 35, y + 10);
+	cout << " HUY ";
+	gotoxy(x + 35, y + 11);
 	cout << "     ";
 
 

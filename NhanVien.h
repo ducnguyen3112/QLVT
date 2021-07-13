@@ -1,4 +1,4 @@
-
+#pragma once
 #include "HoaDon.h"
 #include "mylib.h"
 #include "xulidulieu.h"
@@ -27,4 +27,4 @@ int chonNhanVien(DSNV dsnv);
 void xoaNhanVien(DSNV& dsnv, int index);
 int hieuChinhNhanVien(DSNV& dsnv, int index, int x, int y);
 void ghiFileNhanVien(DSNV dsnv);
-void sapXepNhanVien(DSNV& dsnv);
+void quickSortNhanVien(DSNV& dsnv, int low, int high);

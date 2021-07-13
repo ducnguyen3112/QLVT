@@ -1,3 +1,4 @@
+#pragma once
 #include "mylib.h"
 #include<iostream>
 #include <conio.h>
@@ -26,3 +27,6 @@ void GiaoDienThongKe();
 void duongKeDuoiThongKe(int y,int color);
 void GiaoDienTop10VT();
 void khungDienNgay(int x, int y);
+void giaoDienNhapHoaDonXuat(int x, int y);
+int xacNhanLapHoaDon(int x, int y);
+void giaoDienNhapHoaDonNhap(int x, int y);

@@ -1,13 +1,15 @@
-#include <string>
+#pragma once
 #include "mylib.h"
-using namespace std;
+#include "Date.h"
+#include "CTHD.h"
 
 //cau truc hoa don
 struct HoaDon
 {
 	string soHD;
-	string ngayLap;
 	char loai;
+	Date ngayLap;
+	CTHD dscthd;
 	HoaDon* next;
 };
 //Cau truc danh sach hoa don
@@ -16,3 +18,4 @@ struct DSHD
 	HoaDon* head = NULL;
 	int sl = 0;
 };
+bool lapHoaDon(int x, int y);

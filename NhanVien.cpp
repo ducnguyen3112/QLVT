@@ -127,6 +127,7 @@ int chonNhanVien(DSNV dsnv) {
 		{
 			set_color(240);
 			xuatDSNV(dsnv,vt);
+			duongKeDuoi(dsnv.sl + 10, 240);
 			c = _getch();
 			switch (c)
 			{
@@ -218,23 +219,48 @@ int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 	return 0;
 }
 //Sap xep nhan vien
-void sapXepNhanVien(DSNV& dsnv) {
-	
-	for (int i = 0; i < dsnv.sl-1; i++)
-	{
-		for (int j = i+1; j < dsnv.sl; j++)
-		{
-			if (dsnv.ds[i]->tenNV.compare(dsnv.ds[j]->tenNV)>0)
+int partition(DSNV& dsnv, int low, int high)
+{
+	NhanVien* pivot = dsnv.ds[high];    // pivot
+	int left = low;
+	int right = high - 1;
+	while (true) {
+		while (left <= right && dsnv.ds[left]->tenNV.compare(pivot->tenNV) <= 0) {
+			
+			if (dsnv.ds[left]->tenNV.compare(pivot->tenNV)==0)
 			{
-				swap(dsnv.ds[i], dsnv.ds[j]);
-			}
-			if (dsnv.ds[i]->tenNV.compare(dsnv.ds[j]->tenNV) == 0 )
-			{
-				if (dsnv.ds[i]->hoNV.compare(dsnv.ds[j]->hoNV) > 0)
+				if (dsnv.ds[left]->hoNV.compare(pivot->hoNV) >0)
 				{
-					swap(dsnv.ds[i], dsnv.ds[j]);
+					break;
 				}
 			}
+			left++;
 		}
+		while (right >= left && dsnv.ds[right]->tenNV.compare(pivot->tenNV) >= 0) {
+			if (dsnv.ds[right]->tenNV.compare(pivot->tenNV) == 0)
+			{
+				if (dsnv.ds[right]->hoNV.compare(pivot->hoNV) < 0)
+				{
+					break;
+				}
+			}
+			right--;
+		}
+		
+		if (left >= right) break; 
+		swap(dsnv.ds[left], dsnv.ds[right]); 
+		left++; 
+		right--; 
+	}
+	swap(dsnv.ds[left], dsnv.ds[high]);
+	return left; 
+}
+void quickSortNhanVien(DSNV& dsnv, int low, int high)
+{
+	if (low < high)
+	{
+		int pi = partition(dsnv, low, high);
+		quickSortNhanVien(dsnv, low, pi - 1);
+		quickSortNhanVien(dsnv, pi + 1, high);
 	}
 }

@@ -2,6 +2,7 @@
 #include "giaodien.h"
 #include "xulidulieu.h"
 #include "NhanVien.h"
+#include "Date.h"
 using namespace std;
 
 void menu(int vt, DSNV& dsnv) {
@@ -9,6 +10,7 @@ void menu(int vt, DSNV& dsnv) {
 	int dong;
 	int index;
 	bool b=true;
+	string maNV_HD;
 	printLogo();
 	while (true)
 	{
@@ -64,7 +66,6 @@ void menu(int vt, DSNV& dsnv) {
 		case 4:
 			xoaKhungDuLieu();
 			dong = dsnv.sl + 10;
-			sapXepNhanVien(dsnv);
 			xuatDSNV(dsnv,-1);
 			huongDanThemNhanVien(240);
 			while (true)
@@ -179,6 +180,7 @@ void menu(int vt, DSNV& dsnv) {
 		case 7:
 			xoaKhungDuLieu();
 			GiaoDienNhanVien();
+			quickSortNhanVien(dsnv, 0, dsnv.sl-1);
 			xuatDSNV(dsnv, -1);
 			duongKeDuoi(dsnv.sl+10, 240);
 			gotoxy(Xthongbao, ythongbao);
@@ -186,14 +188,145 @@ void menu(int vt, DSNV& dsnv) {
 			break;
 
 		case 8:
-			xoaKhungDuLieu();
-			clrscr();
-			cout << 8;
+			
+			while (true)
+			{
+				
+				xoaKhungDuLieu();
+				giaoDienNhapHoaDonXuat(90,15);
+				set_color(63);
+				int vitri = maNV_HD.length();
+				int c;
+				gotoxy(115, 20);
+				cout << maNV_HD;
+				string ngaylap;
+				int chr;
+				if (!maNV_HD.empty())
+				{
+					ngaylap = nhapNgay(115 , 22, 10, ngaylap, 63);
+					ShowCur(0);
+					if (xacNhanLapHoaDon(90, 7)==0)
+					{
+						break;
+					}
+					else{
+						gotoxy(Xthongbao, ythongbao);
+						cout << maNV_HD;
+						cout << ngaylap;
+					}
+				}
+				do {
+					ShowCur(1);
+					gotoxy(115 + vitri, 20);
+					chr = _getch();
+					if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 10))
+					{
+						maNV_HD.push_back(toupper(char(chr)));
+						cout << maNV_HD.at(vitri);
+						vitri++;
+					}if (chr == 8 && vitri > 0)
+					{
+						vitri--;
+						maNV_HD.pop_back();
+						gotoxy(115 + vitri, 20);
+						cout << " ";
+						gotoxy(115 + vitri, 20);
+					}
+					if (chr == 13 && vitri != 0)
+					{
+						ShowCur(0);
+						break;
+					}
+					if (chr == Tab)
+					{
+						xoaKhungDuLieu();
+						GiaoDienNhanVien();
+						c = chonNhanVien(dsnv);
+						
+						if (c==-1)
+						{
+							ShowCur(0);
+							break;
+						}
+						else
+						{
+							maNV_HD = dsnv.ds[c]->maNV;
+							ShowCur(0);
+							break;
+						}
+					}
+				} while (chr != ESC);
+			}
 			break;
 		case 9:
-			xoaKhungDuLieu();
-			clrscr();
-			cout << 9;
+			while (true)
+			{
+
+				xoaKhungDuLieu();
+				giaoDienNhapHoaDonXuat(90, 15);
+				set_color(63);
+				int vitri = maNV_HD.length();
+				int c;
+				gotoxy(115, 20);
+				cout << maNV_HD;
+				string ngaylap;
+				int chr;
+				if (!maNV_HD.empty())
+				{
+					ngaylap = nhapNgay(115, 22, 10, ngaylap, 63);
+					ShowCur(0);
+					if (xacNhanLapHoaDon(90, 7) == 0)
+					{
+						break;
+					}
+					else {
+						gotoxy(Xthongbao, ythongbao);
+						cout << maNV_HD;
+						cout << ngaylap;
+					}
+				}
+				do {
+					ShowCur(1);
+					gotoxy(115 + vitri, 20);
+					chr = _getch();
+					if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 10))
+					{
+						maNV_HD.push_back(toupper(char(chr)));
+						cout << maNV_HD.at(vitri);
+						vitri++;
+					}if (chr == 8 && vitri > 0)
+					{
+						vitri--;
+						maNV_HD.pop_back();
+						gotoxy(115 + vitri, 20);
+						cout << " ";
+						gotoxy(115 + vitri, 20);
+					}
+					if (chr == 13 && vitri != 0)
+					{
+						ShowCur(0);
+						break;
+					}
+					if (chr == Tab)
+					{
+						xoaKhungDuLieu();
+						GiaoDienNhanVien();
+						c = chonNhanVien(dsnv);
+
+						if (c == -1)
+						{
+							ShowCur(0);
+							break;
+						}
+						else
+						{
+							maNV_HD = dsnv.ds[c]->maNV;
+							ShowCur(0);
+							break;
+						}
+					}
+				} while (chr != ESC);
+			}
 			break;
 		case 10:
 			xoaKhungDuLieu();
@@ -220,7 +353,6 @@ void menu(int vt, DSNV& dsnv) {
 			break;
 		case 14:
 			xoaKhungDuLieu();
-			sapXepNhanVien(dsnv);
 			ghiFileNhanVien(dsnv);
 			exit(0);
 			break;

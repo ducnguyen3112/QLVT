@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<conio.h>
 #include <string>
@@ -18,6 +19,8 @@ using namespace std;
 #define Left 75
 #define Right 77
 #define Space 32
+#define insert 45
+//========================
 #define Xmenu 4
 #define ymenu 2
 #define Xhuongdan 3
