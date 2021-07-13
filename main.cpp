@@ -2,13 +2,15 @@
 #include "giaodien.h"
 #include "xulidulieu.h"
 #include "NhanVien.h"
+#include "VatTu.h"
 using namespace std;
 
-void menu(int vt, DSNV& dsnv) {
+void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 	char c;
 	int dong;
+	int max = 100;
+	VatTu* ds[100];
 	int index;
-	bool b=true;
 	while (true)
 	{
 
@@ -23,11 +25,11 @@ void menu(int vt, DSNV& dsnv) {
 			{
 			case Up:vt--;
 				if (vt == 0) {
-					vt = 13;
+					vt = 14;
 				}
 				break;
 			case Down:vt++;
-				if (vt == 14) {
+				if (vt == 15) {
 					vt = 1;
 				}
 				break;
@@ -41,20 +43,157 @@ void menu(int vt, DSNV& dsnv) {
 
 		switch (vt)
 		{
-		case 1:
-			set_color(240);
-			gotoxy(35, 15);
-			Sleep(10000);
-			xuatDSNV(dsnv,1);
+		case 1:				
+			dong = dsvt.slvt + 10;
+			xuatDSVT_TREE(dsvt, dsvt.TREE, 0);
+			huongDanThemVatTu(240);			
+			while (true)
+			{
+				duongKeDuoi(dong, 255);
+				set_color(240);
+				GiaoDienVatTu();				
+				duongKeNganCach(dong);
+				duongKeDuoi(dong + 1, 240);
+				gotoxy(xstt, dong);
+				cout << dong - 9;
+				ShowCur(1);
+				if (!themVatTu(dsvt, dong))
+				{					
+					huongDanThemVatTu(255);
+					break;
+				}
+				set_color(240);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "-Them vat tu moi thanh cong.";
+				Sleep(1000);
+				set_color(255);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "-Them vat tu moi thanh cong.";
+				dong++;
+			}
 			break;
-		case 2:
+		case 2:			
+			if (dsvt.slvt == 0)
+			{
+				set_color(240);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "Khong the xoa!Danh sach rong.";
+				Sleep(2000);
+				xoaKhungThongBao();
+				break;
+			}			
+			while (true)
+			{		
+				int ndsx = 0;
+				chuyenCay_Mang_Xoa(dsvt.TREE, ds, ndsx);
+				sapXep_DSVT(ds, ndsx);
+				GiaoDienVatTu();
+				duongKeDuoi(ndsx + 10, 240);
+				index = chonVatTu(dsvt, ds, ndsx);				
+				if (index == -1)
+				{
+					giaiPhong_DSVT(ds, ndsx);
+					break;					
+				}
+				int check = xacNhanXoa("Ban chac chan muon xoa?");
+				if (check == 1)
+				{
+					xoaVatTu(dsvt, dsvt.TREE, ds, index, ndsx);
+					thongBao("- Xoa vat tu thanh cong.");
+					xoaKhungDuLieu();
+					giaiPhong_DSVT(ds, ndsx=ndsx-1);					
+				}
+				else if (check == 0) {
+					xoaKhungThongBao();
+					index = chonVatTu(dsvt, ds, ndsx);
+				}
+				else if (check == -1)
+				{					
+					set_color(240);
+					giaiPhong_DSVT(ds, ndsx);
+					break;
+				}
+			}
+			break;
+		case 3:			
+			if (dsvt.slvt == 0)
+			{			
+				set_color(240);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "Khong the chinh sua!Danh sach rong.";
+				Sleep(2000);
+				xoaKhungThongBao();
+				break;
+			}
+			while (true)
+			{
+				int ndss = 0;
+				GiaoDienVatTu();
+				duongKeDuoi(dsvt.slvt + 10, 240);
+				chuyenCay_Mang(dsvt.TREE, ds, ndss);
+				//sapXep_DSVT(ds, ndss);
+				index = chonVatTu(dsvt, ds, ndss);
+				if (index == -1)
+				{
+					giaiPhong_DSVT(ds, ndss);
+					xoaKhungDuLieu();
+					break;
+				}
+				xoaKhungHuongDan();
+				khungHieuChinhVatTu(90, 10);
+				huongDanHieuChinh();
+				int check = hieuChinhVatTu(dsvt,ds, index, 90, 10);
+				if (check == 1)
+				{
+					xoaKhungHuongDan();
+					thongBao("-Hieu chinh vat tu thanh cong.");
+					xoaKhungDuLieu();
+					HuongDanMenu();
+					set_color(240);
+					giaiPhong_DSVT(ds, ndss);
 
+				}
+				else if (check == 0) 
+				{
+					xoaKhungDuLieu();
+					set_color(240);
+				}
+				else if (check == -1)
+				{
+					giaiPhong_DSVT(ds, ndss);
+					xoaKhungDuLieu();
+					set_color(240);
+					break;
+				}
+			}
 			break;
-		case 3:
-			clrscr();
-			cout << 3;
+		case 4:			
+			if (dsvt.slvt== 0)
+			{
+				set_color(240);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "Khong the in!Danh sach rong.";
+				Sleep(2000);
+				xoaKhungThongBao();
+				break;
+			}
+			while (true)
+			{
+				int nds = 0;
+				set_color(240);
+				GiaoDienVatTu();
+				xuatDSVT_TK(dsvt.TREE, ds, nds, -1);
+				duongKeDuoi(nds + 10, 240);
+				set_color(240);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "-In danh sach vat tu ton kho thanh cong.";
+				Sleep(5000);
+				set_color(255);
+			    gotoxy(Xthongbao, ythongbao);
+				cout << "-In danh sach vat tu ton kho thanh cong.";
+			}
 			break;
-		case 4:
+		case 5:
 			dong = dsnv.sl + 10;
 			sapXepNhanVien(dsnv);
 			xuatDSNV(dsnv,-1);
@@ -87,7 +226,7 @@ void menu(int vt, DSNV& dsnv) {
 				
 				
 			break;
-		case 5:
+		case 6:
 			if (dsnv.sl==0)
 			{
 				set_color(240);
@@ -127,7 +266,7 @@ void menu(int vt, DSNV& dsnv) {
 			}
 			
 			break;
-		case 6:
+		case 7:
 			while (true)
 			{
 				GiaoDienNhanVien();
@@ -148,6 +287,7 @@ void menu(int vt, DSNV& dsnv) {
 					xoaKhungHuongDan();
 					thongBao("-Hieu chinh nhan vien thanh cong.");
 					xoaKhungDuLieu();
+					HuongDanMenu();
 					set_color(240);
 
 				}
@@ -165,20 +305,16 @@ void menu(int vt, DSNV& dsnv) {
 			}
 			
 			break;
-		case 7:
+		case 8:
 			break;
 
-		case 8:
+		case 9:
 			clrscr();
 			cout << 8;
 			break;
-		case 9:
-			clrscr();
-			cout << 9;
-			break;
 		case 10:
 			clrscr();
-			exit(0);
+			cout << 9;
 			break;
 		case 11:
 			clrscr();
@@ -189,16 +325,23 @@ void menu(int vt, DSNV& dsnv) {
 			exit(0);
 			break;
 		case 13:
+			clrscr();
+			exit(0);
+			break;
+		case 14:
 			sapXepNhanVien(dsnv);
 			ghiFileNhanVien(dsnv);
+			ghiFileVatTu(dsvt.TREE);
 			exit(0);
 			break;
 		}
 	}
 }
 int main(){
-	DSNV ds_nv;
-	docFileNhanVien(ds_nv);
+	DSNV dsnv;
+	DSVT dsvt;
+	docFileNhanVien(dsnv);
+	docFileVatTu(dsvt);
 	khoiTaoManHinh();
-	menu(1,ds_nv);
+	menu(1,dsnv, dsvt);
 	}

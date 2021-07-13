@@ -3,19 +3,20 @@
 
 
 using namespace std;
-string menuName[14]{"1.  THEM VAT TU ",
+string menuName[15]{"1.  THEM VAT TU ",
 					"2.  XOA VAT TU ",
 					"3.  HIEU CHINH VAT TU ",
-					"4.  THEM NHAN VIEN ",
-					"5.  XOA NHAN VIEN ",
-					"6.  HIEU CHINH NHAN VIEN ",
-					"7.  IN DANH SACH NHAN VIEN ",
-					"8.  LAP HOA DON NHAP ",
-					"9.  LAP HOA DON XUAT ",
-					"10. IN HOA DON ",
-					"11. DS HOA DON CUA NHAN VIEN ",
-					"12. THONG KE ",
-					"13. LUU VA THOAT "};
+	                "4.  IN DANH SACH VAT TU TON KHO ",
+					"5.  THEM NHAN VIEN ",
+					"6.  XOA NHAN VIEN ",
+					"7.  HIEU CHINH NHAN VIEN ",
+					"8.  IN DANH SACH NHAN VIEN ",
+					"9.  LAP HOA DON NHAP ",
+					"10. LAP HOA DON XUAT ",
+					"11. IN HOA DON ",
+					"12. DS HOA DON CUA NHAN VIEN ",
+					"13. THONG KE ",
+					"14. LUU VA THOAT "};
 void GiaoDienChinh();
 //In ra huong dan menu
 void HuongDanMenu() {
@@ -102,11 +103,11 @@ void GiaoDienVatTu() {
 	cout << "DANH SACH VAT TU";
 	KhungTieude(111, 3, 25);
 	KhungDS();
-	gotoxy(54, 8);
+	gotoxy(54,8);
 	cout << "STT";
-	gotoxy(65, 8);
+	gotoxy(65,8);
 	cout << "MA VAT TU";
-	gotoxy(112, 8);
+	gotoxy(112,8);
 	cout << "TEN VAT TU";
 	gotoxy(162, 8);
 	cout << "DON VI";
@@ -136,7 +137,7 @@ void Printmenu(int vt) {
 	int i ;
 	set_color(240);
 	gotoxy(Xmenu, ymenu);
-	for (i=1; i <=14; i++)
+	for (i=1; i <=15; i++)
 	{
 		if (i == vt) {
 			set_color(5*16+7);
@@ -230,7 +231,7 @@ void duongKeDuoi(int y,int color) {
 void huongDanThemNhanVien(int color) {
 	set_color(color);
 	gotoxy(Xhuongdan, yhuongdan);
-	cout << "-Ma nhan vien: chuoi chu va so khong ";
+	cout << "-Ma nhan vien: chuoi chu va so khong";
 	gotoxy(Xhuongdan, yhuongdan+1);
 		cout<<"khoang trang(Toi da : 10 ki tu.)";
 	gotoxy(Xhuongdan, yhuongdan+2);
@@ -250,8 +251,20 @@ void huongDanThemNhanVien(int color) {
 void huongDanThemVatTu(int color) {
 	set_color(color);
 	gotoxy(Xhuongdan, yhuongdan);
-	cout << "-Nhap thong tin theo tung cot.";
+	cout << "-Ma vat tu: chuoi chu va so khong khoang ";
 	gotoxy(Xhuongdan, yhuongdan + 1);
+	cout << "trang (Toi da : 10 ki tu.)";
+	gotoxy(Xhuongdan, yhuongdan + 2);
+	cout << "-TenVT: chuoi chu cai co khoang trang  ";
+	gotoxy(Xhuongdan, yhuongdan + 3);
+	cout << "(Toi da : 20 ki tu.)";
+	gotoxy(Xhuongdan, yhuongdan + 4);
+	cout << "-DV: Chuoi chu cai khong khoang trang ";
+	gotoxy(Xhuongdan, yhuongdan + 5);
+	cout << "(Toi da : 10 ki tu.)";
+	gotoxy(Xhuongdan, yhuongdan + 6);
+	cout << "-SLT: Chuoi so nguyen (0-999).";
+	gotoxy(Xhuongdan, yhuongdan + 7);
 	cout << "-Nhan phim 'ESC' de huy them thong tin.";
 }
 //In ra chuc nang xac nhan xoa hay khong
@@ -394,6 +407,44 @@ void khungHieuChinhNhanVien(int x,int y) {
 	cout << "     ";
 	
 	
+	set_color(240);
+}
+//In ra khung hieu chinh vat tu
+void khungHieuChinhVatTu(int x, int y) {
+	for (int i = y; i < y + 20; i++)
+	{
+		for (int j = x; j < x + 50; j++)
+		{
+			set_color(51);
+			gotoxy(j, i);
+			cout << "-";
+		}
+	}
+	set_color(63);
+	gotoxy(x + 15, y + 1);
+	cout << "CHINH SUA VAT TU";
+	gotoxy(x + 5, y + 7);
+	cout << "MA VAT TU:";
+	gotoxy(x + 5, y + 9);
+	cout << "TEN VAT TU:";
+	gotoxy(x + 5, y + 11);
+	cout << "DON VI:";
+	gotoxy(x + 5, y + 13);
+	cout << "SO LUONG TON:";
+	gotoxy(x + 12, y + 17);
+	cout << "     ";
+	gotoxy(x + 12, y + 18);
+	cout << " LUU ";
+	gotoxy(x + 12, y + 19);
+	cout << "     ";
+	gotoxy(x + 35, y + 17);
+	cout << "     ";
+	gotoxy(x + 35, y + 18);
+	cout << " HUY ";
+	gotoxy(x + 35, y + 19);
+	cout << "     ";
+
+
 	set_color(240);
 }
 //Chon "YES" ,"NO" trong phan hieu chinh

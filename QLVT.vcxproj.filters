@@ -39,6 +39,9 @@
     <ClCompile Include="NhanVien.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VatTu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mylib.h">
