@@ -1,7 +1,3 @@
-NV7
-Nguyen Cong
-Dinh
-Nam
 NV3
 Ho Si
 Hoang
@@ -14,10 +10,6 @@ NV5
 Nguyen Thi Thuy
 Linh
 Nu
-NV10
-Duong Van
-Thanh
-Nam
 NV2
 Nguyen Thi
 Trang

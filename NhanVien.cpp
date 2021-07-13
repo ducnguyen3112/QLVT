@@ -225,8 +225,6 @@ void sapXepNhanVien(DSNV& dsnv) {
 	{
 		for (int j = i+1; j < dsnv.sl; j++)
 		{
-
-			
 			if (dsnv.ds[i]->tenNV.compare(dsnv.ds[j]->tenNV)>0)
 			{
 				swap(dsnv.ds[i], dsnv.ds[j]);

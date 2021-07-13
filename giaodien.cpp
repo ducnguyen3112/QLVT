@@ -3,20 +3,21 @@
 
 
 using namespace std;
-string menuName[15]{"1.  THEM VAT TU ",
+string menuName[16]{"1.  THEM VAT TU ",
 					"2.  XOA VAT TU ",
 					"3.  HIEU CHINH VAT TU ",
-	                "4.  IN DANH SACH VAT TU TON KHO ",
+					"4.  IN DANH DACH VAT TU TON KHO ",
 					"5.  THEM NHAN VIEN ",
 					"6.  XOA NHAN VIEN ",
 					"7.  HIEU CHINH NHAN VIEN ",
 					"8.  IN DANH SACH NHAN VIEN ",
 					"9.  LAP HOA DON NHAP ",
-					"10. LAP HOA DON XUAT ",
+					"10.  LAP HOA DON XUAT ",
 					"11. IN HOA DON ",
 					"12. DS HOA DON CUA NHAN VIEN ",
-					"13. THONG KE ",
-					"14. LUU VA THOAT "};
+					"13. THONG KE HOA DON ",
+					"14. THONG KE VAT TU DOANH THU CAO NHAT ",
+					"15. LUU VA THOAT "};
 void GiaoDienChinh();
 //In ra huong dan menu
 void HuongDanMenu() {
@@ -150,6 +151,7 @@ void Printmenu(int vt) {
 			
 		
 	}
+	set_color(240);
 	HuongDanMenu();
 }
 //Khung cua cua so chinh
@@ -524,4 +526,207 @@ void huongDanHieuChinh() {
 	gotoxy(Xhuongdan, yhuongdan+1);
 	cout << "-Nhan ESC de thoat.";
 
+}
+void printLogo() {
+	ifstream fin;
+	fin.open("logo.txt", ios_base::in);
+	int dong = 10;
+	string str;
+	string str1;
+	while (fin.eof()!=true)
+	{
+		getline(fin, str);
+		gotoxy(60, dong++);
+		set_color(245);
+		cout << str;
+	}
+}
+void khungThongke() {
+	for (int i = 50; i <= 196; i++)
+	{
+		char c = 196;
+		set_color(240);
+		gotoxy(i, 8);
+		cout << c;
+		gotoxy(i, 10);
+		cout << c;
+		if (i == 50)
+		{
+			gotoxy(i, 8);
+			c = 218;
+			cout << c;
+			gotoxy(i, 9);
+			c = 179;
+			cout << c;
+			gotoxy(i, 10);
+			c = 195;
+			cout << c;
+		}
+		if (i == 70 || i == 95 || i == 120 || i == 170)
+		{
+			gotoxy(i, 8);
+			c = 194;
+			cout << c;
+			gotoxy(i, 9);
+			c = 179;
+			cout << c;
+			gotoxy(i, 10);
+			c = 197;
+			cout << c;
+		}
+		if (i == 196)
+		{
+			gotoxy(i, 8);
+			c = 191;
+			cout << c;
+			gotoxy(i, 9);
+			c = 179;
+			cout << c;
+			gotoxy(i, 10);
+			c = 180;
+			cout << c;
+		}
+	}
+
+}
+void GiaoDienThongKe() {
+	gotoxy(97, 4);
+	cout << "BANG LIET KE CAC HOA DON TRONG KHOANG THOI GIAN";
+	gotoxy(98, 7);
+	cout << "Tu ngay: dd/mm/yyyy";
+	gotoxy(122, 7);
+	cout << "Den ngay: dd/mm/yyyy";
+	KhungTieude(91, 3, 60);
+	khungThongke();
+	gotoxy(55, 9);
+	cout << "MA HOA DON";
+	gotoxy(80, 9);
+	cout << "NGAY LAP";
+	gotoxy(100, 9);
+	cout << "LOAI HOA DON";
+	gotoxy(140, 9);
+	cout << "HO TEN NV LAP";
+	gotoxy(175, 9);
+	cout << "TRI GIA HOA DON";
+}
+void duongKeDuoiThongKe(int y, int color) {
+	set_color(color);
+	for (int i = 51; i < 196; i++)
+	{
+		gotoxy(i, y);
+		cout << char(196);
+	}
+	gotoxy(xkedoc1, y);
+	cout << char(192);
+	gotoxy(70, y);
+	cout << char(193);
+	gotoxy(95, y);
+	cout << char(193);
+	gotoxy(120, y);
+	cout << char(193);
+	gotoxy(170, y);
+	cout << char(193);
+	gotoxy(xkedoc6, y);
+	cout << char(217);
+}
+void GiaoDienTop10VT() {
+	gotoxy(100, 4);
+	cout << "DANH SACH 10 VAT TU CO DOANH THU CAO NHAT";
+	KhungTieude(92, 3, 60);
+	gotoxy(95, 7);
+	set_color(240);
+	cout << "Tu ngay: dd/mm/yyyy";
+	gotoxy(130, 7);
+	cout << "Den ngay: dd/mm/yyyy";
+	for (int i = 50; i <= 196; i++)
+	{
+		char c = 196;
+		set_color(240);
+		gotoxy(i, 8);
+		cout << c;
+		gotoxy(i, 10);
+		cout << c;
+		if (i == 50)
+		{
+			gotoxy(i, 8);
+			c = 218;
+			cout << c;
+			gotoxy(i, 9);
+			c = 179;
+			cout << c;
+			gotoxy(i, 10);
+			c = 195;
+			cout << c;
+		}
+		if (i == 60 || i == 80 || i == 156 || i == 176)
+		{
+			gotoxy(i, 8);
+			c = 194;
+			cout << c;
+			gotoxy(i, 9);
+			c = 179;
+			cout << c;
+			gotoxy(i, 10);
+			c = 197;
+			cout << c;
+		}
+		if (i == 196)
+		{
+			gotoxy(i, 8);
+			c = 191;
+			cout << c;
+			gotoxy(i, 9);
+			c = 179;
+			cout << c;
+			gotoxy(i, 10);
+			c = 180;
+			cout << c;
+		}
+	}
+
+	gotoxy(54, 9);
+	cout << "STT";
+	gotoxy(65, 9);
+	cout << "MA VAT TU";
+	gotoxy(112, 9);
+	cout << "TEN VAT TU";
+	gotoxy(162, 9);
+	cout << "DON VI";
+	gotoxy(178, 9);
+	cout << "SO LUONG DA BAN";
+
+}
+void khungDienNgay(int x, int y) {
+	for (int i = y; i < y + 10; i++)
+	{
+		for (int j = x; j < x + 50; j++)
+		{
+			set_color(51);
+			gotoxy(j, i);
+			cout << "-";
+		}
+	}
+	set_color(63);
+	
+	gotoxy(x + 15, y + 2);
+	cout << "TU NGAY:";
+	cout << "  __/__/____";
+	gotoxy(x + 15, y + 4);
+	cout << "DEN NGAY:";
+	cout << " __/__/____";
+	gotoxy(x + 12, y + 7);
+	cout << "     ";
+	gotoxy(x + 12, y + 8);
+	cout << " LUU ";
+	gotoxy(x + 12, y + 9);
+	cout << "     ";
+	gotoxy(x + 35, y + 7);
+	cout << "     ";
+	gotoxy(x + 35, y + 8);
+	cout << " HUY ";
+	gotoxy(x + 35, y + 9);
+	cout << "     ";
+
+
+	set_color(240);
 }
