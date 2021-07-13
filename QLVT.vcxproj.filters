@@ -53,5 +53,8 @@
     <ClInclude Include="giaodien.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CTHD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

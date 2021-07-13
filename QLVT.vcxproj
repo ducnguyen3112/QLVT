@@ -30,6 +30,7 @@
     <ClCompile Include="VatTu.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CTHD.h" />
     <ClInclude Include="giaodien.h" />
     <ClInclude Include="mylib.h" />
     <ClInclude Include="xulidulieu.h" />
