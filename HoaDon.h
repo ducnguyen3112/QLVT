@@ -2,8 +2,11 @@
 #include "mylib.h"
 #include "Date.h"
 #include "CTHD.h"
+#include "NhanVien.h"
+
 
 //cau truc hoa don
+
 struct HoaDon
 {
 	string soHD;
@@ -18,4 +21,5 @@ struct DSHD
 	HoaDon* head = NULL;
 	int sl = 0;
 };
-bool lapHoaDon(int x, int y);
+void lapHoaDon(int x, int y, DSNV& ds, string date, int vt, char loai);
+void themHoaDon(HoaDon* p, HoaDon* ds);

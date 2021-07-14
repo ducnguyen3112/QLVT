@@ -13,3 +13,7 @@ int getDay(string date);
 int getMonth(string date);
 int getYear(string date);
 Date getCurrentDate();
+int tinhSoNgay(int day, int month, int year);
+bool ktNgay(string date);
+string getTime();
+Date stodate(string  date);

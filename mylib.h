@@ -8,11 +8,12 @@
 #include <windows.h>
 #include <fstream>
 #include <math.h>
+#include <cstdlib>
 
 using namespace std;
 #define widthWindow 1520
 #define heightWindow 800
-#define Enter 13
+#define enter 13
 #define ESC 27
 #define Tab 9
 #define Up 72
@@ -20,9 +21,9 @@ using namespace std;
 #define Left 75
 #define Right 77
 #define Space 32
-#define insert 45
+#define insert 224
 //========================
-#define Xmenu 4
+#define Xmenu 2
 #define ymenu 2
 #define Xhuongdan 3
 #define yhuongdan 23

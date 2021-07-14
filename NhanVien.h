@@ -10,7 +10,7 @@ struct NhanVien
 	string hoNV;
 	string tenNV;
 	string phai;
-	DSHD ds_hd;
+	DSHD dshd;
 	
 };
 //Cau truc danh sach nhan vien
@@ -28,3 +28,4 @@ void xoaNhanVien(DSNV& dsnv, int index);
 int hieuChinhNhanVien(DSNV& dsnv, int index, int x, int y);
 void ghiFileNhanVien(DSNV dsnv);
 void quickSortNhanVien(DSNV& dsnv, int low, int high);
+int ktTrungNV(string str, DSNV ds_nv);

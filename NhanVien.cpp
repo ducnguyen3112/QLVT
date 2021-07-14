@@ -145,7 +145,7 @@ int chonNhanVien(DSNV dsnv) {
 				return -1;
 				break;
 			}
-		} while (c!=Enter);
+		} while (c!=enter);
 		return vt;
 }
 //Xoa nhan vien duoc chon

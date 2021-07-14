@@ -8,12 +8,14 @@ using namespace std;
 
 void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 	char c;
+	int nds = 0;
 	int dong;
 	int max = 100;
 	VatTu* ds[100];
 	int index;
 	bool b=true;
 	string maNV_HD;
+	string t_ngay;
 	printLogo();
 	while (true)
 	{
@@ -32,11 +34,11 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			{
 			case Up:vt--;
 				if (vt == 0) {
-					vt = 15;
+					vt = 14;
 				}
 				break;
 			case Down:vt++;
-				if (vt == 16) {
+				if (vt == 15) {
 					vt = 1;
 				}
 				break;
@@ -44,13 +46,14 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				exit(0);
 			}
 
-		} while (c != Enter);
+		} while (c != enter);
 
 
 
 		switch (vt)
 		{
-		case 1:				
+		case 1:	
+			xoaKhungDuLieu();
 			dong = dsvt.slvt + 10;
 			xuatDSVT_TREE(dsvt, dsvt.TREE, 0);
 			huongDanThemVatTu(240);			
@@ -79,7 +82,8 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				dong++;
 			}
 			break;
-		case 2:			
+		case 2:	
+			xoaKhungDuLieu();
 			if (dsvt.slvt == 0)
 			{
 				set_color(240);
@@ -122,7 +126,8 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				}
 			}
 			break;
-		case 3:			
+		case 3:	
+			xoaKhungDuLieu();
 			if (dsvt.slvt == 0)
 			{			
 				set_color(240);
@@ -174,7 +179,8 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				}
 			}
 			break;
-		case 4:			
+		case 4:	
+			xoaKhungDuLieu();
 			if (dsvt.slvt== 0)
 			{
 				set_color(240);
@@ -184,23 +190,18 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				xoaKhungThongBao();
 				break;
 			}
-			while (true)
-			{
-				int nds = 0;
+				
 				set_color(240);
 				GiaoDienVatTu();
 				xuatDSVT_TK(dsvt.TREE, ds, nds, -1);
 				duongKeDuoi(nds + 10, 240);
 				set_color(240);
 				gotoxy(Xthongbao, ythongbao);
-				cout << "-In danh sach vat tu ton kho thanh cong.";
-				Sleep(5000);
-				set_color(255);
-			    gotoxy(Xthongbao, ythongbao);
-				cout << "-In danh sach vat tu ton kho thanh cong.";
-			}
+				system("pause");
+
 			break;
 		case 5:
+			xoaKhungDuLieu();
 			dong = dsnv.sl + 10;
 			xuatDSNV(dsnv,-1);
 			huongDanThemNhanVien(240);
@@ -234,6 +235,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				
 			break;
 		case 6:
+			xoaKhungDuLieu();
 			if (dsnv.sl==0)
 			{
 				set_color(240);
@@ -274,6 +276,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			
 			break;
 		case 7:
+			xoaKhungDuLieu();
 			while (true)
 			{
 				GiaoDienNhanVien();
@@ -322,7 +325,9 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			system("pause");
 			break;
 
-		case 8:
+		case 9:
+			maNV_HD = "";
+			c = 0;
 			
 			while (true)
 			{
@@ -331,13 +336,21 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				giaoDienNhapHoaDonXuat(90,15);
 				set_color(63);
 				int vitri = maNV_HD.length();
-				int c;
+				int chon;
 				gotoxy(115, 20);
 				cout << maNV_HD;
 				string ngaylap;
 				int chr;
 				if (!maNV_HD.empty())
 				{
+					xoaKhungHuongDan();
+					set_color(240);
+					gotoxy(Xhuongdan,yhuongdan);
+					cout << "- Dinh dang ngay (dd/mm/yyyy).";
+					gotoxy(Xhuongdan, yhuongdan+1);
+					cout << "- Gia tri ngay va thang 1->9";
+					gotoxy(Xhuongdan, yhuongdan + 2);
+					cout << " phai co so '0' o truoc.";
 					ngaylap = nhapNgay(115 , 22, 10, ngaylap, 63);
 					ShowCur(0);
 					if (xacNhanLapHoaDon(90, 7)==0)
@@ -345,12 +358,20 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 						break;
 					}
 					else{
-						gotoxy(Xthongbao, ythongbao);
-						cout << maNV_HD;
-						cout << ngaylap;
+						lapHoaDon(90, 7, dsnv, ngaylap, chon, 'X');
 					}
 				}
+				xoaKhungHuongDan();
 				do {
+					
+					gotoxy(Xhuongdan, yhuongdan);
+					set_color(240);
+					cout << "- Nhan TAB de chon nhan vien.";
+					gotoxy(Xhuongdan, yhuongdan+1);
+					cout << "- Khong duoc de trong.";
+					gotoxy(Xhuongdan, yhuongdan+2);
+					cout << "- Enter chuyen sang noi dung khac.";
+					set_color(63);
 					ShowCur(1);
 					gotoxy(115 + vitri, 20);
 					chr = _getch();
@@ -369,34 +390,62 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					}
 					if (chr == 13 && vitri != 0)
 					{
-						ShowCur(0);
-						break;
+						if (ktTrungNV(maNV_HD,dsnv)>-1)
+						{
+							ShowCur(0);
+							xoaKhungHuongDan();
+							break;
+						}
+						else
+						{
+							gotoxy(Xthongbao, ythongbao);
+							set_color(240);
+							cout << "-Ma nhan vien khong ton tai.";
+							Sleep(2000);
+							xoaKhungThongBao();
+						}
+						
 					}
 					if (chr == Tab)
 					{
+						ShowCur(0);
+						xoaKhungHuongDan();
+						HuongDanMenu();
 						xoaKhungDuLieu();
 						GiaoDienNhanVien();
-						c = chonNhanVien(dsnv);
+						chon = chonNhanVien(dsnv);
 						
-						if (c==-1)
+						if (chon==-1)
 						{
 							ShowCur(0);
 							break;
 						}
 						else
 						{
-							maNV_HD = dsnv.ds[c]->maNV;
+							maNV_HD = dsnv.ds[chon]->maNV;
 							ShowCur(0);
 							break;
 						}
 					}
-				} while (chr != ESC);
+					if (chr == ESC)
+					{
+
+						c = -1;
+						ShowCur(0);
+						break;
+					}
+				} while (true);
+				if (c == -1)
+				{
+					break;
+				}
 			}
 			break;
-		case 9:
+		case 10:
+			maNV_HD = "";
+			c = 0;
 			while (true)
 			{
-
 				xoaKhungDuLieu();
 				giaoDienNhapHoaDonXuat(90, 15);
 				set_color(63);
@@ -437,7 +486,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 						cout << " ";
 						gotoxy(115 + vitri, 20);
 					}
-					if (chr == 13 && vitri != 0)
+					if (chr == enter && vitri != 0)
 					{
 						ShowCur(0);
 						break;
@@ -460,33 +509,46 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 							break;
 						}
 					}
-				} while (chr != ESC);
+					if (chr==ESC)
+					{
+
+						c = -1;
+						ShowCur(0);
+						break;
+					}
+
+				} while (true);
+				if (c==-1)
+				{
+					break;
+				}
+				
 			}
 			break;
+		
 		case 11:
-			xoaKhungDuLieu();
-			clrscr();
-			cout << 9;
-			break;
-		case 12:
 			xoaKhungDuLieu();
 			khungDienNgay(90, 15);
 			gotoxy(Xthongbao, ythongbao);
 			system("pause");
 			break;
+		case 12:
+			t_ngay = "";
+			xoaKhungDuLieu();
+			khungDienNgay(90, 15);
+			nhapNgay(115, 17, 10, t_ngay, 63);
+			//GiaoDienThongKe();
+			gotoxy(Xthongbao, ythongbao);
+			system("pause");
+			break;
 		case 13:
 			xoaKhungDuLieu();
-			GiaoDienThongKe();
+			//GiaoDienTop10VT();
+			khungDienNgay(90, 15);
 			gotoxy(Xthongbao, ythongbao);
 			system("pause");
 			break;
 		case 14:
-			xoaKhungDuLieu();
-			GiaoDienTop10VT();
-			gotoxy(Xthongbao, ythongbao);
-			system("pause");
-			break;
-		case 15:
 			xoaKhungDuLieu();
 			ghiFileNhanVien(dsnv);
 			ghiFileVatTu(dsvt.TREE);
@@ -503,4 +565,5 @@ int main(){
 	docFileVatTu(dsvt);
 	khoiTaoManHinh();
 	menu(1,dsnv, dsvt);
+	
 	}

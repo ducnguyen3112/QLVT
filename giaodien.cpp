@@ -3,21 +3,20 @@
 
 
 using namespace std;
-string menuName[16]{"1.  THEM VAT TU ",
-					"2.  XOA VAT TU ",
-					"3.  HIEU CHINH VAT TU ",
-					"4.  IN DANH DACH VAT TU TON KHO ",
-					"5.  THEM NHAN VIEN ",
-					"6.  XOA NHAN VIEN ",
-					"7.  HIEU CHINH NHAN VIEN ",
-					"8.  IN DANH SACH NHAN VIEN ",
-					"9.  LAP HOA DON NHAP ",
-					"10.  LAP HOA DON XUAT ",
+string menuName[16]{" 1.  THEM VAT TU ",
+					" 2.  XOA VAT TU ",
+					" 3.  HIEU CHINH VAT TU ",
+					" 4.  IN DANH DACH VAT TU TON KHO ",
+					" 5.  THEM NHAN VIEN ",
+					" 6.  XOA NHAN VIEN ",
+					" 7.  HIEU CHINH NHAN VIEN ",
+					" 8.  IN DANH SACH NHAN VIEN ",
+					" 9.  LAP HOA DON NHAP ",
+					"10. LAP HOA DON XUAT ",
 					"11. IN HOA DON ",
-					"12. DS HOA DON CUA NHAN VIEN ",
-					"13. THONG KE HOA DON ",
-					"14. THONG KE VAT TU DOANH THU CAO NHAT ",
-					"15. LUU VA THOAT "};
+					"12. IN HOA DON TRONG KHOANG THOI GIAN ",
+					"13. TOP 10 VAT TU TRONG KHOANG THOI GIAN ",
+					"14. LUU VA THOAT "};
 void GiaoDienChinh();
 //In ra huong dan menu
 void HuongDanMenu() {
@@ -138,7 +137,7 @@ void Printmenu(int vt) {
 	int i ;
 	set_color(240);
 	gotoxy(Xmenu, ymenu);
-	for (i=1; i <=15; i++)
+	for (i=1; i <=14; i++)
 	{
 		if (i == vt) {
 			set_color(5*16+7);
@@ -318,7 +317,7 @@ int xacNhanXoa(string mess) {
 			return -1;
 			break;
 		}
-	} while (c!=Enter);
+	} while (c!= enter);
 	set_color(240);
 	return chon;
 }
@@ -514,7 +513,7 @@ int xacNhanHieuChinh(int x,int y) {
 				break;
 				
 		}
-	} while (c!=Enter);
+	} while (c!=enter);
 	set_color(240);
 	return chon;
 }
@@ -794,7 +793,7 @@ int xacNhanLapHoaDon(int x, int y) {
 			break;
 
 		}
-	} while (c != Enter);
+	} while (c != enter);
 	set_color(240);
 	return chon;
 }

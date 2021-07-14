@@ -292,7 +292,7 @@ int chonVatTu(DSVT& dsvt, VatTu* ds[], int& nds) {
 			return -1;
 			break;
 		}
-	} while (c != Enter);
+	} while (c != enter);
 	return vt;
 }
 void xoaVatTu(DSVT& dsvt, tree t, VatTu* ds[], int index, int& nds)
