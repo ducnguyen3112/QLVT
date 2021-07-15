@@ -1,7 +1,5 @@
 #include "mylib.h"
 #include "NhanVien.h"
-#include "Date.h"
-#include "HoaDon.h"
 //Ham nhap chuoi co chu va khoang trang
 string nhapChuoi(int x,int y,int length,string str, int color) {
     set_color(color);
@@ -16,7 +14,7 @@ string nhapChuoi(int x,int y,int length,string str, int color) {
         chr = _getch();
         if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr == ' ')) && (vitri < length))
         {
-            if (vitri==0||str.at(vitri-1)==' ')
+            if (vitri==0||str.at(vitri - 1)==' ')
             {
                 str.push_back(char(toupper(chr)));
             }
@@ -200,7 +198,7 @@ string nhapNgay(int x, int y, int length, string str, int color) {
            }
            gotoxy(x + vitri, y); 
         }
-        if (chr == 13 && vitri != 0 && str.length()==10 && ktNgay(str))
+        if (chr == 13 && vitri != 0 && str.length()==10 && ktNgay(str) )
         {
 
             return str;
@@ -209,15 +207,15 @@ string nhapNgay(int x, int y, int length, string str, int color) {
     return "";
 }
 //
-string sinhMaHoaDon(char loai,string date,DSHD ds) {
-    string ma = "HD"+loai+date.substr(0, 2) +date.substr(3, 2) +date.substr(8)+"00";
-    srand((int)time(0));
-    while (ktTrungHoaDon(ds,ma))
-    {
-    for (size_t i = 9; i < ma.length(); i++)
-        {
-        ma[i] = rand() % (57 - 48 + 1) + 48;
-        }
-    }
-    return ma;
-}
+//string sinhMaHoaDon(char loai,string date,DSHD ds) {
+//    string ma = "HD"+loai+date.substr(0, 2) +date.substr(3, 2) +date.substr(8)+"00";
+//    srand((int)time(0));
+//    while (ktTrungHoaDon(ds,ma))
+//    {
+//    for (size_t i = 9; i < ma.length(); i++)
+//        {
+//        ma[i] = rand() % (57 - 48 + 1) + 48;
+//        }
+//    }
+//    return ma;
+//}

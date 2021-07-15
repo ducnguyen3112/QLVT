@@ -19,10 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Date.cpp" />
     <ClCompile Include="giaodien.cpp" />
-    <ClCompile Include="HoaDon.cpp" />
-    <ClCompile Include="HoaDon.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mylib.cpp" />
     <ClCompile Include="NhanVien.cpp" />
@@ -32,8 +29,6 @@
     <ClCompile Include="VatTu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CTHD.h" />
-    <ClInclude Include="Date.h" />
     <ClInclude Include="giaodien.h" />
     <ClInclude Include="mylib.h" />
     <ClInclude Include="xulidulieu.h" />

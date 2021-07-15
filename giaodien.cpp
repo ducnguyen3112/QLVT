@@ -47,6 +47,7 @@ void KhungTieude(int x,int y,int dai) {
 			cout << "*";
 		}
 	}
+	set_color(240);
 }
 //In ra khung bang danh sach
 void KhungDS() {
@@ -810,11 +811,13 @@ void giaoDienNhapHoaDonXuat(int x, int y) {
 	set_color(63);
 	gotoxy(x + 18, y + 1);
 	cout << "HOA DON XUAT";
-	gotoxy(x + 10, y + 5);
-	cout << "MA NHAN VIEN:";
 	gotoxy(x + 10, y + 7);
+	cout << "SO HOA DON:";
+	gotoxy(x + 10, y + 3);
+	cout << "MA NHAN VIEN:";
+	gotoxy(x + 10, y + 5);
 	cout << "NGAY LAP:";
-	gotoxy(x + 25, y + 7);
+	gotoxy(x + 25, y + 5);
 	cout << "__/__/____";
 	gotoxy(x + 12, y + 9);
 	cout << "     ";
@@ -845,11 +848,13 @@ void giaoDienNhapHoaDonNhap(int x, int y) {
 	set_color(63);
 	gotoxy(x + 18, y + 1);
 	cout << "HOA DON NHAP";
-	gotoxy(x + 10, y + 5);
-	cout << "MA NHAN VIEN:";
 	gotoxy(x + 10, y + 7);
+	cout << "SO HOA DON:";
+	gotoxy(x + 10, y + 3);
+	cout << "MA NHAN VIEN:";
+	gotoxy(x + 10, y + 5);
 	cout << "NGAY LAP:";
-	gotoxy(x + 25, y + 7);
+	gotoxy(x + 25, y + 5);
 	cout << "__/__/____";
 	gotoxy(x + 12, y + 9);
 	cout << "     ";
@@ -866,4 +871,25 @@ void giaoDienNhapHoaDonNhap(int x, int y) {
 
 
 	set_color(240);
+}
+void giaoDienCTHD(char loai) {
+	gotoxy(118, 4);
+	if (loai == 'N')
+	{
+		cout << "HOA DON NHAP";
+	}
+	else
+	{
+		cout << "HOA DON XUAT";
+	}
+	KhungTieude(108, 3, 30);
+	gotoxy(75, 8);
+	cout << "MA VAT TU:";
+	gotoxy(105, 8);
+	cout << "SO LUONG:";
+	gotoxy(135, 8);
+	cout << "DON GIA:";
+	gotoxy(165, 8);
+	cout << "VAT:";
+
 }

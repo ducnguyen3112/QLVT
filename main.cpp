@@ -3,7 +3,6 @@
 #include "xulidulieu.h"
 #include "NhanVien.h"
 #include "VatTu.h"
-#include "Date.h"
 using namespace std;
 
 void menu(int vt, DSNV& dsnv, DSVT& dsvt){
@@ -13,9 +12,12 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 	int max = 100;
 	VatTu* ds[100];
 	int index;
+	int vitri;
+	int chon;
 	bool b=true;
 	string maNV_HD;
 	string t_ngay;
+	string sohoadon;
 	printLogo();
 	while (true)
 	{
@@ -331,19 +333,19 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			
 			while (true)
 			{
-				
+				vitri = maNV_HD.length();
 				xoaKhungDuLieu();
 				giaoDienNhapHoaDonXuat(90,15);
 				set_color(63);
-				int vitri = maNV_HD.length();
-				int chon;
-				gotoxy(115, 20);
+				gotoxy(115, 18);
 				cout << maNV_HD;
-				string ngaylap;
+				
 				int chr;
 				if (!maNV_HD.empty())
-				{
+				{	
+					string ngaylap;
 					xoaKhungHuongDan();
+					xoaKhungThongBao();
 					set_color(240);
 					gotoxy(Xhuongdan,yhuongdan);
 					cout << "- Dinh dang ngay (dd/mm/yyyy).";
@@ -351,15 +353,29 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					cout << "- Gia tri ngay va thang 1->9";
 					gotoxy(Xhuongdan, yhuongdan + 2);
 					cout << " phai co so '0' o truoc.";
-					ngaylap = nhapNgay(115 , 22, 10, ngaylap, 63);
+					ngaylap = nhapNgay(115 , 20, 10, ngaylap, 63);
+					sohoadon = sinhMaHoaDon('N',  dsnv.ds[chon]->dshd);
+					gotoxy(115, 22);
+					cout << sohoadon;
 					ShowCur(0);
-					if (xacNhanLapHoaDon(90, 7)==0)
+					if (xacNhanLapHoaDon(90, 7) == 0)
 					{
+					
+						xoaKhungThongBao();
+						system("pause");
 						break;
 					}
-					else{
-						lapHoaDon(90, 7, dsnv, ngaylap, chon, 'X');
+					else
+					{
+						HoaDon*t= taoNodeHoaDon(dsnv, chon, 'N', ngaylap,sohoadon);
+						themHoaDon(dsnv.ds[chon]->dshd.head, t);
+						dsnv.ds[chon]->dshd.sl++;
+						gotoxy(Xthongbao, ythongbao);
+						cout << "-Them hoa don thanh cong.";
+	
 					}
+					
+				
 				}
 				xoaKhungHuongDan();
 				do {
@@ -373,7 +389,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					cout << "- Enter chuyen sang noi dung khac.";
 					set_color(63);
 					ShowCur(1);
-					gotoxy(115 + vitri, 20);
+					gotoxy(115 + vitri, 18);
 					chr = _getch();
 					if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 10))
 					{
@@ -384,13 +400,14 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					{
 						vitri--;
 						maNV_HD.pop_back();
-						gotoxy(115 + vitri, 20);
+						gotoxy(115 + vitri, 18);
 						cout << " ";
-						gotoxy(115 + vitri, 20);
+						gotoxy(115 + vitri, 18);
 					}
 					if (chr == 13 && vitri != 0)
 					{
-						if (ktTrungNV(maNV_HD,dsnv)>-1)
+						chon = ktTrungNV(maNV_HD, dsnv);
+						if (chon>-1)
 						{
 							ShowCur(0);
 							xoaKhungHuongDan();
@@ -398,6 +415,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 						}
 						else
 						{
+							chon = -1;
 							gotoxy(Xthongbao, ythongbao);
 							set_color(240);
 							cout << "-Ma nhan vien khong ton tai.";
@@ -564,6 +582,7 @@ int main(){
 	docFileNhanVien(dsnv);
 	docFileVatTu(dsvt);
 	khoiTaoManHinh();
-	menu(1,dsnv, dsvt);
-	
+	GiaoDienChinh();
+	//menu(1,dsnv, dsvt);
+	giaoDienCTHD('N');
 	}

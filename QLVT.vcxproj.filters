@@ -33,16 +33,10 @@
     <ClCompile Include="VatTu.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="HoaDon.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="NhanVien.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Date.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HoaDon.cpp">
+    <ClCompile Include="VatTu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,12 +48,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="giaodien.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CTHD.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Date.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
