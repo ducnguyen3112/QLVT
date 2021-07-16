@@ -439,5 +439,29 @@ void hieuChinh_1_VT(tree t, string ma, string ten, string dv, int slt)
 	}
 }
 
-
+VatTu* TimKiem(tree t, string x)
+{
+	
+	if (t == NULL)
+	{
+		return NULL;
+	}
+	else
+	{
+		
+		if (t->maVT.compare(x)<0)
+		{
+			TimKiem(t->left, x);
+		}
+		else if (t->maVT.compare(x) > 0)
+		{
+			TimKiem(t->right, x);
+		}
+		else 
+		{
+			return t; 
+		}
+	}
+	return t;
+}
 

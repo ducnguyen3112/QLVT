@@ -888,9 +888,9 @@ void giaoDienCTHD(char loai) {
 	gotoxy(90, 8);
 	cout << "SO LUONG:";
 	gotoxy(120, 8);
-	cout << "DON GIA:";
+	cout << "DON GIA(VND):";
 	gotoxy(150, 8);
-	cout << "VAT:";
+	cout << "VAT(%):";
 	int dong = 14;
 	for (int i = 50; i <= 196; i++)
 	{
@@ -1012,10 +1012,62 @@ void giaoDienCTHD(char loai) {
 	cout << "   (VND)";
 	gotoxy(157, 35);
 	cout << "TONG CONG:";
-	set_color(63);
 	gotoxy(165, 8);
 	cout << "             ";
 	gotoxy(165, 8);
 	cout << " THEM VAT TU ";
+}
+int xacNhanThemVT() {
+	ShowCur(0);
+	xoaKhungHuongDan();
+	gotoxy(Xhuongdan, yhuongdan);
+	cout << "-Dung phim mui ten trai phai de di chuyen.";
+	gotoxy(Xhuongdan, yhuongdan + 1);
+	cout << "-Nhan phim Enter de chon.";
+	char c;
+	bool chon = 0;
+	do
+	{
+		set_color(240);
+		gotoxy(165, 8);
+		cout << " THEM VAT TU ";
+		gotoxy(180, 8);
+		cout << " HUY ";
+
+		if (chon == 0)
+		{
+			set_color(63);
+			gotoxy(180, 8);
+			cout << " HUY ";
+		}
+		if (chon == 1)
+		{
+			set_color(63);
+			gotoxy(165, 8);
+			cout << " THEM VAT TU ";
+		}
+		c = _getch();
+		switch (c)
+		{
+		case Left:
+			if (chon == 0)
+			{
+				chon = 1;
+			}
+			break;
+		case Right:
+			if (chon == 1)
+			{
+				chon = 0;
+			}
+			break;
+		case ESC:
+			return -1;
+			break;
+
+		}
+	} while (c != enter);
+	set_color(240);
+	return chon;
 }
 	

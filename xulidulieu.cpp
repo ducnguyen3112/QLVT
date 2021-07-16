@@ -289,3 +289,9 @@ string nhapNgay(int x, int y, int length, string str, int color) {
 //    }
 //    return ma;
 //}
+int thanhTien(int dongia,int sl,int VAT) {
+
+   int tinh = dongia * sl;
+    tinh = tinh + (tinh*VAT / 100);
+    return tinh;
+}

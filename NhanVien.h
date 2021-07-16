@@ -70,4 +70,4 @@ HoaDon* taoNodeHoaDon(DSNV& dsnv, int indexNV, char loai, string ngay,string shd
 string sinhMaHoaDon(char loai, DSHD ds);
 void duyetHoaDon(DSHD ds);
 void themHoaDon(HoaDon*& ds, HoaDon* p);
-void themVatTuVaoHoaDon(VatTu* ds[], DSCTHD ds_cthd, tree t, int nds, char loai);
+void themVatTuVaoHoaDon(VatTu* ds[], DSCTHD &ds_cthd, tree t, int nds, char loai);

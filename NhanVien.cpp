@@ -444,18 +444,92 @@ void duyetHoaDon(DSHD ds) {
 		d++;
 	}
 }
-void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD ds_cthd, tree t,int nds,char loai) {
+void xuatDSCTHD(DSCTHD ds_cthd, tree t) {
+	ShowCur(0);
+	for (int i = 0; i < ds_cthd.sl; i++)
+	{
+		gotoxy(52, 14 + i);
+		cout << ds_cthd.hd[i].maVT;
+		VatTu* p = TimKiem(t, ds_cthd.hd[i].maVT);
+		if (p==NULL)
+		{
+			return;
+		}
+		gotoxy(67, 14 + i);
+		cout << p->tenVT;
+		gotoxy(107, 14 + i);
+		cout << p->DV;
+		gotoxy(120, 14 + i);
+		cout << ds_cthd.hd[i].soluong;
+		gotoxy(129, 14 + i);
+		cout << ds_cthd.hd[i].dongia;
+		gotoxy(152, 14 + i);
+		cout << ds_cthd.hd[i].VAT;
+		gotoxy(158, 14 + i);
+		cout << thanhTien(ds_cthd.hd[i].dongia, ds_cthd.hd[i].soluong, ds_cthd.hd[i].VAT);
+	}
+
+}
+void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
 	char chr;
 	int vitri;
 	CTHD ct;
+	ct.maVT = "";
+	ct.soluong = -1;
+	ct.dongia = -1;
+	ct.VAT = -1;
 	int chon = -1;
+	int thanhtien = 0;
+	string mavt;
 	while (true)
 	{	
-		ct.maVT= "";
-		vitri = ct.maVT.length();
+		/*xoaKhungDuLieu();
+		giaoDienCTHD(loai);*/
+		xuatDSCTHD(ds_cthd, t);
+		mavt= "";
+		vitri = mavt.length();
 		set_color(240);
-		gotoxy(71+vitri, 8);
-		cout << ct.maVT;
+		gotoxy(70+vitri, 8);
+		cout << mavt;
+		if (!ct.maVT.empty())
+		{
+			cout << ct.maVT;
+			ShowCur(1);
+			ct.soluong = nhapSoNguyenint(99, 8, 10, "", 240);
+			if (ct.soluong == -1)
+			{
+				break;
+			}
+			ct.dongia = nhapSoNguyenint(133, 8, 10, "", 240);
+			if (ct.dongia == -1)
+			{
+				break;
+			}
+			ct.VAT = nhapSoNguyenint(157, 8, 10, "", 240);
+			if (ct.VAT == -1)
+			{
+				break;
+			}
+			int lchon = xacNhanThemVT();
+
+			if (lchon == 1)
+			{
+				ds_cthd.hd[ds_cthd.sl] = ct;
+				ds_cthd.sl++;
+				
+				ShowCur(0);
+				xuatDSCTHD(ds_cthd, t);
+				gotoxy(70, 8);
+				cout << "                  ";
+				gotoxy(99, 8);
+				cout << "                  ";
+				gotoxy(133, 8);
+				cout << "                 ";
+				gotoxy(157, 8);
+				cout << "        ";
+				//break;
+			}
+		}
 		do {
 
 			gotoxy(Xhuongdan, yhuongdan);
@@ -471,26 +545,24 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD ds_cthd, tree t,int nds,char loai) {
 			chr = _getch();
 			if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 10))
 			{
-				ct.maVT.push_back(toupper(char(chr)));
-				cout << ct.maVT.at(vitri);
+				mavt.push_back(toupper(char(chr)));
+				cout << mavt.at(vitri);
 				vitri++;
 			}if (chr == 8 && vitri > 0)
 			{
 				vitri--;
-				ct.maVT.pop_back();
+				mavt.pop_back();
 				gotoxy(70 + vitri, 8);
 				cout << " ";
 				gotoxy(70 + vitri, 8);
 			}
 			if (chr == 13 && vitri != 0)
 			{
-				if (ktMaVT_Trung(t, ct.maVT))
+				if (ktMaVT_Trung(t, mavt))
 				{
 					ShowCur(1);
+					ct.maVT = mavt;
 					xoaKhungHuongDan();
-					ct.soluong = nhapSoNguyenint(100, 8, 10, "", 240);
-					ct.dongia = nhapSoNguyenint(128, 8, 10, "", 240);
-					ct.VAT = nhapSoNguyenint(154, 8, 10, "", 240);
 					ShowCur(0);
 					break;
 				}
@@ -521,19 +593,17 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD ds_cthd, tree t,int nds,char loai) {
 				}
 				else
 				{
-					ct.maVT = ds[chon]->maVT;
-					xoaKhungDuLieu();
-					giaoDienCTHD(loai);
-					gotoxy(70, 8);
-					set_color(240);
-					cout << ct.maVT;
-					ShowCur(1);
-					ct.soluong = nhapSoNguyenint(100, 8, 10, "", 240);
-					ct.dongia = nhapSoNguyenint(128, 8, 10, "", 240);
-					ct.VAT = nhapSoNguyenint(154, 8, 10, "", 240);
-					ShowCur(0);
-					break;
-				}
+						ct.maVT = ds[chon]->maVT;
+						
+						xoaKhungDuLieu();
+						giaoDienCTHD(loai);
+						gotoxy(70, 8);
+						set_color(240);
+						cout << ct.maVT;
+						break;
+						
+						}
+				
 			}
 			
 			if (chr == ESC)

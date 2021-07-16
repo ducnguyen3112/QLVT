@@ -594,4 +594,7 @@ int main(){
 	menu(1,dsnv, dsvt);
 	/*giaoDienCTHD('N');
 	gotoxy(Xthongbao, ythongbao);*/
+	/*gotoxy(Xthongbao, ythongbao);
+	set_color(240);
+	cout << TimKiem(dsvt.TREE, "1")->tenVT;*/
 	}

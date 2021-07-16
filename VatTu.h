@@ -39,6 +39,7 @@ void chuyenCay_Mang_TK(tree t, VatTu* ds[], int& nds);
 void sapXep_DSVT(VatTu* ds[], int& nds);
 void inDSVT(VatTu* ds[], int& nds, int index);
 void giaiPhong_DSVT(VatTu* ds[], int& nds);
+VatTu* TimKiem(tree t, string x);
 
 //=========Đọc file vật tư==========
 void docFileVatTu(DSVT& dsvt);
