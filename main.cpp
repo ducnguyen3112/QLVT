@@ -102,7 +102,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				sapXep_DSVT(ds, ndsx);
 				GiaoDienVatTu();
 				duongKeDuoi(ndsx + 10, 240);
-				index = chonVatTu(dsvt, ds, ndsx);				
+				index = chonVatTu( ds, ndsx);				
 				if (index == -1)
 				{
 					giaiPhong_DSVT(ds, ndsx);
@@ -118,7 +118,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				}
 				else if (check == 0) {
 					xoaKhungThongBao();
-					index = chonVatTu(dsvt, ds, ndsx);
+					index = chonVatTu( ds, ndsx);
 				}
 				else if (check == -1)
 				{					
@@ -146,7 +146,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				duongKeDuoi(dsvt.slvt + 10, 240);
 				chuyenCay_Mang(dsvt.TREE, ds, ndss);
 				//sapXep_DSVT(ds, ndss);
-				index = chonVatTu(dsvt, ds, ndss);
+				index = chonVatTu( ds, ndss);
 				if (index == -1)
 				{
 					giaiPhong_DSVT(ds, ndss);
@@ -372,6 +372,14 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 						dsnv.ds[chon]->dshd.sl++;
 						gotoxy(Xthongbao, ythongbao);
 						cout << "-Them hoa don thanh cong.";
+						xoaKhungDuLieu();
+						xoaKhungThongBao();
+						xoaKhungHuongDan();
+						giaoDienCTHD('N');
+						int nds = 0;
+						chuyenCay_Mang_TK(dsvt.TREE, ds, nds);
+						themVatTuVaoHoaDon(ds, dsnv.ds[chon]->dshd.head->ds_cthd, dsvt.TREE,nds,'N');
+
 	
 					}
 					
@@ -583,6 +591,7 @@ int main(){
 	docFileVatTu(dsvt);
 	khoiTaoManHinh();
 	GiaoDienChinh();
-	//menu(1,dsnv, dsvt);
-	giaoDienCTHD('N');
+	menu(1,dsnv, dsvt);
+	/*giaoDienCTHD('N');
+	gotoxy(Xthongbao, ythongbao);*/
 	}

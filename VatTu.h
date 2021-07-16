@@ -49,7 +49,7 @@ void ghiFile_NLR(ofstream& fout, tree t);
 
 
 //==========Chức năng xóa vật tư==========
-int chonVatTu(DSVT& dsvt, VatTu* ds[], int& nds);
+int chonVatTu( VatTu* ds[], int& nds);
 void xoaVatTu(DSVT& dsvt, tree t, VatTu* ds[], int index, int& nds);
 void xoa1_VatTu(tree& t, string ma);
 void node_TheMang(tree& t, VatTu*& x);

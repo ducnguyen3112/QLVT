@@ -7,4 +7,6 @@ string nhapMa(int x, int y, int length, string str, int color);
 string nhapNgay(int x, int y, int length, string str, int color);
 string nhapChuoi2(int x, int y, int length, string str, int color);
 string nhapSoNguyen(int x, int y, int length, string str, int color);
+string nhapChuoi3(int x, int y, int length, string str, int color);
+int nhapSoNguyenint(int x, int y, int length, string str, int color);
 int doiThanhSo(string a);

@@ -164,6 +164,9 @@ void xoaNhanVien(DSNV &dsnv ,int index) {
 int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 	NhanVien* nv = new NhanVien();
 	set_color(63);
+	
+	gotoxy(x + 20, y + 7);
+	cout <<dsnv.ds[index]->maNV;
 	gotoxy(x + 20, y + 9);
 	cout << dsnv.ds[index]->hoNV;
 	gotoxy(x + 20, y + 11);
@@ -173,27 +176,27 @@ int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 	string str;
 
 	ShowCur(true);
-	do
-	{
-		set_color(63);
-		gotoxy(x + 20, y + 7);
-		cout << "             ";
-		nv->maNV = "";
-		nv->maNV = nhapMa(x + 20, y + 7, 10, dsnv.ds[index]->maNV, 63);
-		if (nv->maNV == dsnv.ds[index]->maNV)
-		{
+	//do
+	//{
+	//	set_color(63);
+	//	gotoxy(x + 20, y + 7);
+	//	cout << "             ";
+	//	//nv->maNV = "";
+	//	//nv->maNV = nhapMa(x + 20, y + 7, 10, dsnv.ds[index]->maNV, 63);
+	//	/*if (nv->maNV == dsnv.ds[index]->maNV)
+	//	{
 
-			break;
-		}
-		if (ktTrungNV(str, dsnv) > -1)
-		{
-			gotoxy(Xthongbao, ythongbao);
-			set_color(240);
-			cout << "Ma so bi trung!Hay nhap lai.";
-			Sleep(2000);
-			xoaKhungThongBao();
-		}
-	}
+	//		break;
+	//	}
+	//	if (ktTrungNV(str, dsnv) > -1)
+	//	{
+	//		gotoxy(Xthongbao, ythongbao);
+	//		set_color(240);
+	//		cout << "Ma so bi trung!Hay nhap lai.";
+	//		Sleep(2000);
+	//		xoaKhungThongBao();
+	//	}*/
+	//}
 	while (ktTrungNV(str,dsnv)>-1);
 	nv->hoNV=nhapChuoi(x+20, y+9, 20, dsnv.ds[index]->hoNV, 63);
 	nv->tenNV = nhapChuoi(x+20, y+11, 10, dsnv.ds[index]->tenNV, 63);
@@ -203,7 +206,7 @@ int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 	xoaKhungHuongDan();
 	if (confirm==1)
 	{
-		dsnv.ds[index]->maNV = nv->maNV;
+		//dsnv.ds[index]->maNV = nv->maNV;
 		dsnv.ds[index]->hoNV = nv->hoNV;
 		dsnv.ds[index]->tenNV = nv->tenNV;
 		dsnv.ds[index]->phai = nv->phai;
@@ -439,5 +442,106 @@ void duyetHoaDon(DSHD ds) {
 		cout << p->soHD;
 		cout << " " << p->ngayLap.nam << " " << p->loai;
 		d++;
+	}
+}
+void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD ds_cthd, tree t,int nds,char loai) {
+	char chr;
+	int vitri;
+	CTHD ct;
+	int chon = -1;
+	while (true)
+	{	
+		ct.maVT= "";
+		vitri = ct.maVT.length();
+		set_color(240);
+		gotoxy(71+vitri, 8);
+		cout << ct.maVT;
+		do {
+
+			gotoxy(Xhuongdan, yhuongdan);
+			set_color(240);
+			cout << "- Nhan TAB de chon vat tu.";
+			gotoxy(Xhuongdan, yhuongdan + 1);
+			cout << "- Khong duoc de trong.";
+			gotoxy(Xhuongdan, yhuongdan + 2);
+			cout << "- Enter chuyen sang noi dung khac.";
+			set_color(240);
+			ShowCur(1);
+			gotoxy(70 + vitri, 8);
+			chr = _getch();
+			if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 10))
+			{
+				ct.maVT.push_back(toupper(char(chr)));
+				cout << ct.maVT.at(vitri);
+				vitri++;
+			}if (chr == 8 && vitri > 0)
+			{
+				vitri--;
+				ct.maVT.pop_back();
+				gotoxy(70 + vitri, 8);
+				cout << " ";
+				gotoxy(70 + vitri, 8);
+			}
+			if (chr == 13 && vitri != 0)
+			{
+				if (ktMaVT_Trung(t, ct.maVT))
+				{
+					ShowCur(1);
+					xoaKhungHuongDan();
+					ct.soluong = nhapSoNguyenint(100, 8, 10, "", 240);
+					ct.dongia = nhapSoNguyenint(128, 8, 10, "", 240);
+					ct.VAT = nhapSoNguyenint(154, 8, 10, "", 240);
+					ShowCur(0);
+					break;
+				}
+				else
+				{
+					ShowCur(0);
+					gotoxy(Xthongbao, ythongbao);
+					set_color(240);
+					cout << "-Ma vat tu khong ton tai.";
+					Sleep(2000);
+					xoaKhungThongBao();
+				}
+
+			}
+			if (chr == Tab)
+			{
+				ShowCur(0);
+				xoaKhungHuongDan();
+				HuongDanMenu();
+				xoaKhungDuLieu();
+				GiaoDienVatTu();
+				chon = chonVatTu(ds,nds);
+
+				if (chon == -1)
+				{
+					ShowCur(0);
+					break;
+				}
+				else
+				{
+					ct.maVT = ds[chon]->maVT;
+					xoaKhungDuLieu();
+					giaoDienCTHD(loai);
+					gotoxy(70, 8);
+					set_color(240);
+					cout << ct.maVT;
+					ShowCur(1);
+					ct.soluong = nhapSoNguyenint(100, 8, 10, "", 240);
+					ct.dongia = nhapSoNguyenint(128, 8, 10, "", 240);
+					ct.VAT = nhapSoNguyenint(154, 8, 10, "", 240);
+					ShowCur(0);
+					break;
+				}
+			}
+			
+			if (chr == ESC)
+			{
+
+				ShowCur(0);
+				break;
+			}
+		} while (true);
 	}
 }

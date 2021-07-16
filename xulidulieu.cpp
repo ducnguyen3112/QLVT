@@ -1,5 +1,6 @@
 #include "mylib.h"
 #include "NhanVien.h"
+int doiThanhSo(string a);
 //Ham nhap chuoi co chu va khoang trang
 string nhapChuoi(int x,int y,int length,string str, int color) {
     set_color(color);
@@ -73,6 +74,46 @@ string nhapMa(int x, int y, int length, string str,int color) {
     
     return "";
 }
+//Chi viet hoa ki tu dau
+string nhapChuoi3(int x, int y, int length, string str, int color) {
+    set_color(color);
+    int vitri = str.length();
+    gotoxy(x, y);
+    cout << str;
+    int chr;
+    do {
+
+        gotoxy(x + vitri, y);
+
+        chr = _getch();
+        if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr == ' ')) && (vitri < length))
+        {
+            if (vitri == 0 )
+            {
+                str.push_back(char(toupper(chr)));
+            }
+            else
+            {
+                str.push_back(char(chr));
+            }
+
+            cout << str.at(vitri);
+            vitri++;
+        }if (chr == 8 && vitri > 0)
+        {
+            vitri--;
+            str.pop_back();
+            gotoxy(x + vitri, y);
+            cout << " ";
+            gotoxy(x + vitri, y);
+        }
+        if (chr == 13 && vitri != 0)
+        {
+            return str;
+        }
+    } while (chr != ESC);
+    return "";
+}
 //Chi co chu cai khong co khoang trang
 string nhapChuoi2(int x, int y, int length,string str, int color) {
     set_color(color);
@@ -141,7 +182,36 @@ string nhapSoNguyen(int x, int y, int length, string str, int color) {
     } while (chr != ESC);
     return "";
 }
+int nhapSoNguyenint(int x, int y, int length, string str, int color) {
+    set_color(color);
+    int vitri = str.length();
+    gotoxy(x, y);
+    cout << str;
+    int chr;
+    do {
 
+        gotoxy(x + vitri, y);
+        chr = _getch();
+        if (((chr >= '0' && chr <= '9')) && (vitri < length))
+        {
+            str.push_back(char(chr));
+            cout << str.at(vitri);
+            vitri++;
+        }if (chr == 8 && vitri > 0)
+        {
+            vitri--;
+            str.pop_back();
+            gotoxy(x + vitri, y);
+            cout << " ";
+            gotoxy(x + vitri, y);
+        }
+        if (chr == 13 && vitri != 0)
+        {
+            return doiThanhSo(str);
+        }
+    } while (chr != ESC);
+    return -1;
+}
 //Ham chuyen chuoi thanh so
 int doiThanhSo(string a)
 {

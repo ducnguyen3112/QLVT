@@ -35,12 +35,12 @@ bool themVatTu(DSVT& dsvt, int y)
 	{
 		return false;
 	}
-	p->tenVT = nhapChuoi(xdulieu3, y, 20, "", 240);
+	p->tenVT = nhapChuoi3(xdulieu3, y, 20, "", 240);
 	if (p->tenVT.empty())
 	{
 		return false;
 	}
-	p->DV = nhapChuoi2(xdulieu4, y, 10, "", 240);
+	p->DV = nhapChuoi3(xdulieu4, y, 10, "", 240);
 	if (p->DV.empty())
 	{
 		return false;
@@ -90,7 +90,15 @@ bool ktMaVT_Trung(tree t, string ma)
 	}
 	return false;
 }
-
+//int ktTrungMaVT(string ma,VatTu* a[],int sl) {
+//	for (int i = 0; i < sl; i++)
+//	{
+//		if (a[i]->maVT == ma) {
+//			return i;
+//		}
+//	}
+//	return -1;
+//}
 //=========Đọc file vật tư==========
 void docFileVatTu(DSVT& dsvt) {
 	ifstream fin;
@@ -164,7 +172,7 @@ void xuatDSVT_TK(tree t, VatTu* ds[], int& nds, int index)
 }
 //==========Các bước xuất danh sách vật tư==========
 //===Chuyển cây sang mảng con trỏ===
-void chuyenCay_Mang(tree t, VatTu* ds[], int& nds)
+void chuyenCay_Mang(tree t, VatTu* ds[],int& nds)
 {
 	if (t != NULL)
 	{
@@ -256,6 +264,7 @@ void inDSVT(VatTu* ds[], int& nds, int index)
 		set_color(240);
 		duongKeNganCach(i + 10);
 	}
+
 }
 //===Giải phóng===
 void giaiPhong_DSVT(VatTu* ds[], int& nds)
@@ -267,7 +276,7 @@ void giaiPhong_DSVT(VatTu* ds[], int& nds)
 }
 
 //==========Xóa vật tư được chọn==========
-int chonVatTu(DSVT& dsvt, VatTu* ds[], int& nds) {
+int chonVatTu(VatTu* ds[], int& nds) {
 	ShowCur(false);
 	char c;
 	int vt = 0;	
@@ -275,6 +284,8 @@ int chonVatTu(DSVT& dsvt, VatTu* ds[], int& nds) {
 	{
 		set_color(240);
 		inDSVT(ds, nds, vt);
+		duongKeDuoi(nds + 10, 240);
+
 		c = _getch();
 		switch (c)
 		{
