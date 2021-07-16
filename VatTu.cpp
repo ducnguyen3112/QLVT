@@ -84,9 +84,9 @@ bool ktMaVT_Trung(tree t, string ma)
 		if (t->maVT == ma)
 			return true;
 		else if (t->maVT > ma)
-			ktMaVT_Trung(t->left, ma);
+			return ktMaVT_Trung(t->left, ma);
 		else if (t->maVT < ma)
-			ktMaVT_Trung(t->right, ma);							
+			return ktMaVT_Trung(t->right, ma);							
 	}
 	return false;
 }

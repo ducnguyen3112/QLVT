@@ -192,7 +192,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				xoaKhungThongBao();
 				break;
 			}
-				
+				nds = 0;
 				set_color(240);
 				GiaoDienVatTu();
 				xuatDSVT_TK(dsvt.TREE, ds, nds, -1);
