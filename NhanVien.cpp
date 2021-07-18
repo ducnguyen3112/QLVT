@@ -1,6 +1,7 @@
 #include "NhanVien.h"
 #include "mylib.h"
 #include "giaodien.h"
+#include "VatTu.h"
 int ktTrungNV(string str, DSNV ds_nv) {
 	for (int i = 0; i < ds_nv.sl; i++)
 	{
@@ -410,7 +411,7 @@ HoaDon* createNodeHD() {
 	return p;
 }
 void themHoaDon(HoaDon* &ds, HoaDon* p) {
-	HoaDon* t;
+	HoaDon* t=createNodeHD();
 	if (ds==NULL)
 	{
 		ds = p;
@@ -418,12 +419,8 @@ void themHoaDon(HoaDon* &ds, HoaDon* p) {
 	
 	else
 	{
-		t = ds;
-		while (t->next!=NULL)
-		{
-			t = t->next;
-		}
-		t->next = p;
+		t->next = ds;
+		ds = t;
 	}
 }
 HoaDon* taoNodeHoaDon(DSNV& dsnv,int indexNV,char loai,string ngay,string shd) {
@@ -444,17 +441,15 @@ void duyetHoaDon(DSHD ds) {
 		d++;
 	}
 }
-void xuatDSCTHD(DSCTHD ds_cthd, tree t) {
+void xuatDSCTHD(DSCTHD& ds_cthd, tree t) {
 	ShowCur(0);
+	VatTu* p = khoiTaoNode_VatTu();
 	for (int i = 0; i < ds_cthd.sl; i++)
 	{
+		
+		p = TimKiem(t, ds_cthd.hd[i].maVT);
 		gotoxy(52, 14 + i);
-		cout << ds_cthd.hd[i].maVT;
-		VatTu* p = TimKiem(t, ds_cthd.hd[i].maVT);
-		if (p==NULL)
-		{
-			return;
-		}
+		cout << p->maVT;
 		gotoxy(67, 14 + i);
 		cout << p->tenVT;
 		gotoxy(107, 14 + i);
@@ -470,9 +465,10 @@ void xuatDSCTHD(DSCTHD ds_cthd, tree t) {
 	}
 
 }
-void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
+void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 	char chr;
 	int vitri;
+	int nds = 0;
 	CTHD ct;
 	ct.maVT = "";
 	ct.soluong = -1;
@@ -481,10 +477,10 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
 	int chon = -1;
 	int thanhtien = 0;
 	string mavt;
+	bool temp = true;
+	VatTu* ds[1000];
 	while (true)
 	{	
-		/*xoaKhungDuLieu();
-		giaoDienCTHD(loai);*/
 		xuatDSCTHD(ds_cthd, t);
 		mavt= "";
 		vitri = mavt.length();
@@ -493,9 +489,42 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
 		cout << mavt;
 		if (!ct.maVT.empty())
 		{
-			cout << ct.maVT;
+			VatTu* k = khoiTaoNode_VatTu();
+			k = TimKiem(t, ct.maVT);
 			ShowCur(1);
+			while (true)
+			{
+				xoaKhungHuongDan();
 			ct.soluong = nhapSoNguyenint(99, 8, 10, "", 240);
+
+				if (k->SLT<ct.soluong && loai=='X')
+				{
+					gotoxy(Xthongbao, ythongbao);
+					cout << "-Vuot qua so luong ton.";
+					ShowCur(0);
+					gotoxy(Xthongbao, ythongbao+1);
+					cout << "-So luong hien co:"<<k->SLT;
+					gotoxy(99, 8);
+					cout << "                  ";
+					ShowCur(1);
+				}
+				else
+				{
+					xoaKhungHuongDan();
+					if (loai=='X')
+					{
+						k->SLT -= ct.soluong;
+					}
+					else
+					{
+						k->SLT += ct.soluong;
+					}
+					
+					capNhatSLT(t, k->maVT, k->SLT);
+					break;
+				}
+			}
+			xoaKhungThongBao();
 			if (ct.soluong == -1)
 			{
 				break;
@@ -511,7 +540,7 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
 				break;
 			}
 			int lchon = xacNhanThemVT();
-
+			xoaKhungHuongDan();
 			if (lchon == 1)
 			{
 				ds_cthd.hd[ds_cthd.sl] = ct;
@@ -526,8 +555,19 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
 				gotoxy(133, 8);
 				cout << "                 ";
 				gotoxy(157, 8);
-				cout << "        ";
+				cout << "                               ";
 				//break;
+			}
+			else
+			{
+				gotoxy(70, 8);
+				cout << "                  ";
+				gotoxy(99, 8);
+				cout << "                  ";
+				gotoxy(133, 8);
+				cout << "                 ";
+				gotoxy(157, 8);
+				cout << "                               ";
 			}
 		}
 		do {
@@ -584,6 +624,9 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
 				HuongDanMenu();
 				xoaKhungDuLieu();
 				GiaoDienVatTu();
+				giaiPhong_DSVT(ds, nds);
+				nds = 0;
+				chuyenCay_Mang_TK(t, ds, nds);
 				chon = chonVatTu(ds,nds);
 
 				if (chon == -1)
@@ -608,10 +651,21 @@ void themVatTuVaoHoaDon(VatTu* ds[],DSCTHD &ds_cthd, tree t,int nds,char loai) {
 			
 			if (chr == ESC)
 			{
-
+				ct.maVT = "";
+				temp = false;
 				ShowCur(0);
 				break;
 			}
+			
 		} while (true);
+		if (!temp)
+			{
+				gotoxy(Xthongbao, ythongbao);
+				cout << "-Da luu chi tiet hoa don.";
+				Sleep(2000);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "                         ";
+				break;
+			}
 	}
 }

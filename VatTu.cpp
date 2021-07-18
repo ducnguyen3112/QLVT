@@ -162,6 +162,15 @@ void xuatDSVT_TREE(DSVT& dsvt, tree t, int i)
 		xuatDSVT_TREE(dsvt, t->right, i++);
 	}
 }
+void PreOrder(tree t,int i) {
+	if (t != NULL)
+	{
+		set_color(240);
+		cout << t->tenVT<<" ";
+		PreOrder(t->left,i);
+		PreOrder(t->right,i);
+	}
+}
 //==========Xuất danh sách vật tư tồn kho lên bảng==========
 void xuatDSVT_TK(tree t, VatTu* ds[], int& nds, int index)
 {
@@ -438,30 +447,54 @@ void hieuChinh_1_VT(tree t, string ma, string ten, string dv, int slt)
 		}
 	}
 }
-
+void capNhatSLT(tree t,string ma, int slt) {
+	if (t != NULL)
+	{
+		if (t->maVT == ma)
+		{
+			t->SLT = slt;
+		}
+		else if (t->maVT > ma)
+		{
+			capNhatSLT(t->left, ma, slt);
+		}
+		else if (t->maVT < ma)
+		{
+			capNhatSLT(t->right, ma,  slt);
+		}
+	}
+}
 VatTu* TimKiem(tree t, string x)
 {
-	
-	if (t == NULL)
+	tree p=t;
+	while (p!=NULL)
 	{
-		return NULL;
+		if (p->maVT == x)
+			return p;
+		else if (x < p->maVT)
+			p = p->left;
+		else
+			p = p->right;
 	}
-	else
-	{
-		
-		if (t->maVT.compare(x)<0)
-		{
-			TimKiem(t->left, x);
-		}
-		else if (t->maVT.compare(x) > 0)
-		{
-			TimKiem(t->right, x);
-		}
-		else 
-		{
-			return t; 
-		}
-	}
-	return t;
+	return NULL;
 }
 
+bool ktMaVT_Trung1(tree t, string ma,VatTu* vt)
+{
+	if (t == NULL)
+		return false;
+	else
+	{
+		if (t->maVT == ma) {
+			vt->maVT = t->maVT;
+			vt->tenVT = t->tenVT;
+			return true;
+		}
+			
+		else if (t->maVT > ma)
+			return ktMaVT_Trung(t->left, ma);
+		else if (t->maVT < ma)
+			return ktMaVT_Trung(t->right, ma);
+	}
+	return false;
+}

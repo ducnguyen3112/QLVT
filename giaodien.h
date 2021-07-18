@@ -31,3 +31,4 @@ int xacNhanLapHoaDon(int x, int y);
 void giaoDienNhapHoaDonNhap(int x, int y);
 void giaoDienCTHD(char loai);
 int xacNhanThemVT();
+void giaoDienInHoaDon();

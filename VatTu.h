@@ -23,12 +23,15 @@ typedef struct DSVT dsvt;
 //==================================
 
 //==========Chức năng thêm vật tư==========
+VatTu* khoiTaoNode_VatTu();
 bool themVatTu(DSVT& dsvt, int y);
 void them_1_VatTu(tree& t, VatTu* p);
 bool ktMaVT_Trung(tree t, string ma);
 
 //=========Xuất danh sách vật tư theo cây nhị phân=========
 void xuatDSVT_TREE(DSVT& dsvt, tree t, int i);
+void PreOrder(tree t, int i);
+void capNhatSLT(tree t, string ma, int slt);
 
 //==========Xuất danh sách vật tư tồn kho lên bảng==========
 void xuatDSVT_TK(tree t, VatTu* ds[], int& nds, int index);
@@ -59,3 +62,4 @@ void hoanVi_2VatTu(VatTu* a, VatTu* b);
 //==========Chức năng hiệu chỉnh vật tư==========
 int hieuChinhVatTu(DSVT& dsvt, VatTu* ds[], int index, int x, int y);
 void hieuChinh_1_VT(tree t, string ma, string ten, string dv, int slt);
+bool ktMaVT_Trung1(tree t, string ma, VatTu* vt);

@@ -1010,12 +1010,12 @@ void giaoDienCTHD(char loai) {
 	cout << "THANH TIEN";
 	gotoxy(172, 12);
 	cout << "   (VND)";
-	gotoxy(157, 35);
-	cout << "TONG CONG:";
+	//gotoxy(157, 35);
+	//cout << "TONG CONG:";
 	gotoxy(165, 8);
 	cout << "             ";
-	gotoxy(165, 8);
-	cout << " THEM VAT TU ";
+	//gotoxy(165, 8);
+	//cout << " THEM VAT TU ";
 }
 int xacNhanThemVT() {
 	ShowCur(0);
@@ -1069,5 +1069,140 @@ int xacNhanThemVT() {
 	} while (c != enter);
 	set_color(240);
 	return chon;
+}
+void giaoDienInHoaDon() {
+	gotoxy(118, 4);
+	
+	cout << "IN HOA DON";
+	KhungTieude(108, 3, 30);
+	gotoxy(60, 8);
+	cout << "LOAI HD:";
+	gotoxy(80, 8);
+	cout << "MA HOA DON:";
+	gotoxy(110, 8);
+	cout << "NGAY LAP HD:";
+	gotoxy(140, 8);
+	cout << "NHAN VIEN LAP HD:";
+	int dong = 14;
+	for (int i = 50; i <= 196; i++)
+	{
+		char c = 196;
+		set_color(240);
+		gotoxy(i, 10);
+		cout << c;
+		gotoxy(i, 13);
+		cout << c;
+		if (i == 50)
+		{
+			gotoxy(i, 10);
+			c = 218;
+			cout << c;
+			gotoxy(i, 11);
+			c = 179;
+			cout << c;
+			gotoxy(i, 12);
+			c = 179;
+			cout << c;
+			gotoxy(i, 13);
+			c = 195;
+			cout << c;
+		}
+		if (dong < 34)
+		{
+			c = 179;
+			gotoxy(50, dong);
+			cout << c;
+			gotoxy(65, dong);
+			cout << c;
+			gotoxy(105, dong);
+			cout << c;
+			gotoxy(118, dong);
+			cout << c;
+			gotoxy(127, dong);
+			cout << c;
+			gotoxy(150, dong);
+			cout << c;
+			gotoxy(156, dong);
+			cout << c;
+			gotoxy(196, dong);
+			cout << c;
+			dong++;
+		}
+		if (i == 65 || i == 105 || i == 118 || i == 127 || i == 150 || i == 156)
+		{
+			gotoxy(i, 10);
+			c = 194;
+			cout << c;
+			gotoxy(i, 11);
+			c = 179;
+			cout << c;
+			gotoxy(i, 12);
+			c = 179;
+			cout << c;
+			gotoxy(i, 13);
+			c = 197;
+			cout << c;
+		}
+		if (i == 196)
+		{
+			gotoxy(i, 10);
+			c = 191;
+			cout << c;
+			gotoxy(i, 11);
+			c = 179;
+			cout << c;
+			gotoxy(i, 12);
+			c = 179;
+			cout << c;
+			gotoxy(i, 13);
+			c = 180;
+			cout << c;
+		}
+	}
+
+	for (int i = 51; i < 196; i++)
+	{
+		gotoxy(i, 34);
+		cout << char(196);
+	}
+	gotoxy(xkedoc1, 34);
+	cout << char(192);
+	gotoxy(65, 34);
+	cout << char(193);
+	gotoxy(105, 34);
+	cout << char(193);
+	gotoxy(118, 34);
+	cout << char(193);
+	gotoxy(127, 34);
+	cout << char(193);
+	gotoxy(150, 34);
+	cout << char(193);
+	gotoxy(156, 34);
+	cout << char(193);
+	gotoxy(xkedoc6, 34);
+	cout << char(217);
+
+	gotoxy(56, 11);
+	cout << "MAVT";
+	gotoxy(80, 11);
+	cout << "TEN VAT TU";
+	gotoxy(109, 11);
+	cout << "DON VI";
+	gotoxy(119, 11);
+	cout << "SO LUONG";
+	gotoxy(135, 11);
+	cout << "DON GIA";
+	gotoxy(135, 12);
+	cout << " (VND)";
+	gotoxy(152, 11);
+	cout << "VAT";
+	gotoxy(152, 12);
+	cout << "(%)";
+	gotoxy(172, 11);
+	cout << "THANH TIEN";
+	gotoxy(172, 12);
+	cout << "   (VND)";
+	gotoxy(157, 35);
+	cout << "TONG CONG:";
 }
 	
