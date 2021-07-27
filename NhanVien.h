@@ -68,6 +68,16 @@ void quickSortNhanVien(DSNV& dsnv, int low, int high);
 int ktTrungNV(string str, DSNV ds_nv);
 HoaDon* taoNodeHoaDon(DSNV& dsnv, int indexNV, char loai, string ngay,string shd);
 string sinhMaHoaDon(char loai, DSHD ds);
-void duyetHoaDon(DSHD ds);
+void duyetHoaDon(DSNV dsnv, int index);
+int chonHoaDon(DSNV dsnv, DSHD dshd);
 void themHoaDon(HoaDon*& ds, HoaDon* p);
 void themVatTuVaoHoaDon(DSCTHD& ds_cthd, tree t, char loai);
+Date stodate(string  date);
+void xuatDSHD_TrongTG(DSCTHD ds_cthd, DSHD ds, DSNV dsnv, Date date1, Date date2);
+
+//Tinh ngay
+bool kT_NamNhuan(Date date);
+int ngay_Theo_Nam(Date date);
+int ngay_Theo_Thang(Date date);
+int demNgay(Date date);
+bool kTNgay_Truoc(Date date1, Date date2);

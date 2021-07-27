@@ -133,6 +133,36 @@ void GiaoDienNhanVien() {
 	gotoxy(180, 8);
 	cout << "GIOI TINH";
 }
+//Giao dien hoa don nhap
+void GiaoDienHoaDonNhap() {
+	gotoxy(115, 4);
+	cout << "DANH SACH HOA DON NHAP";
+	KhungTieude(111, 3, 25);
+	KhungDS();
+	gotoxy(54, 8);
+	cout << "STT";
+	gotoxy(65, 8);
+	cout << "SO HOA DON";
+	gotoxy(112, 8);
+	cout << "NGAY LAP";
+	gotoxy(162, 8);
+	cout << "MA NHAN VIEN";
+}
+//Giao dien hoa don xuat
+void GiaoDienHoaDonXuat() {
+	gotoxy(115, 4);
+	cout << "DANH SACH HOA DON XUAT";
+	KhungTieude(111, 3, 25);
+	KhungDS();
+	gotoxy(54, 8);
+	cout << "STT";
+	gotoxy(65, 8);
+	cout << "SO HOA DON";
+	gotoxy(112, 8);
+	cout << "NGAY LAP";
+	gotoxy(162, 8);
+	cout << "MA NHAN VIEN";
+}
 //In menu chinh
 void Printmenu(int vt) {
 	int i ;
@@ -593,9 +623,9 @@ void GiaoDienThongKe() {
 	gotoxy(97, 4);
 	cout << "BANG LIET KE CAC HOA DON TRONG KHOANG THOI GIAN";
 	gotoxy(98, 7);
-	cout << "Tu ngay: dd/mm/yyyy";
+	cout << "Tu ngay: ";
 	gotoxy(122, 7);
-	cout << "Den ngay: dd/mm/yyyy";
+	cout << "Den ngay: ";
 	KhungTieude(91, 3, 60);
 	khungThongke();
 	gotoxy(55, 9);
@@ -717,7 +747,7 @@ void khungDienNgay(int x, int y) {
 	gotoxy(x + 12, y + 7);
 	cout << "     ";
 	gotoxy(x + 12, y + 8);
-	cout << " LUU ";
+	cout << " XUAT ";
 	gotoxy(x + 12, y + 9);
 	cout << "     ";
 	gotoxy(x + 35, y + 7);
@@ -773,6 +803,76 @@ int xacNhanLapHoaDon(int x, int y) {
 			cout << " LAP ";
 			gotoxy(x + 12, y + 19);
 			cout << "     ";
+		}
+		c = _getch();
+		switch (c)
+		{
+		case Left:
+			if (chon == 0)
+			{
+				chon = 1;
+			}
+			break;
+		case Right:
+			if (chon == 1)
+			{
+				chon = 0;
+			}
+			break;
+		case ESC:
+			return -1;
+			break;
+
+		}
+	} while (c != enter);
+	set_color(240);
+	return chon;
+}
+//xac nhan xuat danh sach hoa don
+int xacNhanXuatHoaDon(int x, int y)
+{
+	xoaKhungHuongDan();
+	gotoxy(Xhuongdan, yhuongdan);
+	cout << "-Dung phim mui ten trai phai de di chuyen.";
+	gotoxy(Xhuongdan, yhuongdan + 1);
+	cout << "-Nhan phim Enter de chon.";
+	char c;
+	bool chon = 0;
+	do
+	{
+		set_color(63);
+		gotoxy(x + 12, y + 7);
+		cout << "      ";
+		gotoxy(x + 12, y + 8);
+		cout << " XUAT ";
+		gotoxy(x + 12, y + 9);
+		cout << "      ";
+		gotoxy(x + 35, y + 7);
+		cout << "     ";
+		gotoxy(x + 35, y + 8);
+		cout << " HUY ";
+		gotoxy(x + 35, y + 9);
+		cout << "     ";
+
+		if (chon == 0)
+		{
+			set_color(240);
+			gotoxy(x + 35, y + 7);
+			cout << "     ";
+			gotoxy(x + 35, y + 8);
+			cout << " HUY ";
+			gotoxy(x + 35, y + 9);
+			cout << "     ";
+		}
+		if (chon == 1)
+		{
+			set_color(240);
+			gotoxy(x + 12, y + 7);
+			cout << "      ";
+			gotoxy(x + 12, y + 8);
+			cout << " XUAT ";
+			gotoxy(x + 12, y + 9);
+			cout << "      ";
 		}
 		c = _getch();
 		switch (c)
@@ -1069,6 +1169,22 @@ int xacNhanThemVT() {
 	} while (c != enter);
 	set_color(240);
 	return chon;
+}
+void giaoDienDSHoaDon() {
+	gotoxy(116, 4);
+	cout << "DANH SACH HOA DON";
+	KhungTieude(111, 3, 25);
+	KhungDS();
+	gotoxy(54, 8);
+	cout << "STT";
+	gotoxy(65, 8);
+	cout << "SO HOA DON";
+	gotoxy(112, 8);
+	cout << "NHAN VIEN LAP";
+	gotoxy(162, 8);
+	cout << "NGAY LAP";
+	gotoxy(180, 8);
+	cout << "LOAI HOA DON";	
 }
 void giaoDienInHoaDon() {
 	gotoxy(118, 4);

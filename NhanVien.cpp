@@ -269,6 +269,27 @@ void quickSortNhanVien(DSNV& dsnv, int low, int high)
 		quickSortNhanVien(dsnv, pi + 1, high);
 	}
 }
+//Xuat danh sach hoa don
+//void xuatDSHD(DSHD* dshd, int i)
+//{
+//	HoaDon* p = dshd->head;
+//	if (p != NULL)
+//	{
+//		set_color(240);
+//		gotoxy(xstt, i + 10);
+//		cout << i + 1;
+//		gotoxy(xdulieu2, i + 10);
+//		cout << p->soHD;
+//		gotoxy(xdulieu3, i + 10);
+//		cout << p->ngayLap;
+//		gotoxy(xdulieu4, i + 10);
+//		cout << p->;
+//	}
+//}
+////Sap xep hoa don theo ngay lap
+//void SortListHD(DSHD*& dshd) {
+//	for()
+//}
 //=========================================================
 int getDay(string date) {
 	return stoi(date.substr(0, 2), 0, 10);
@@ -430,23 +451,71 @@ HoaDon* taoNodeHoaDon(DSNV& dsnv,int indexNV,char loai,string ngay,string shd) {
 	t->ngayLap = stodate(ngay);
 	return t;
 }
-void duyetHoaDon(DSHD ds) {
+void duyetHoaDon(DSNV dsnv, int index) {
 	int d = 0;
 	set_color(240);
-	for (HoaDon* p = ds.head; p != NULL; p = p->next)
+	for (int i = 0; i < dsnv.sl; i++)
+	{	
+		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
+		{
+			if (d == index)
+			{
+				set_color(63);
+			}
+			else
+			{
+				set_color(240);
+			}
+			gotoxy(xstt, d + 10);
+			cout << d + 1;
+			gotoxy(xdulieu2, d + 10);
+			cout << p->soHD;
+			gotoxy(xdulieu3, d + 10);
+			cout << dsnv.ds[i]->tenNV;
+			gotoxy(xdulieu4, d + 10);
+			cout << p->ngayLap.ngay << "/" << p->ngayLap.thang << "/" << p->ngayLap.nam;
+			gotoxy(xdulieu5, d + 10);
+			cout << p->loai;
+			set_color(240);
+			duongKeNganCach(d + 10);
+			d++;
+		}
+	}	
+}
+int chonHoaDon(DSNV dsnv,DSHD dshd) {
+	ShowCur(false);
+	char c;
+	int vt = 0;
+	do
 	{
-		gotoxy(Xthongbao, ythongbao + d);
-		cout << p->soHD;
-		cout << " " << p->ngayLap.nam << " " << p->loai;
-		d++;
-	}
+		set_color(240);
+		duyetHoaDon(dsnv, vt);
+		duongKeDuoi(dshd.sl + 10, 240);
+		c = _getch();
+		switch (c)
+		{
+		case Up:vt--;
+			if (vt == -1) {
+				vt = dshd.sl - 1;
+			}
+			break;
+		case Down:vt++;
+			if (vt == dshd.sl) {
+				vt = 0;
+			}
+			break;
+		case ESC:
+			return -1;
+			break;
+		}
+	} while (c != enter);
+	return vt;
 }
 void xuatDSCTHD(DSCTHD& ds_cthd, tree t) {
 	ShowCur(0);
 	VatTu* p = khoiTaoNode_VatTu();
 	for (int i = 0; i < ds_cthd.sl; i++)
-	{
-		
+	{		
 		p = TimKiem(t, ds_cthd.hd[i].maVT);
 		gotoxy(52, 14 + i);
 		cout << p->maVT;
@@ -464,6 +533,36 @@ void xuatDSCTHD(DSCTHD& ds_cthd, tree t) {
 		cout << thanhTien(ds_cthd.hd[i].dongia, ds_cthd.hd[i].soluong, ds_cthd.hd[i].VAT);
 	}
 
+}
+void xuatDSHD_TrongTG(DSCTHD ds_cthd,DSHD ds, DSNV dsnv, Date date1, Date date2)
+{
+	ShowCur(0);
+	for (int i = 0; i < ds_cthd.sl; i++)
+	{
+		for (HoaDon* p = ds.head; p != NULL; p = p->next)
+		{
+			if ((demNgay(date1) <= demNgay(p->ngayLap)) && (demNgay(p->ngayLap) <= demNgay(date2)))
+			{
+				gotoxy(55, 9 + i);
+				cout << p->soHD;
+				gotoxy(80, 9 + i);
+				cout << " " << p->ngayLap.ngay << "/" << p->ngayLap.thang << "/" << p->ngayLap.nam;
+				gotoxy(100, 9 + i);
+				cout << p->loai;
+				gotoxy(140, 9 + i);
+				cout << " ";
+				gotoxy(175, 9 + i);
+				cout << thanhTien(ds_cthd.hd[i].dongia, ds_cthd.hd[i].soluong, ds_cthd.hd[i].VAT);
+
+			}
+			else
+			{
+				gotoxy(Xthongbao, ythongbao);
+				cout << "Khong co hoa don nao trong khoang thoi gian nay";
+			}
+		}
+	
+	}
 }
 void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 	char chr;
@@ -631,6 +730,8 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 
 				if (chon == -1)
 				{
+					xoaKhungDuLieu();
+					giaoDienCTHD('N');
 					ShowCur(0);
 					break;
 				}
@@ -645,13 +746,15 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 						cout << ct.maVT;
 						break;
 						
-						}
+					}
 				
 			}
 			
 			if (chr == ESC)
 			{
 				ct.maVT = "";
+				xoaKhungDuLieu();
+				giaoDienCTHD('N');
 				temp = false;
 				ShowCur(0);
 				break;
@@ -668,4 +771,87 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				break;
 			}
 	}
+}
+
+//=====Tinh ngay=====
+bool kT_NamNhuan(Date date)
+{
+	if ((date.nam - 2000) % 4 == 0)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+int ngay_Theo_Nam(Date date)
+{
+	int soNgay_Nam = 0;
+	int k = 0, h = 0;
+	for (int i = 2000; i <= date.nam - 1; i++)
+	{
+		k++;
+		if (k == 1)
+		{
+			soNgay_Nam += 366;
+		}
+		else if (k != 1)
+		{
+			h++;
+			if (h == 3)
+			{
+				k = 0;
+				h = 0;
+			}
+			soNgay_Nam += 365;
+		}
+	}
+
+	return soNgay_Nam;
+}
+
+int ngay_Theo_Thang(Date date)
+{
+	int soNgay_Thang = 0;
+	for (int i = 1; i <= date.thang - 1; i++)
+	{
+		if (i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12)
+			soNgay_Thang += 31;
+		else if (i == 4 || i == 6 || i == 9 || i == 11)
+			soNgay_Thang += 30;
+		else if (i == 2)
+		{
+			if (kT_NamNhuan(date) == true)
+				soNgay_Thang += 29;
+			else
+				soNgay_Thang += 28;
+		}
+	}
+	return soNgay_Thang;
+}
+int demNgay(Date date) //dem ngay tu 1/1/2000 -> date
+{
+	return (ngay_Theo_Nam(date) + ngay_Theo_Thang(date) + date.ngay);
+}
+bool kTNgay_Truoc(Date date1, Date date2) //kt date1 <= date2
+{
+	if (date1.nam <= date2.nam)
+	{
+		if (date1.thang <= date2.thang) {
+			if (date1.ngay <= date2.ngay)
+			{
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+	return true;
 }
