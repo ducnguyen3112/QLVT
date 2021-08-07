@@ -74,6 +74,46 @@ string nhapMa(int x, int y, int length, string str,int color) {
     
     return "";
 }
+//Viet hoa ki tu dau - co the viet so
+string nhapChuoi4(int x, int y, int length, string str, int color) {
+    set_color(color);
+    int vitri = str.length();
+    gotoxy(x, y);
+    cout << str;
+    int chr;
+    do {
+
+        gotoxy(x + vitri, y);
+
+        chr = _getch();
+        if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')|| (chr == ' ')) && (vitri < length))
+        {
+            if (vitri == 0)
+            {
+                str.push_back(char(toupper(chr)));
+            }
+            else
+            {
+                str.push_back(char(chr));
+            }
+
+            cout << str.at(vitri);
+            vitri++;
+        }if (chr == 8 && vitri > 0)
+        {
+            vitri--;
+            str.pop_back();
+            gotoxy(x + vitri, y);
+            cout << " ";
+            gotoxy(x + vitri, y);
+        }
+        if (chr == 13 && vitri != 0)
+        {
+            return str;
+        }
+    } while (chr != ESC);
+    return "";
+}
 //Chi viet hoa ki tu dau
 string nhapChuoi3(int x, int y, int length, string str, int color) {
     set_color(color);

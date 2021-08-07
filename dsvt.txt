@@ -1,28 +1,68 @@
-1
-tu lanh
-cai
-1
-2
-ti vi
-cai
-0
-3
-may lanh
-cai
-11
-4
-may giat
-cai
+VT001
+Tu lanh
+Cai
+12
+VT002
+Ti vi
+Cai
+20
+VT003
+Loa
+Cai
 15
-5
-tu do
-cai
-17
-6
-quat dien
-cai
-0
+VT004
+May chieu
+Cai
 7
-aa
-cai
+VT005
+May hut bui
+Cai
+9
+VT006
+Den ban
+Cai
+11
+VT007
+May say toc
+Cai
 0
+VT008
+May khoan
+Cai
+0
+VT009
+Noi com dien
+Cai
+9
+VT010
+Bep ga
+Cai
+4
+VT011
+Quat dieu hoa
+Cai
+0
+VT012
+Quat dien
+Cai
+15
+VT013
+Lo vi song
+Cai
+9
+VT014
+May loc nuoc
+Cai
+0
+VT015
+Binh ly thuy tinh
+Bo
+0
+VT016
+Ban ghe inox
+Bo
+0
+VT017
+Tu lanh Panasonic 188l
+Cai
+5

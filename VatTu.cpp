@@ -35,7 +35,7 @@ bool themVatTu(DSVT& dsvt, int y)
 	{
 		return false;
 	}
-	p->tenVT = nhapChuoi3(xdulieu3, y, 20, "", 240);
+	p->tenVT = nhapChuoi4(xdulieu3, y, 30, "", 240);
 	if (p->tenVT.empty())
 	{
 		return false;
@@ -90,15 +90,7 @@ bool ktMaVT_Trung(tree t, string ma)
 	}
 	return false;
 }
-//int ktTrungMaVT(string ma,VatTu* a[],int sl) {
-//	for (int i = 0; i < sl; i++)
-//	{
-//		if (a[i]->maVT == ma) {
-//			return i;
-//		}
-//	}
-//	return -1;
-//}
+
 //=========Đọc file vật tư==========
 void docFileVatTu(DSVT& dsvt) {
 	ifstream fin;
@@ -318,13 +310,13 @@ int chonVatTu(VatTu* ds[], int& nds) {
 void xoaVatTu(DSVT& dsvt, tree t, VatTu* ds[], int index, int& nds)
 {
 	string ma;
-	ma = ds[index]->maVT;	
-	if (ds[index]->SLT == 0)
+	ma = ds[index]->maVT;
+	bool kt = ktMaVT_Trung(t, ma);
+	if (kt==true)
 	{
 		xoa1_VatTu(dsvt.TREE, ma);
 		dsvt.slvt--;
 		nds--;
-		delete ds[index];
 	}
 }
 void xoa1_VatTu(tree& t, string ma)
@@ -406,7 +398,7 @@ int hieuChinhVatTu(DSVT& dsvt, VatTu* ds[], int index, int x, int y)
 	cout << ds[index]->SLT;
 
 	ShowCur(true);
-	ten = nhapChuoi(x + 20, y + 9, 20, ds[index]->tenVT, 63);
+	ten = nhapChuoi4(x + 20, y + 9, 30, ds[index]->tenVT, 63);
 	dv = nhapChuoi2(x + 20, y + 11, 10, ds[index]->DV, 63);
 	slt = ds[index]->SLT;
 	ShowCur(false);

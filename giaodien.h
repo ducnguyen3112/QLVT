@@ -24,6 +24,7 @@ void printLogo();
 void khungThongke();
 void GiaoDienThongKe();
 void duongKeDuoiThongKe(int y,int color);
+void duongKeNganCachThongKe(int y);
 void GiaoDienTop10VT();
 void khungDienNgay(int x, int y);
 void giaoDienNhapHoaDonXuat(int x, int y);
