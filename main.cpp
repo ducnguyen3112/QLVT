@@ -534,7 +534,6 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				}
 				xoaKhungHuongDan();
 				do {
-
 					gotoxy(Xhuongdan, yhuongdan);
 					set_color(240);
 					cout << "- Nhan TAB de chon nhan vien.";
@@ -589,8 +588,8 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 						chon = chonNhanVien(dsnv);
 
 						if (chon == -1)
-						{
-							ShowCur(0);
+						{							
+							ShowCur(0);							
 							break;
 						}
 						else
@@ -617,17 +616,18 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 
 		case 11:
 			so_HD = "";
-			xoaKhungDuLieu();	
-
-			set_color(240);				
-			giaoDienInHoaDon();
-			ShowCur(1);
-			gotoxy(72, 8);
-			so_HD = nhapMa(72, 8, 6, so_HD, 240);
-			if (!so_HD.empty())
+			c = 0;
+			while (true)
 			{
-				if (ktTrungHoaDon2(dsnv, so_HD))
-				{
+				vitri = so_HD.length();
+				xoaKhungDuLieu();
+				set_color(240);
+				giaoDienInHoaDon();
+				gotoxy(72 + vitri, 8);
+			    cout << so_HD;
+				char chr;
+				if (!so_HD.empty())
+				{					
 					for (int i = 0; i < dsnv.sl; i++)
 					{
 						for (HoaDon* k = dsnv.ds[i]->dshd.head; k != NULL; k = k->next)
@@ -651,21 +651,78 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 								break;
 							}
 						}
-					}
+					}						
 				}
-				else
-				{
-					ShowCur(0);
-					gotoxy(Xthongbao, ythongbao);
+				xoaKhungHuongDan();
+				do {
+					gotoxy(Xhuongdan, yhuongdan);
 					set_color(240);
-					cout << "-Ma hoa don khong ton tai.";
-					Sleep(2000);
-					xoaKhungThongBao();
+					cout << "- Nhan TAB de xem danh sach hoa don.";
+					gotoxy(Xhuongdan, yhuongdan + 1);
+					cout << "- Khong duoc de trong.";
+					gotoxy(Xhuongdan, yhuongdan + 2);
+					cout << "- Enter chuyen sang noi dung khac.";
+					set_color(240);
+					ShowCur(1);
+					gotoxy(72 + vitri, 8);
+					chr = _getch();
+					if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 7))
+					{
+						so_HD.push_back(toupper(char(chr)));
+						cout << so_HD.at(vitri);
+						vitri++;
+					}if (chr == 8 && vitri > 0)
+					{					
+						vitri--;
+						so_HD.pop_back();
+						gotoxy(72 + vitri, 8);
+						cout << " ";
+						gotoxy(72 + vitri, 8);
+					}
+					if (chr == 13 && vitri != 0)
+					{
+						if (ktTrungHoaDon2(dsnv, so_HD))
+						{							
+							xoaKhungHuongDan();
+							ShowCur(0);
+							break;
+						}
+						else
+						{
+							ShowCur(0);
+							gotoxy(Xthongbao, ythongbao);
+							set_color(240);
+							cout << "-Ma hoa don khong ton tai.";
+							Sleep(2000);
+							xoaKhungThongBao();
+						}
+
+					}
+					if (chr == Tab)
+					{
+						so_HD = "";
+						xoaKhungHuongDan();
+						xoaKhungDuLieu();
+						giaoDienDSHoaDon();						
+						chon = thoatDSHoaDon(dsnv);
+						if (chon == 1)
+						{
+							ShowCur(0);
+							break;
+						}
+					}
+					if (chr == ESC)
+					{
+						c = -1;
+						ShowCur(0);
+						break;
+					}
+				} while (true);
+				if (c == -1)
+				{
 					break;
-				}
-			}
-			gotoxy(Xthongbao, ythongbao);
-			system("pause");
+				}				
+			}			
 			break;
 		case 12:
 			t_ngay = "";
@@ -722,6 +779,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			}
 			ShowCur(0);
 			set_color(240);
+			gotoxy(Xthongbao, ythongbao);
 			system("pause");
 			break;
 		case 13:

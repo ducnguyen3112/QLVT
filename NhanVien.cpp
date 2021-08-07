@@ -467,6 +467,8 @@ HoaDon* taoNodeHoaDon(DSNV& dsnv,int indexNV,char loai,string ngay,string shd) {
 	return t;
 }
 void duyetHoaDon(DSNV dsnv) {
+	ShowCur(0);
+	quickSortNhanVien(dsnv, 0, dsnv.sl - 1);
 	int d = 0;
 	set_color(240);
 	for (int i = 0; i < dsnv.sl; i++)
@@ -489,6 +491,24 @@ void duyetHoaDon(DSNV dsnv) {
 		}
 	}
 	duongKeDuoi(d + 10, 240);
+}
+int thoatDSHoaDon(DSNV dsnv)
+{
+	ShowCur(false);
+	char c;
+	do
+	{
+		set_color(240);
+		duyetHoaDon(dsnv);
+		c = _getch();
+		switch (c)
+		{
+		case ESC:
+			return 1;
+			break;
+		}
+	} while (c != ESC);
+	return 0;
 }
 
 void xuatDSCTHD(DSCTHD& ds_cthd, tree t) {
@@ -517,7 +537,6 @@ void xuatDSCTHD(DSCTHD& ds_cthd, tree t) {
 void xuatDSHD_TrongTG(DSNV dsnv, Date date1, Date date2)
 {
 	int d = 0;
-	//partition(dsnv, low, high);
 	quickSortNhanVien(dsnv, 0, dsnv.sl - 1);
 	for (int i = 0; i < dsnv.sl; i++)
 	{
