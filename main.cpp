@@ -867,7 +867,9 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			xoaKhungDuLieu();
 			ghiFileNhanVien(dsnv);
 			ghiFileVatTu(dsvt.TREE);
+			ghiFileHD(dsnv);
 			ghiFileCTHD(dsnv);
+			
 			exit(0);
 			break;
 		}
@@ -878,6 +880,8 @@ int main(){
 	DSVT dsvt;
 	docFileNhanVien(dsnv);
 	docFileVatTu(dsvt);
+	docFileHD(dsnv);
+	docFileCTHD(dsnv);
 	khoiTaoManHinh();
 	GiaoDienChinh();
 	menu(1,dsnv, dsvt);
