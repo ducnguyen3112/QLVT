@@ -1,27 +1,27 @@
 VT001
 Tu lanh
 Cai
-323
+3428
 VT002
 Ti vi
 Cai
-21
+102
 VT003
 Loa
 Cai
-18
+55
 VT004
 May chieu
 Cai
-3
+0
 VT005
 May hut bui
 Cai
-9
+10
 VT006
 Den ban
 Cai
-11
+15
 VT007
 May say toc
 Cai
@@ -33,7 +33,7 @@ Cai
 VT009
 Noi com dien
 Cai
-9
+12
 VT010
 Bep ga
 Cai
