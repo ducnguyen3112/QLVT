@@ -45,7 +45,7 @@ bool themVatTu(DSVT& dsvt, int y)
 	{
 		return false;
 	}
-	str2 = nhapSoNguyenint(xdulieu5, y, 3, "", 240);
+	str2 = nhapSoNguyen(xdulieu5, y, 3, "", 240);
 	p->SLT = doiThanhSo(str2);	
 	if (str2.length() == 0)
 	{
@@ -118,18 +118,18 @@ void ghiFileVatTu(tree t)
 {
 	ofstream fout;
 	fout.open("dsvt.txt", ios_base::out);
-	ghiFile_NLR(fout,t);
+	ghiFile_LNR(fout,t);
 	fout.close();
 }
-void ghiFile_NLR(ofstream& fout,tree t) {
+void ghiFile_LNR(ofstream& fout,tree t) {
 	if (t!=NULL)
 	{
+		ghiFile_LNR(fout, t->left);
 		fout << t->maVT << endl
 			 << t->tenVT<< endl
 			 << t->DV   << endl
-			 << t->SLT  << endl;
-		ghiFile_NLR(fout, t->left);
-		ghiFile_NLR(fout, t->right);
+			 << t->SLT  << endl;		
+		ghiFile_LNR(fout, t->right);
 	}
 }
 //=========Xuất danh sách vật tư theo cây nhị phân=========
@@ -149,7 +149,7 @@ void xuatDSVT_TREE(DSVT& dsvt, tree t, int i)
 			gotoxy(xdulieu5, i + 10);
 			cout << t->SLT;
 			set_color(240);
-			duongKeNganCach(i + 10);		
+			duongKeNganCach(i + 10);
 		xuatDSVT_TREE(dsvt, t->left, i++);
 		xuatDSVT_TREE(dsvt, t->right, i++);
 	}

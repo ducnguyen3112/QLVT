@@ -49,7 +49,7 @@ void docFileVatTu(DSVT& dsvt);
 
 //=========Ghi file vật tư==========
 void ghiFileVatTu(tree t);
-void ghiFile_NLR(ofstream& fout, tree t);
+void ghiFile_LNR(ofstream& fout, tree t);
 
 
 //==========Chức năng xóa vật tư==========

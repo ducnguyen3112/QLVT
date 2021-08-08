@@ -66,3 +66,15 @@ VT017
 Tu lanh Panasonic 188l
 Cai
 5
+VT018
+Ti vi oled1
+Cai
+1
+VT019
+Ti vi lcd
+Cai
+1
+VT020
+Ti vi samsung
+Cai
+1

@@ -58,15 +58,17 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 		switch (vt)
 		{
 		case 1:
+			nds = 0;
 			xoaKhungDuLieu();
-			dong = dsvt.slvt + 10;
-			xuatDSVT_TREE(dsvt, dsvt.TREE, 0);
+			dong = dsvt.slvt + 10;;
+			chuyenCay_Mang(dsvt.TREE, ds, nds);
+			inDSVT(ds, nds, -1);
 			huongDanThemVatTu(240);
 			while (true)
 			{
 				duongKeDuoi(dong, 255);
 				set_color(240);
-				GiaoDienVatTu();
+				GiaoDienVatTu();				
 				duongKeNganCach(dong);
 				duongKeDuoi(dong + 1, 240);
 				gotoxy(xstt, dong);
@@ -75,6 +77,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				if (!themVatTu(dsvt, dong))
 				{
 					huongDanThemVatTu(255);
+					giaiPhong_DSVT(ds, nds);
 					break;
 				}
 				set_color(240);
@@ -100,15 +103,15 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			}
 			while (true)
 			{
-				int ndsx = 0;
-				chuyenCay_Mang_Xoa(dsvt.TREE, ds, ndsx);
-				sapXep_DSVT(ds, ndsx);
+				nds = 0;
+				chuyenCay_Mang_Xoa(dsvt.TREE, ds, nds);
+				sapXep_DSVT(ds, nds);
 				GiaoDienVatTu();
-				duongKeDuoi(ndsx + 10, 240);
-				index = chonVatTu(ds, ndsx);
+				duongKeDuoi(nds + 10, 240);
+				index = chonVatTu(ds, nds);
 				if (index == -1)
 				{
-					giaiPhong_DSVT(ds, ndsx);
+					giaiPhong_DSVT(ds, nds);
 					break;
 				}
 				int check = xacNhanXoa("Ban chac chan muon xoa?");
@@ -116,10 +119,10 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				{
 					bool kt = kT_VT_CTDSHD(dsnv, ds, index);
 					if (kt == false) {
-						xoaVatTu(dsvt, dsvt.TREE, ds, index, ndsx);
+						xoaVatTu(dsvt, dsvt.TREE, ds, index, nds);
 						thongBao("- Xoa vat tu thanh cong.");
 						xoaKhungDuLieu();
-						giaiPhong_DSVT(ds, ndsx);
+						giaiPhong_DSVT(ds, nds);
 					}
 					else
 					{
@@ -129,12 +132,12 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				}
 				else if (check == 0) {
 					xoaKhungThongBao();
-					index = chonVatTu(ds, ndsx);
+					index = chonVatTu(ds, nds);
 				}
 				else if (check == -1)
 				{
 					set_color(240);
-					giaiPhong_DSVT(ds, ndsx);
+					giaiPhong_DSVT(ds, nds);
 					break;
 				}
 			}
@@ -152,15 +155,15 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			}
 			while (true)
 			{
-				int ndss = 0;
+				nds = 0;
 				GiaoDienVatTu();
 				duongKeDuoi(dsvt.slvt + 10, 240);
-				chuyenCay_Mang(dsvt.TREE, ds, ndss);
+				chuyenCay_Mang(dsvt.TREE, ds, nds);
 				//sapXep_DSVT(ds, ndss);
-				index = chonVatTu(ds, ndss);
+				index = chonVatTu(ds, nds);
 				if (index == -1)
 				{
-					giaiPhong_DSVT(ds, ndss);
+					giaiPhong_DSVT(ds, nds);
 					xoaKhungDuLieu();
 					break;
 				}
@@ -175,7 +178,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					xoaKhungDuLieu();
 					HuongDanMenu();
 					set_color(240);
-					giaiPhong_DSVT(ds, ndss);
+					giaiPhong_DSVT(ds, nds);
 
 				}
 				else if (check == 0)
@@ -185,7 +188,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				}
 				else if (check == -1)
 				{
-					giaiPhong_DSVT(ds, ndss);
+					giaiPhong_DSVT(ds, nds);
 					xoaKhungDuLieu();
 					set_color(240);
 					break;
