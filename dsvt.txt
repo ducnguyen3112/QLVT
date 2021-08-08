@@ -1,11 +1,11 @@
 VT001
 Tu lanh
 Cai
-2437
+2440
 VT002
 Ti vi
 Cai
-105
+108
 VT003
 Loa
 Cai
@@ -13,7 +13,7 @@ Cai
 VT004
 May chieu
 Cai
-0
+2
 VT005
 May hut bui
 Cai
@@ -25,7 +25,7 @@ Cai
 VT007
 May say toc
 Cai
-0
+3
 VT008
 May khoan
 Cai
@@ -65,4 +65,4 @@ Bo
 VT017
 Tu lanh Panasonic 188l
 Cai
-5
+3

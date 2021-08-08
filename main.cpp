@@ -156,7 +156,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				GiaoDienVatTu();
 				duongKeDuoi(dsvt.slvt + 10, 240);
 				chuyenCay_Mang(dsvt.TREE, ds, ndss);
-				//sapXep_DSVT(ds, ndss);
+				sapXep_DSVT(ds, ndss);
 				index = chonVatTu(ds, ndss);
 				if (index == -1)
 				{

@@ -913,7 +913,7 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				xoaKhungDuLieu();
 				GiaoDienVatTu();
 				nds = 0;
-				chuyenCay_Mang_TK(t, ds, nds);
+				chuyenCay_Mang(t, ds, nds);
 				chon = chonVatTu(ds,nds);
 
 				if (chon == -1)
