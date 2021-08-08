@@ -62,13 +62,15 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			xoaKhungDuLieu();
 			dong = dsvt.slvt + 10;;
 			chuyenCay_Mang(dsvt.TREE, ds, nds);
+			sapXep_DSVT(ds, nds);
 			inDSVT(ds, nds, -1);
+			
 			huongDanThemVatTu(240);
 			while (true)
 			{
 				duongKeDuoi(dong, 255);
 				set_color(240);
-				GiaoDienVatTu();				
+				GiaoDienVatTu();					
 				duongKeNganCach(dong);
 				duongKeDuoi(dong + 1, 240);
 				gotoxy(xstt, dong);
@@ -76,10 +78,12 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				ShowCur(1);
 				if (!themVatTu(dsvt, dong))
 				{
-					huongDanThemVatTu(255);
+					ShowCur(0);
 					giaiPhong_DSVT(ds, nds);
+					huongDanThemVatTu(255);
 					break;
 				}
+				ShowCur(0);
 				set_color(240);
 				gotoxy(Xthongbao, ythongbao);
 				cout << "-Them vat tu moi thanh cong.";
@@ -159,7 +163,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				GiaoDienVatTu();
 				duongKeDuoi(dsvt.slvt + 10, 240);
 				chuyenCay_Mang(dsvt.TREE, ds, nds);
-				//sapXep_DSVT(ds, ndss);
+				sapXep_DSVT(ds, nds);
 				index = chonVatTu(ds, nds);
 				if (index == -1)
 				{

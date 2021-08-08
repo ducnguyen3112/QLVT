@@ -28,8 +28,6 @@ bool themVatTu(DSVT& dsvt, int y);
 void them_1_VatTu(tree& t, VatTu* p);
 bool ktMaVT_Trung(tree t, string ma);
 
-//=========Xuất danh sách vật tư theo cây nhị phân=========
-void xuatDSVT_TREE(DSVT& dsvt, tree t, int i);
 void PreOrder(tree t, int i);
 void capNhatSLT(tree t, string ma, int slt);
 
@@ -42,6 +40,7 @@ void chuyenCay_Mang_TK(tree t, VatTu* ds[], int& nds);
 void sapXep_DSVT(VatTu* ds[], int& nds);
 void inDSVT(VatTu* ds[], int& nds, int index);
 void giaiPhong_DSVT(VatTu* ds[], int& nds);
+
 VatTu* TimKiem(tree t, string x);
 
 //=========Đọc file vật tư==========
@@ -49,7 +48,7 @@ void docFileVatTu(DSVT& dsvt);
 
 //=========Ghi file vật tư==========
 void ghiFileVatTu(tree t);
-void ghiFile_LNR(ofstream& fout, tree t);
+void ghiFile_NLR(ofstream& fout, tree t);
 
 
 //==========Chức năng xóa vật tư==========

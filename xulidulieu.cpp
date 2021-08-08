@@ -148,37 +148,6 @@ string nhapChuoi4(int x, int y, int length, string str, int color) {
     return "";
 }
 //nhap nhap chuoi la so nguyen va khong co khoang trang
-string nhapSoNguyen(int x, int y, int length, string str, int color) {
-    set_color(color);
-    int vitri = str.length();
-    gotoxy(x, y);
-    cout << str;
-    int chr;
-    do {
-
-        gotoxy(x + vitri, y);
-        chr = _getch();
-        if (((chr >= '0' && chr <= '9')) && (vitri < length))
-        {
-            str.push_back(char(chr));
-            cout << str.at(vitri);
-            vitri++;
-        }if (chr == 8 && vitri > 0)
-        {
-            vitri--;
-            str.pop_back();
-            gotoxy(x + vitri, y);
-            cout << " ";
-            gotoxy(x + vitri, y);
-        }
-        if (chr == 13 && vitri != 0)
-        {
-            return str;
-        }
-    } while (chr != ESC);
-    return "";
-}
-//nhap nhap chuoi la so nguyen va khong co khoang trang
 int nhapSoNguyenint(int x, int y, int length, string str, int color) {
     set_color(color);
     char* temp = new char[length + 1];

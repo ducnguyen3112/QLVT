@@ -1,80 +1,88 @@
-VT001
-Tu lanh
-Cai
-2437
-VT002
-Ti vi
-Cai
-105
-VT003
-Loa
-Cai
-61
-VT004
-May chieu
-Cai
-0
-VT005
-May hut bui
-Cai
-10
-VT006
-Den ban
-Cai
-23
-VT007
-May say toc
-Cai
-0
-VT008
-May khoan
-Cai
-0
-VT009
-Noi com dien
-Cai
-10
-VT010
-Bep ga
-Cai
-4
-VT011
-Quat dieu hoa
-Cai
-0
-VT012
-Quat dien
-Cai
-15
-VT013
-Lo vi song
-Cai
-9
-VT014
+VT126
 May loc nuoc
 Cai
+115
+VT132
+Den ban
+Cai
+100
+VT147
+Lo vi song
+Cai
+20
+VT160
+Loa
+Cai
+25
+VT198
+May rua chen
+Cai
+10
+VT200
+Dao
+Cai
 0
-VT015
+VT291
+May say toc
+Cai
+50
+VT294
+Ti vi sony
+Cai
+30
+VT369
+May ep cam
+Cai
+0
+VT379
 Binh ly thuy tinh
 Bo
 0
-VT016
+VT389
+May hut bui
+Cai
+0
+VT415
+Bep ga
+Cai
+0
+VT448
+May chieu
+Cai
+0
+VT484
+Tu lanh panasonic 188l
+Cai
+0
+VT565
 Ban ghe inox
 Bo
+25
+VT580
+Noi com dien
+Cai
 0
-VT017
-Tu lanh Panasonic 188l
+VT688
+May khoan
 Cai
-5
-VT018
-Ti vi oled1
+0
+VT836
+Quat dien
 Cai
-1
-VT019
+30
+VT889
+May lanh
+Cai
+0
+VT921
+Quat dieu hoa
+Cai
+0
+VT931
+Tu lanh panasonic 288l
+Cai
+0
+VT941
 Ti vi lcd
 Cai
-1
-VT020
-Ti vi samsung
-Cai
-1
+50

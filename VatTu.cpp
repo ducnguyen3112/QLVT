@@ -2,7 +2,7 @@
 #include "mylib.h"
 #include "giaodien.h"
 #include "xulidulieu.h"
-
+string sinhMaVatTu(tree t);
 VatTu* khoiTaoNode_VatTu()
 {
 	VatTu* p = new VatTu;
@@ -14,23 +14,11 @@ VatTu* khoiTaoNode_VatTu()
 bool themVatTu(DSVT& dsvt, int y)
 {
 	VatTu *p = khoiTaoNode_VatTu();
-	string str1, str2;
-	while (true) 
-	{
-		gotoxy(xdulieu2, y);
-		cout << "          ";
-		str1 = nhapMa(xdulieu2, y, 10, "", 240);
-		if (ktMaVT_Trung(dsvt.TREE,str1) == false)
-		{
-			p->maVT = str1;			
-			break;
-		}
-		gotoxy(Xthongbao, ythongbao);
-		cout << "Ma vat tu da ton tai.";
-		Sleep(2000);
-		gotoxy(Xthongbao, ythongbao);
-		cout << "                     ";
-	}
+	gotoxy(xdulieu2, y);
+	cout << "          ";
+	p->maVT = sinhMaVatTu(dsvt.TREE);
+	gotoxy(xdulieu2, y);
+	cout << p->maVT;
 	if (p->maVT.empty())
 	{
 		return false;
@@ -40,17 +28,17 @@ bool themVatTu(DSVT& dsvt, int y)
 	{
 		return false;
 	}
-	p->DV = nhapChuoi4(xdulieu4, y, 10, "", 240);
+	p->DV = nhapChuoi(xdulieu4, y, 10, "", 240);
 	if (p->DV.empty())
 	{
 		return false;
 	}
-	str2 = nhapSoNguyen(xdulieu5, y, 3, "", 240);
-	p->SLT = doiThanhSo(str2);	
-	if (str2.length() == 0)
+	do
 	{
-		return false;
-	}
+		p->SLT = nhapSoNguyenint(xdulieu5, y, 3, "", 240);
+
+	} while (p->SLT < 0);
+		
 
 	them_1_VatTu(dsvt.TREE, p);
 	dsvt.slvt++;
@@ -73,6 +61,19 @@ void them_1_VatTu(tree& t, VatTu* p)
 			them_1_VatTu(t->left, p);
 		}
 	}
+}
+string sinhMaVatTu(tree t) {
+	string ma = "VT000";;
+	srand((int)time(0));
+	do
+	{
+		for (int i = 2; i < 5; i++)
+		{
+			ma[i] = rand() % (57 - 48 + 1) + 48;
+			gotoxy(Xthongbao, ythongbao);
+		}
+	} while (ktMaVT_Trung(t, ma));
+	return ma;
 }
 
 bool ktMaVT_Trung(tree t, string ma)
@@ -118,40 +119,18 @@ void ghiFileVatTu(tree t)
 {
 	ofstream fout;
 	fout.open("dsvt.txt", ios_base::out);
-	ghiFile_LNR(fout,t);
+	ghiFile_NLR(fout,t);
 	fout.close();
 }
-void ghiFile_LNR(ofstream& fout,tree t) {
+void ghiFile_NLR(ofstream& fout,tree t) {
 	if (t!=NULL)
-	{
-		ghiFile_LNR(fout, t->left);
+	{		
 		fout << t->maVT << endl
 			 << t->tenVT<< endl
 			 << t->DV   << endl
-			 << t->SLT  << endl;		
-		ghiFile_LNR(fout, t->right);
-	}
-}
-//=========Xuất danh sách vật tư theo cây nhị phân=========
-void xuatDSVT_TREE(DSVT& dsvt, tree t, int i)
-{
-	if (t != NULL)
-	{		
-			set_color(240);
-			gotoxy(xstt, i + 10);
-			cout << i + 1;
-			gotoxy(xdulieu2, i + 10);
-			cout << t->maVT;
-			gotoxy(xdulieu3, i + 10);
-			cout << t->tenVT;
-			gotoxy(xdulieu4, i + 10);
-			cout << t->DV;
-			gotoxy(xdulieu5, i + 10);
-			cout << t->SLT;
-			set_color(240);
-			duongKeNganCach(i + 10);
-		xuatDSVT_TREE(dsvt, t->left, i++);
-		xuatDSVT_TREE(dsvt, t->right, i++);
+			 << t->SLT  << endl;
+		ghiFile_NLR(fout, t->left);
+		ghiFile_NLR(fout, t->right);
 	}
 }
 void PreOrder(tree t,int i) {
