@@ -796,16 +796,6 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				else
 				{
 					xoaKhungHuongDan();
-					if (loai=='X')
-					{
-						k->SLT -= ct.soluong;
-					}
-					else
-					{
-						k->SLT += ct.soluong;
-					}
-					
-					capNhatSLT(t, k->maVT, k->SLT);
 					break;
 				}
 			}
@@ -827,8 +817,17 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 			xoaKhungHuongDan();
 			if (lchon == 1)
 			{
+				if (loai == 'X')
+				{
+					k->SLT -= ct.soluong;
+				}
+				else if (loai == 'N')
+				{
+					k->SLT += ct.soluong;
+				}
 				ds_cthd.hd[ds_cthd.sl] = ct;
 				ds_cthd.sl++;
+				
 				gotoxy(Xthongbao, ythongbao);
 				cout << "-Da them vat tu vao chi tiet hoa don.";
 				Sleep(2000);
@@ -856,6 +855,7 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				cout << "                 ";
 				gotoxy(157, 8);
 				cout << "                               ";
+				lchon = 0;
 			}
 		}
 		do {
