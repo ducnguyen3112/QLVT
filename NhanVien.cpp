@@ -218,7 +218,7 @@ void docFileCTHD(DSNV& dsnv) {
 						while (p->ds_cthd.sl < slvt)
 						{
 							getline(fin, p->ds_cthd.hd[p->ds_cthd.sl].maVT, ',');
-							cout << p->ds_cthd.hd[p->ds_cthd.sl].maVT;
+							//cout << p->ds_cthd.hd[p->ds_cthd.sl].maVT;
 							fin >> p->ds_cthd.hd[p->ds_cthd.sl].dongia;
 							//cout << "dg:" << p->ds_cthd.hd[p->ds_cthd.sl].dongia << endl;
 							fin.ignore();
@@ -912,13 +912,13 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				HuongDanMenu();
 				xoaKhungDuLieu();
 				GiaoDienVatTu();
-				giaiPhong_DSVT(ds, nds);
 				nds = 0;
 				chuyenCay_Mang_TK(t, ds, nds);
 				chon = chonVatTu(ds,nds);
 
 				if (chon == -1)
 				{
+					giaiPhong_DSVT(ds, nds);
 					xoaKhungDuLieu();
 					giaoDienCTHD('N');
 					ShowCur(0);
@@ -927,7 +927,7 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				else
 				{
 						ct.maVT = ds[chon]->maVT;
-						
+						giaiPhong_DSVT(ds, nds);
 						xoaKhungDuLieu();
 						giaoDienCTHD(loai);
 						gotoxy(70, 8);
@@ -967,13 +967,13 @@ bool kT_VT_CTDSHD(DSNV dsnv, VatTu* ds[], int index)
 	{
 		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
 		{
-			for (int j = 0; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
+			for (int j = 0 ; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
 			{
 				if (dsnv.ds[i]->dshd.head->ds_cthd.hd[j].maVT == ma)
 				{
-					return i;
+					return true;
 				}
-			}
+			}			
 		}
 	}	
 	return false;
