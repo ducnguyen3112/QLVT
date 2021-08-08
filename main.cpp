@@ -350,7 +350,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				set_color(63);
 				gotoxy(115, 18);
 				cout << maNV_HD;
-
+				ShowCur(0);
 				int chr;
 				if (!maNV_HD.empty())
 				{
@@ -364,7 +364,14 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					cout << "- Gia tri ngay va thang 1->9";
 					gotoxy(Xhuongdan, yhuongdan + 2);
 					cout << " phai co so '0' o truoc.";
+					ShowCur(1);
 					ngaylap = nhapNgay(115, 20, 10, ngaylap, 63);
+			
+					if (ngaylap=="")
+					{
+						ShowCur(0);
+						break;
+					}
 					sohoadon = sinhMaHoaDon('N', dsnv.ds[chon]->dshd);
 					gotoxy(115, 22);
 					cout << sohoadon;
@@ -619,15 +626,17 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			c = 0;
 			while (true)
 			{
+				ShowCur(0);
 				vitri = so_HD.length();
 				xoaKhungDuLieu();
 				set_color(240);
 				giaoDienInHoaDon();
-				gotoxy(72 + vitri, 8);
+				ShowCur(0);
+				gotoxy(72 , 8);
 			    cout << so_HD;
 				char chr;
 				if (!so_HD.empty())
-				{					
+				{
 					for (int i = 0; i < dsnv.sl; i++)
 					{
 						for (HoaDon* k = dsnv.ds[i]->dshd.head; k != NULL; k = k->next)
@@ -648,7 +657,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 									trigiaHD += thanhTien(dsnv.ds[i]->dshd.head->ds_cthd.hd[j].dongia, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].soluong, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].VAT);
 								}
 								cout << trigiaHD;
-								break;
+								//break;
 							}
 						}
 					}						
@@ -666,7 +675,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					ShowCur(1);
 					gotoxy(72 + vitri, 8);
 					chr = _getch();
-					if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 7))
+					if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < 10))
 					{
 						so_HD.push_back(toupper(char(chr)));
 						cout << so_HD.at(vitri);
@@ -695,6 +704,10 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 							cout << "-Ma hoa don khong ton tai.";
 							Sleep(2000);
 							xoaKhungThongBao();
+							xoaKhungDuLieu();
+							giaoDienInHoaDon();
+							so_HD = "";
+							vitri = so_HD.length();
 						}
 
 					}
@@ -722,7 +735,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				{
 					break;
 				}				
-			}			
+			}
 			break;
 		case 12:
 			t_ngay = "";
@@ -851,6 +864,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			xoaKhungDuLieu();
 			ghiFileNhanVien(dsnv);
 			ghiFileVatTu(dsvt.TREE);
+			ghiFileCTHD(dsnv);
 			exit(0);
 			break;
 		}
