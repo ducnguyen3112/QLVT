@@ -40,12 +40,12 @@ bool themVatTu(DSVT& dsvt, int y)
 	{
 		return false;
 	}
-	p->DV = nhapChuoi3(xdulieu4, y, 10, "", 240);
+	p->DV = nhapChuoi4(xdulieu4, y, 10, "", 240);
 	if (p->DV.empty())
 	{
 		return false;
 	}
-	str2 = nhapSoNguyen(xdulieu5, y, 3, "", 240);
+	str2 = nhapSoNguyenint(xdulieu5, y, 3, "", 240);
 	p->SLT = doiThanhSo(str2);	
 	if (str2.length() == 0)
 	{
@@ -399,7 +399,7 @@ int hieuChinhVatTu(DSVT& dsvt, VatTu* ds[], int index, int x, int y)
 
 	ShowCur(true);
 	ten = nhapChuoi4(x + 20, y + 9, 30, ds[index]->tenVT, 63);
-	dv = nhapChuoi2(x + 20, y + 11, 10, ds[index]->DV, 63);
+	dv = nhapChuoi(x + 20, y + 11, 10, ds[index]->DV, 63);
 	slt = ds[index]->SLT;
 	ShowCur(false);
 	int confirm = xacNhanHieuChinh(x, y);

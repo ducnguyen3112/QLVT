@@ -350,7 +350,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 				set_color(63);
 				gotoxy(115, 18);
 				cout << maNV_HD;
-
+				ShowCur(0);
 				int chr;
 				if (!maNV_HD.empty())
 				{
@@ -364,7 +364,14 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 					cout << "- Gia tri ngay va thang 1->9";
 					gotoxy(Xhuongdan, yhuongdan + 2);
 					cout << " phai co so '0' o truoc.";
+					ShowCur(1);
 					ngaylap = nhapNgay(115, 20, 10, ngaylap, 63);
+			
+					if (ngaylap=="")
+					{
+						ShowCur(0);
+						break;
+					}
 					sohoadon = sinhMaHoaDon('N', dsnv.ds[chon]->dshd);
 					gotoxy(115, 22);
 					cout << sohoadon;
@@ -851,6 +858,7 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 			xoaKhungDuLieu();
 			ghiFileNhanVien(dsnv);
 			ghiFileVatTu(dsvt.TREE);
+			ghiFileCTHD(dsnv);
 			exit(0);
 			break;
 		}

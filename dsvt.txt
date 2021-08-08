@@ -1,19 +1,19 @@
 VT001
 Tu lanh
 Cai
-12
+323
 VT002
 Ti vi
 Cai
-20
+21
 VT003
 Loa
 Cai
-15
+18
 VT004
 May chieu
 Cai
-7
+3
 VT005
 May hut bui
 Cai
