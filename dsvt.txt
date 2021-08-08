@@ -1,7 +1,7 @@
 VT126
 May loc nuoc
 Cai
-115
+109
 VT132
 Den ban
 Cai
@@ -9,31 +9,31 @@ Cai
 VT147
 Lo vi song
 Cai
-20
+19
 VT160
 Loa
 Cai
-25
+24
 VT198
 May rua chen
 Cai
-10
+0
 VT200
 Dao
 Cai
-0
+50
 VT291
 May say toc
 Cai
-50
+49
 VT294
 Ti vi sony
 Cai
-30
+24
 VT369
 May ep cam
 Cai
-0
+50
 VT379
 Binh ly thuy tinh
 Bo
@@ -50,14 +50,14 @@ VT448
 May chieu
 Cai
 0
-VT484
-Tu lanh panasonic 188l
-Cai
-0
 VT565
 Ban ghe inox
 Bo
 25
+VT518
+Tu lanh panasonic 188l
+Cai
+0
 VT580
 Noi com dien
 Cai
@@ -69,7 +69,7 @@ Cai
 VT836
 Quat dien
 Cai
-30
+28
 VT889
 May lanh
 Cai
@@ -77,7 +77,7 @@ Cai
 VT921
 Quat dieu hoa
 Cai
-0
+20
 VT931
 Tu lanh panasonic 288l
 Cai
@@ -85,4 +85,4 @@ Cai
 VT941
 Ti vi lcd
 Cai
-50
+49

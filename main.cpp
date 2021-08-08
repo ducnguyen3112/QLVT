@@ -656,12 +656,12 @@ void menu(int vt, DSNV& dsnv, DSVT& dsvt){
 								cout << k->ngayLap.ngay << "/" << k->ngayLap.thang << "/" << k->ngayLap.nam;
 								gotoxy(158, 8);
 								cout << dsnv.ds[i]->hoNV << " " << dsnv.ds[i]->tenNV;
-								xuatDSCTHD(dsnv.ds[i]->dshd.head->ds_cthd, dsvt.TREE);
+								xuatDSCTHD(k->ds_cthd, dsvt.TREE);
 								gotoxy(168, 35);
 								int trigiaHD = 0;
-								for (int j = 0; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
+								for (int j = 0; j < k->ds_cthd.sl; j++)
 								{
-									trigiaHD += thanhTien(dsnv.ds[i]->dshd.head->ds_cthd.hd[j].dongia, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].soluong, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].VAT);
+									trigiaHD += thanhTien(k->ds_cthd.hd[j].dongia, k->ds_cthd.hd[j].soluong, k->ds_cthd.hd[j].VAT);
 								}
 								cout << trigiaHD;
 								//break;

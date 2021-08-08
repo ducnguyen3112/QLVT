@@ -759,9 +759,9 @@ void xuatDSHD_TrongTG(DSNV dsnv, Date date1, Date date2)
 				cout << dsnv.ds[i]->hoNV << " "<<dsnv.ds[i]->tenNV;
 				gotoxy(175, 11 + d);
 				int trigiaHD=0;
-				for (int j = 0; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
+				for (int j = 0; j < p->ds_cthd.sl; j++)
 				{
-					trigiaHD += thanhTien(dsnv.ds[i]->dshd.head->ds_cthd.hd[j].dongia, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].soluong, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].VAT);					
+					trigiaHD += thanhTien(p->ds_cthd.hd[j].dongia, p->ds_cthd.hd[j].soluong, p->ds_cthd.hd[j].VAT);					
 				}
 				cout << trigiaHD;
 				d++;				
@@ -943,10 +943,12 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				if (loai=='N')
 				{
 					chuyenCay_Mang(t, ds, nds);
+					sapXep_DSVT(ds, nds);
 				}
 				else
 				{
 					chuyenCay_Mang_TK(t, ds, nds);
+					sapXep_DSVT(ds, nds);
 				}
 				
 				chon = chonVatTu(ds,nds);
@@ -1004,7 +1006,7 @@ bool kT_VT_CTDSHD(DSNV dsnv, VatTu* ds[], int index)
 		{
 			for (int j = 0 ; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
 			{
-				if (dsnv.ds[i]->dshd.head->ds_cthd.hd[j].maVT == ma)
+				if (p->ds_cthd.hd[j].maVT == ma)
 				{
 					return true;
 				}
