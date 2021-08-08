@@ -46,7 +46,17 @@ bool themNhanVien(DSNV& dsnv,int y) {
 	{
 		return false;
 	}
-	nv->phai = nhapChuoi2(xdulieu5, y, 3,"", 240);
+	while (true)
+	{
+		gotoxy(xdulieu5, y);
+		cout << "       ";
+		nv->phai = nhapChuoi(xdulieu5, y, 3,"", 240);
+		if (nv->phai=="Nam"|| nv->phai == "Nu")
+		{
+			break;
+		}
+	}
+	
 	if (nv->phai.empty())
 	{
 		return false;
@@ -55,13 +65,10 @@ bool themNhanVien(DSNV& dsnv,int y) {
 		dsnv.sl++;
 		return true;
 }
-
-//Doc file nhan vien
-void docFileNhanVien(DSNV &dsnv) {
+void docFileNhanVien(DSNV& dsnv) {
 	ifstream fin;
 	fin.open("dsnv.txt", ios_base::in);
-	string str;
-	while (fin.eof()!=true)
+	while (fin.eof() != true)
 	{
 		dsnv.ds[dsnv.sl] = new NhanVien;
 		getline(fin, dsnv.ds[dsnv.sl]->maNV, '\n');
@@ -72,12 +79,42 @@ void docFileNhanVien(DSNV &dsnv) {
 		getline(fin, dsnv.ds[dsnv.sl]->hoNV, '\n');
 		getline(fin, dsnv.ds[dsnv.sl]->tenNV, '\n');
 		getline(fin, dsnv.ds[dsnv.sl]->phai, '\n');
-		string str;
-		
+
 		dsnv.sl++;
 	}
 	fin.close();
 }
+//Doc file nhan vien
+//void docFileNhanVien(DSNV &dsnv) {
+//	ifstream fin;
+//	fin.open("dsnv.txt", ios_base::in);
+//	char loai;
+//	string ngaylap;
+//	string sohoadon;
+//	string mavt;
+//
+//	while (fin.eof()!=true)
+//	{
+//		dsnv.ds[dsnv.sl] = new NhanVien;
+//		getline(fin, dsnv.ds[dsnv.sl]->maNV, '\n');
+//		if (dsnv.ds[dsnv.sl]->maNV.empty())
+//		{
+//			break;
+//		}
+//		getline(fin, dsnv.ds[dsnv.sl]->hoNV, '\n');
+//		getline(fin, dsnv.ds[dsnv.sl]->tenNV, '\n');
+//		getline(fin, dsnv.ds[dsnv.sl]->phai, '\n');
+//		getline(fin, sohoadon, '\n');
+//		getline(fin, ngaylap, '\n');
+//		fin >> loai;
+//		HoaDon* t = taoNodeHoaDon(dsnv, dsnv.sl, loai, ngaylap, sohoadon);
+//		themHoaDon(dsnv.ds[dsnv.sl]->dshd.head, t);
+//		string str;
+//		
+//		dsnv.sl++;
+//	}
+//	fin.close();
+//}
 //ghi file nhan vien
 void ghiFileNhanVien(DSNV dsnv) {
 	ofstream fout;
@@ -91,6 +128,146 @@ void ghiFileNhanVien(DSNV dsnv) {
 	}
 	fout.close();
 }
+void docFileHD(DSNV& dsnv) {
+	ifstream fin;
+	fin.open("dshd.txt", ios_base::in);
+	string manv;
+	string mahd;
+	string ngaylap;
+	char loai;
+	int index;
+	HoaDon* t ;
+	while (fin.eof() != true)
+	{ 
+		t = createNodeHD();
+		getline(fin,manv, '\n');
+		index = ktTrungNV(manv, dsnv);
+		if (index>=0)
+		{
+			while (true)
+			{
+				getline(fin, mahd, ',');
+				if (mahd.length()<6)
+				{
+					break;
+				}
+				getline(fin, ngaylap, ',');
+				fin >> loai;
+				fin.ignore();
+				t = taoNodeHoaDon(dsnv, index, loai, ngaylap, mahd);
+				themHoaDon(dsnv.ds[index]->dshd.head, t);
+				dsnv.ds[index]->dshd.sl++;
+				
+			}
+			
+		}
+	}
+	fin.close();
+}
+void ghiFileHD(DSNV dsnv) {
+	ofstream fout;
+	fout.open("dshd.txt" ,ios_base::out);
+	for (int i = 0; i < dsnv.sl; i++)
+	{
+		if (dsnv.ds[i]->dshd.head!=NULL)
+		{
+			fout << dsnv.ds[i]->maNV << endl;
+			for (HoaDon*  p = dsnv.ds[i]->dshd.head; p != NULL; p=p->next)
+			{
+			
+				fout << p->soHD << ',';
+				fout << p->ngayLap.ngay<<"/"<< p->ngayLap.thang << "/" << p->ngayLap.nam << ',';
+				fout << p->loai << endl;
+			}
+			fout << "-," << endl;
+		}
+
+	}
+	fout.close();
+}
+void docFileCTHD(DSNV& dsnv) {
+	ifstream fin;
+	fin.open("dscthd.txt", ios_base::in);
+	string manv;
+	string mahd;
+	string ngaylap;
+	char loai;
+	int index;
+	int slvt;
+	int demhd;
+	while (fin.eof() != true)
+	{
+
+		getline(fin, manv, '\n');
+		index = ktTrungNV(manv, dsnv);
+		if (index >= 0)
+		{
+			demhd = 0;
+			while (demhd < dsnv.ds[index]->dshd.sl)
+			{
+				mahd = "";
+				getline(fin, mahd, '\n');
+				fin >> slvt;
+				fin.ignore();
+				for (HoaDon* p = dsnv.ds[index]->dshd.head; p != NULL; p=p->next)
+				{
+					
+					if (p->soHD==mahd)
+					{	
+						
+						while (p->ds_cthd.sl < slvt)
+						{
+							getline(fin, p->ds_cthd.hd[p->ds_cthd.sl].maVT, ',');
+							cout << p->ds_cthd.hd[p->ds_cthd.sl].maVT;
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].dongia;
+							//cout << "dg:" << p->ds_cthd.hd[p->ds_cthd.sl].dongia << endl;
+							fin.ignore();
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].soluong;
+							//cout << "sl:" << p->ds_cthd.hd[p->ds_cthd.sl].soluong << endl;
+							fin.ignore();
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].VAT;
+							//cout << "vat:" << p->ds_cthd.hd[p->ds_cthd.sl].VAT << endl;
+							p->ds_cthd.sl++;
+							fin.ignore();
+						}
+						break;
+					}
+				}
+				demhd++;
+			}
+		}
+	}
+	fin.close();
+}
+void ghiFileCTHD(DSNV dsnv) {
+	ofstream fout;
+	fout.open("dscthd.txt", ios_base::out);
+	for (int i = 0; i < dsnv.sl; i++)
+	{
+
+		
+		if (dsnv.ds[i]->dshd.head != NULL)
+		{
+			fout << dsnv.ds[i]->maNV << endl;
+		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
+			{
+			fout << p->soHD << endl;
+			fout << p->ds_cthd.sl << endl;
+			for (int i = 0; i < p->ds_cthd.sl; i++)
+				{
+					fout << p->ds_cthd.hd[i].maVT << ',';
+					fout << p->ds_cthd.hd[i].dongia << ',';
+					fout << p->ds_cthd.hd[i].soluong << ',';
+					fout << p->ds_cthd.hd[i].VAT  << endl;
+					
+				}
+			}
+		}
+		
+	}
+	fout.close();
+}
+
 //Xuat ds nhan vien len bang
 void xuatDSNV(DSNV dsnv,int index) {
 	int i;
@@ -201,7 +378,7 @@ int hieuChinhNhanVien(DSNV& dsnv, int index,int x,int y) {
 	while (ktTrungNV(str,dsnv)>-1);
 	nv->hoNV=nhapChuoi(x+20, y+9, 20, dsnv.ds[index]->hoNV, 63);
 	nv->tenNV = nhapChuoi(x+20, y+11, 10, dsnv.ds[index]->tenNV, 63);
-	nv->phai = nhapChuoi2(x+20, y+13, 3, dsnv.ds[index]->phai, 63);
+	nv->phai = nhapChuoi(x+20, y+13, 3, dsnv.ds[index]->phai, 63);
 	ShowCur(false);
 	int confirm = xacNhanHieuChinh(x, y);
 	xoaKhungHuongDan();
@@ -411,6 +588,21 @@ bool ktTrungHoaDon(HoaDon* ds,string ma) {
 	}
 	return false;
 }
+bool ktTrungHoaDon2(DSNV dsnv, string ma)
+{
+	
+	for (int i = 0; i < dsnv.sl; i++)
+	{
+		for (HoaDon* k = dsnv.ds[i]->dshd.head; k != NULL; k = k->next)
+		{
+			if (k->soHD.compare(ma)==0)
+			{				
+				return true;
+			}
+		}
+	}	
+	return false;
+}
 //=======================================================
 string sinhMaHoaDon(char loai, DSHD ds) {
 	string ma = "HD0000";
@@ -432,7 +624,7 @@ HoaDon* createNodeHD() {
 	return p;
 }
 void themHoaDon(HoaDon* &ds, HoaDon* p) {
-	HoaDon* t=createNodeHD();
+	//HoaDon* t=createNodeHD();
 	if (ds==NULL)
 	{
 		ds = p;
@@ -440,8 +632,8 @@ void themHoaDon(HoaDon* &ds, HoaDon* p) {
 	
 	else
 	{
-		t->next = ds;
-		ds = t;
+		p->next = ds;
+		ds = p;
 	}
 }
 HoaDon* taoNodeHoaDon(DSNV& dsnv,int indexNV,char loai,string ngay,string shd) {
@@ -451,27 +643,21 @@ HoaDon* taoNodeHoaDon(DSNV& dsnv,int indexNV,char loai,string ngay,string shd) {
 	t->ngayLap = stodate(ngay);
 	return t;
 }
-void duyetHoaDon(DSNV dsnv, int index) {
+void duyetHoaDon(DSNV dsnv) {
+	ShowCur(0);
+	quickSortNhanVien(dsnv, 0, dsnv.sl - 1);
 	int d = 0;
 	set_color(240);
 	for (int i = 0; i < dsnv.sl; i++)
 	{	
 		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
-		{
-			if (d == index)
-			{
-				set_color(63);
-			}
-			else
-			{
-				set_color(240);
-			}
+		{			
 			gotoxy(xstt, d + 10);
 			cout << d + 1;
 			gotoxy(xdulieu2, d + 10);
 			cout << p->soHD;
 			gotoxy(xdulieu3, d + 10);
-			cout << dsnv.ds[i]->tenNV;
+			cout << dsnv.ds[i]->hoNV <<" "<< dsnv.ds[i]->tenNV;
 			gotoxy(xdulieu4, d + 10);
 			cout << p->ngayLap.ngay << "/" << p->ngayLap.thang << "/" << p->ngayLap.nam;
 			gotoxy(xdulieu5, d + 10);
@@ -480,37 +666,28 @@ void duyetHoaDon(DSNV dsnv, int index) {
 			duongKeNganCach(d + 10);
 			d++;
 		}
-	}	
+	}
+	duongKeDuoi(d + 10, 240);
 }
-int chonHoaDon(DSNV dsnv,DSHD dshd) {
+int thoatDSHoaDon(DSNV dsnv)
+{
 	ShowCur(false);
 	char c;
-	int vt = 0;
 	do
 	{
 		set_color(240);
-		duyetHoaDon(dsnv, vt);
-		duongKeDuoi(dshd.sl + 10, 240);
+		duyetHoaDon(dsnv);
 		c = _getch();
 		switch (c)
 		{
-		case Up:vt--;
-			if (vt == -1) {
-				vt = dshd.sl - 1;
-			}
-			break;
-		case Down:vt++;
-			if (vt == dshd.sl) {
-				vt = 0;
-			}
-			break;
 		case ESC:
-			return -1;
+			return 1;
 			break;
 		}
-	} while (c != enter);
-	return vt;
+	} while (c != ESC);
+	return 0;
 }
+
 void xuatDSCTHD(DSCTHD& ds_cthd, tree t) {
 	ShowCur(0);
 	VatTu* p = khoiTaoNode_VatTu();
@@ -534,35 +711,38 @@ void xuatDSCTHD(DSCTHD& ds_cthd, tree t) {
 	}
 
 }
-void xuatDSHD_TrongTG(DSCTHD ds_cthd,DSHD ds, DSNV dsnv, Date date1, Date date2)
+void xuatDSHD_TrongTG(DSNV dsnv, Date date1, Date date2)
 {
-	ShowCur(0);
-	for (int i = 0; i < ds_cthd.sl; i++)
+	int d = 0;
+	quickSortNhanVien(dsnv, 0, dsnv.sl - 1);
+	for (int i = 0; i < dsnv.sl; i++)
 	{
-		for (HoaDon* p = ds.head; p != NULL; p = p->next)
+		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
 		{
 			if ((demNgay(date1) <= demNgay(p->ngayLap)) && (demNgay(p->ngayLap) <= demNgay(date2)))
 			{
-				gotoxy(55, 9 + i);
+				duongKeNganCachThongKe(d+11);
+				gotoxy(55, 11 + d);
 				cout << p->soHD;
-				gotoxy(80, 9 + i);
-				cout << " " << p->ngayLap.ngay << "/" << p->ngayLap.thang << "/" << p->ngayLap.nam;
-				gotoxy(100, 9 + i);
+				gotoxy(75, 11 + d);
+				cout << p->ngayLap.ngay << "/" << p->ngayLap.thang << "/" << p->ngayLap.nam;
+				gotoxy(100, 11 + d);
 				cout << p->loai;
-				gotoxy(140, 9 + i);
-				cout << " ";
-				gotoxy(175, 9 + i);
-				cout << thanhTien(ds_cthd.hd[i].dongia, ds_cthd.hd[i].soluong, ds_cthd.hd[i].VAT);
-
-			}
-			else
-			{
-				gotoxy(Xthongbao, ythongbao);
-				cout << "Khong co hoa don nao trong khoang thoi gian nay";
-			}
-		}
-	
+				gotoxy(125, 11 + d);
+				cout << dsnv.ds[i]->hoNV << " "<<dsnv.ds[i]->tenNV;
+				gotoxy(175, 11 + d);
+				int trigiaHD=0;
+				for (int j = 0; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
+				{
+					trigiaHD += thanhTien(dsnv.ds[i]->dshd.head->ds_cthd.hd[j].dongia, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].soluong, dsnv.ds[i]->dshd.head->ds_cthd.hd[j].VAT);					
+				}
+				cout << trigiaHD;
+				d++;				
+			}									
+		}		
 	}
+	duongKeDuoiThongKe(d + 11, 240);
+	gotoxy(Xthongbao, ythongbao);
 }
 void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 	char chr;
@@ -594,7 +774,13 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 			while (true)
 			{
 				xoaKhungHuongDan();
-			ct.soluong = nhapSoNguyenint(99, 8, 10, "", 240);
+				do
+				{
+					gotoxy(99, 8);
+					cout << "           ";
+					ct.soluong = nhapSoNguyenint(99, 8, 10, "", 240);
+				} while (ct.soluong<1);
+			
 
 				if (k->SLT<ct.soluong && loai=='X')
 				{
@@ -624,27 +810,30 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 				}
 			}
 			xoaKhungThongBao();
-			if (ct.soluong == -1)
+			
+			do
 			{
-				break;
-			}
-			ct.dongia = nhapSoNguyenint(133, 8, 10, "", 240);
-			if (ct.dongia == -1)
+				gotoxy(133, 8);
+				cout << "            ";
+				ct.dongia = nhapSoNguyenint(133, 8, 10, "", 240);
+			} while (ct.dongia<1);
+			do
 			{
-				break;
-			}
-			ct.VAT = nhapSoNguyenint(157, 8, 10, "", 240);
-			if (ct.VAT == -1)
-			{
-				break;
-			}
+				gotoxy(157, 8);
+				cout << "            ";
+				ct.VAT = nhapSoNguyenint(157, 8, 10, "", 240);
+			} while (ct.VAT<1);
 			int lchon = xacNhanThemVT();
 			xoaKhungHuongDan();
 			if (lchon == 1)
 			{
 				ds_cthd.hd[ds_cthd.sl] = ct;
 				ds_cthd.sl++;
-				
+				gotoxy(Xthongbao, ythongbao);
+				cout << "-Da them vat tu vao chi tiet hoa don.";
+				Sleep(2000);
+				gotoxy(Xthongbao, ythongbao);
+				cout << "                                     ";
 				ShowCur(0);
 				xuatDSCTHD(ds_cthd, t);
 				gotoxy(70, 8);
@@ -754,22 +943,115 @@ void themVatTuVaoHoaDon(DSCTHD &ds_cthd, tree t,char loai) {
 			{
 				ct.maVT = "";
 				xoaKhungDuLieu();
-				giaoDienCTHD('N');
+				giaoDienCTHD(loai);
 				temp = false;
 				ShowCur(0);
 				break;
 			}
 			
 		} while (true);
-		if (!temp)
+		if (!temp && ds_cthd.sl>0 )
 			{
-				gotoxy(Xthongbao, ythongbao);
-				cout << "-Da luu chi tiet hoa don.";
-				Sleep(2000);
-				gotoxy(Xthongbao, ythongbao);
-				cout << "                         ";
+				
 				break;
 			}
+	}
+}
+
+//Ham kiem tra vat tu trong ct_dshd
+bool kT_VT_CTDSHD(DSNV dsnv, VatTu* ds[], int index)
+{
+	string ma;
+	ma = ds[index]->maVT;
+	for (int i = 0; i < dsnv.sl; i++)
+	{
+		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
+		{
+			for (int j = 0; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
+			{
+				if (dsnv.ds[i]->dshd.head->ds_cthd.hd[j].maVT == ma)
+				{
+					return i;
+				}
+			}
+		}
+	}	
+	return false;
+}
+//Tinh so luong vat tu xuat trong khoang thoi gian
+void SLVTXuat_TrongTG(DSNV dsnv, Date date1, Date date2, VatTu* dsvt[], int& nds)
+{
+	int d = 0;
+	for (int i = 0; i < dsnv.sl; i++)
+	{
+		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
+		{
+			if ((demNgay(date1) <= demNgay(p->ngayLap)) && (demNgay(p->ngayLap) <= demNgay(date2)) && (p->loai == 'X'))
+			{
+				for (int j = 0; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
+				{
+					for (int k = 0; k < nds; k++)
+					{
+						if ((dsnv.ds[i]->dshd.head->ds_cthd.hd[j].maVT) == dsvt[k]->maVT)
+						{
+							dsvt[k]->SLT += dsnv.ds[i]->dshd.head->ds_cthd.hd[j].soluong;
+						}
+					}				
+				}
+			}
+		}
+	}
+}
+void chuyenMang_TopVT(tree t, VatTu* dsvt[], int& nds)
+{
+	if (t != NULL)
+	{
+		dsvt[nds] = new VatTu;
+		dsvt[nds]->maVT = t->maVT;
+		dsvt[nds]->tenVT = t->tenVT;
+		dsvt[nds]->DV = t->DV;
+		dsvt[nds]->SLT = 0;
+		nds++;
+		chuyenMang_TopVT(t->left, dsvt, nds);
+		chuyenMang_TopVT(t->right, dsvt, nds);
+	}	
+}
+void sapXep_TopVT(VatTu* ds[], int& nds)
+{
+	for (int i = 0; i < nds - 1; i++)
+	{
+		for (int j = i + 1; j < nds; j++)
+		{
+			if (ds[i]->SLT < ds[j]->SLT)
+			{
+				hoanVi_2VatTu(ds[i], ds[j]);
+			}
+			else if (ds[i]->SLT == ds[j]->SLT)
+			{
+				if(ds[i]->tenVT > ds[j]->tenVT)
+				hoanVi_2VatTu(ds[i], ds[j]);
+			}
+		}
+	}
+}
+void inTopVT(VatTu* ds[], int& nds)
+{
+	int i;
+	set_color(240);
+	for (int i = 0; i < 10; i++)
+	{		
+		gotoxy(xstt, i + 11);
+		cout << i + 1;
+		gotoxy(xdulieu2, i + 11);
+		cout << ds[i]->maVT;
+		gotoxy(xdulieu3, i + 11);
+		cout << ds[i]->tenVT;
+		gotoxy(xdulieu4, i + 11);
+		cout << ds[i]->DV;
+		gotoxy(xdulieu5, i + 11);
+		cout << ds[i]->SLT;
+		set_color(240);
+		duongKeNganCach(i + 11);
 	}
 }
 
@@ -832,26 +1114,4 @@ int ngay_Theo_Thang(Date date)
 int demNgay(Date date) //dem ngay tu 1/1/2000 -> date
 {
 	return (ngay_Theo_Nam(date) + ngay_Theo_Thang(date) + date.ngay);
-}
-bool kTNgay_Truoc(Date date1, Date date2) //kt date1 <= date2
-{
-	if (date1.nam <= date2.nam)
-	{
-		if (date1.thang <= date2.thang) {
-			if (date1.ngay <= date2.ngay)
-			{
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else {
-			return false;
-		}
-	}
-	else {
-		return false;
-	}
-	return true;
 }

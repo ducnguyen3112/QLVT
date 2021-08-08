@@ -68,16 +68,32 @@ void quickSortNhanVien(DSNV& dsnv, int low, int high);
 int ktTrungNV(string str, DSNV ds_nv);
 HoaDon* taoNodeHoaDon(DSNV& dsnv, int indexNV, char loai, string ngay,string shd);
 string sinhMaHoaDon(char loai, DSHD ds);
-void duyetHoaDon(DSNV dsnv, int index);
-int chonHoaDon(DSNV dsnv, DSHD dshd);
+void duyetHoaDon(DSNV dsnv);
+int thoatDSHoaDon(DSNV dsnv);
 void themHoaDon(HoaDon*& ds, HoaDon* p);
 void themVatTuVaoHoaDon(DSCTHD& ds_cthd, tree t, char loai);
+bool ktTrungHoaDon(HoaDon* ds, string ma);
+bool ktTrungHoaDon2(DSNV dsnv, string ma);
 Date stodate(string  date);
-void xuatDSHD_TrongTG(DSCTHD ds_cthd, DSHD ds, DSNV dsnv, Date date1, Date date2);
+void xuatDSCTHD(DSCTHD& ds_cthd, tree t);
+void xuatDSHD_TrongTG(DSNV dsnv, Date date1, Date date2);
+bool kT_VT_CTDSHD(DSNV dsnv, VatTu* ds[], int index);
+HoaDon* createNodeHD();
+
+//Top10VT
+void chuyenMang_TopVT(tree t, VatTu* dsvt[], int& nds);
+void SLVTXuat_TrongTG(DSNV dsnv, Date date1, Date date2, VatTu* dsvt[], int& nds);
+void sapXep_TopVT(VatTu* ds[], int& nds);
+void inTopVT(VatTu* ds[], int& nds);
+
 
 //Tinh ngay
 bool kT_NamNhuan(Date date);
 int ngay_Theo_Nam(Date date);
 int ngay_Theo_Thang(Date date);
 int demNgay(Date date);
-bool kTNgay_Truoc(Date date1, Date date2);
+
+void ghiFileCTHD(DSNV dsnv);
+void ghiFileHD(DSNV dsnv);
+void docFileHD(DSNV& dsnv);
+void docFileCTHD(DSNV& dsnv);

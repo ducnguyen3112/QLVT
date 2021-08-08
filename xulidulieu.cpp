@@ -4,6 +4,8 @@ int doiThanhSo(string a);
 //Ham nhap chuoi co chu va khoang trang
 string nhapChuoi(int x,int y,int length,string str, int color) {
     set_color(color);
+    char* temp = new char[length + 1];
+    strcpy(temp, str.c_str());
     int vitri = str.length();
     gotoxy(x, y);
     cout << str;
@@ -15,36 +17,50 @@ string nhapChuoi(int x,int y,int length,string str, int color) {
         chr = _getch();
         if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr == ' ')) && (vitri < length))
         {
-            if (vitri==0||str.at(vitri - 1)==' ')
+            if (chr == ' ' && (vitri == 0 || temp[vitri - 1] == ' '))
             {
-                str.push_back(char(toupper(chr)));
+                continue;
+            }
+            if (vitri==0||temp[vitri - 1]==' ')
+            {
+                temp[vitri]=char(toupper(chr));
             }
             else
             {
-                str.push_back(char(chr));
+                temp[vitri] = char(tolower(chr));
             }
             
-            cout << str.at(vitri);
+            cout << temp[vitri];
             vitri++;
         }if (chr == 8 && vitri > 0)
         {
             vitri--;
-            str.pop_back();
+            temp[vitri] = '\0';
             gotoxy(x + vitri, y);
             cout << " ";
             gotoxy(x + vitri, y);
         }
         if (chr == 13 && vitri != 0)
         {
+            if (temp[vitri-1]==' ')
+            {
+                temp[vitri - 1] = '\0';
+            }
+            temp[vitri] = '\0';
+            str = temp;
+            delete[] temp;
             return str;
         }
     } while (chr != ESC);
+    delete[] temp;
     return "";
 }
 
 //Ham nhap chuoi co chu,so va khong khoang trang
 string nhapMa(int x, int y, int length, string str,int color) {
     set_color(color);
+    char* temp = new char[length + 1];
+    strcpy(temp, str.c_str());
     int vitri = str.length();
     gotoxy(x, y);
     cout << str;
@@ -54,29 +70,34 @@ string nhapMa(int x, int y, int length, string str,int color) {
         chr = _getch();
         if (((chr >= 'A' && chr <= 'Z') || (chr <= '9' && chr >= '0') || (chr >= 'a' && chr <= 'z')) && (vitri < length))
         {
-            str.push_back(toupper(char(chr)));
-            cout << str.at(vitri);
+            temp[vitri] = char(toupper(chr));
+            cout << temp[vitri];
             vitri++;
         }if (chr == 8 && vitri > 0)
         {
             vitri--;
-            str.pop_back();
+            temp[vitri] = '\0';
             gotoxy(x + vitri, y);
             cout << " ";
             gotoxy(x + vitri, y);
         }
         if (chr == 13 && vitri != 0)
         {
+            temp[vitri] = '\0';
+            str = temp;
+            delete[] temp;
             return str;
         }
     } while (chr != ESC);
 
-    
+    delete[] temp;
     return "";
 }
-//Chi viet hoa ki tu dau
-string nhapChuoi3(int x, int y, int length, string str, int color) {
+//Viet hoa ki tu dau - co the viet so
+string nhapChuoi4(int x, int y, int length, string str, int color) {
     set_color(color);
+    char* temp = new char[length + 1];
+    strcpy(temp, str.c_str());
     int vitri = str.length();
     gotoxy(x, y);
     cout << str;
@@ -86,104 +107,51 @@ string nhapChuoi3(int x, int y, int length, string str, int color) {
         gotoxy(x + vitri, y);
 
         chr = _getch();
-        if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr == ' ')) && (vitri < length))
+        if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')|| (chr == ' ')) && (vitri < length))
         {
-            if (vitri == 0 )
+            if (chr == ' ' && (vitri == 0 || temp[vitri - 1] == ' '))
             {
-                str.push_back(char(toupper(chr)));
+                continue;
+            }
+            if (vitri == 0)
+            {
+                temp[vitri] = char(toupper(chr));
             }
             else
             {
-                str.push_back(char(chr));
+                temp[vitri] = char(tolower(chr));
             }
 
-            cout << str.at(vitri);
+            cout << temp[vitri];
             vitri++;
         }if (chr == 8 && vitri > 0)
         {
             vitri--;
-            str.pop_back();
+            temp[vitri] = '\0';
             gotoxy(x + vitri, y);
             cout << " ";
             gotoxy(x + vitri, y);
         }
         if (chr == 13 && vitri != 0)
         {
-            return str;
-        }
-    } while (chr != ESC);
-    return "";
-}
-//Chi co chu cai khong co khoang trang
-string nhapChuoi2(int x, int y, int length,string str, int color) {
-    set_color(color);
-    int vitri = str.length();
-    gotoxy(x, y);
-    cout << str;
-    int chr;
-    do {
-
-        gotoxy(x + vitri, y);
-        chr = _getch();
-        if (((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') ) && (vitri < length))
-        {
-            if (vitri==0)
+            if (temp[vitri - 1] == ' ')
             {
-                str.push_back(char(toupper(chr)));
+                temp[vitri - 1] = '\0';
             }
-            else{
-                    cout << str.at(vitri);
-            }
- 
-            vitri++;
-        }if (chr == 8 && vitri > 0)
-        {
-            vitri--;
-            str.pop_back();
-            gotoxy(x + vitri, y);
-            cout << " ";
-            gotoxy(x + vitri, y);
-        }
-        if (chr == 13 && vitri != 0)
-        {
+            temp[vitri] = '\0';
+            str = temp;
+            delete[] temp;
             return str;
         }
     } while (chr != ESC);
+    delete[] temp;
     return "";
 }
 //nhap nhap chuoi la so nguyen va khong co khoang trang
-string nhapSoNguyen(int x, int y, int length, string str, int color) {
-    set_color(color);
-    int vitri = str.length();
-    gotoxy(x, y);
-    cout << str;
-    int chr;
-    do {
-
-        gotoxy(x + vitri, y);
-        chr = _getch();
-        if (((chr >= '0' && chr <= '9')) && (vitri < length))
-        {
-            str.push_back(char(chr));
-            cout << str.at(vitri);
-            vitri++;
-        }if (chr == 8 && vitri > 0)
-        {
-            vitri--;
-            str.pop_back();
-            gotoxy(x + vitri, y);
-            cout << " ";
-            gotoxy(x + vitri, y);
-        }
-        if (chr == 13 && vitri != 0)
-        {
-            return str;
-        }
-    } while (chr != ESC);
-    return "";
-}
 int nhapSoNguyenint(int x, int y, int length, string str, int color) {
     set_color(color);
+    char* temp = new char[length + 1];
+    strcpy(temp, str.c_str());
     int vitri = str.length();
     gotoxy(x, y);
     cout << str;
@@ -194,22 +162,25 @@ int nhapSoNguyenint(int x, int y, int length, string str, int color) {
         chr = _getch();
         if (((chr >= '0' && chr <= '9')) && (vitri < length))
         {
-            str.push_back(char(chr));
-            cout << str.at(vitri);
+            temp[vitri]=(char(chr));
+            cout << temp[vitri];
             vitri++;
         }if (chr == 8 && vitri > 0)
         {
             vitri--;
-            str.pop_back();
+            temp[vitri] = '\0';
             gotoxy(x + vitri, y);
             cout << " ";
             gotoxy(x + vitri, y);
         }
         if (chr == 13 && vitri != 0)
         {
-            return doiThanhSo(str);
+            int t = atoi(temp);
+            delete[] temp;
+            return t;
         }
     } while (chr != ESC);
+    delete[] temp;
     return -1;
 }
 //Ham chuyen chuoi thanh so
@@ -227,9 +198,11 @@ int doiThanhSo(string a)
 //Ham nhap ngay
 string nhapNgay(int x, int y, int length, string str, int color) {
     set_color(color);
+    char* temp = new char[length + 1];
+    strcpy(temp, str.c_str());
     int vitri = str.length();
     gotoxy(x, y);
-    cout << str;
+    cout << temp;
     int chr;
     ShowCur(1);
     do {
@@ -238,26 +211,26 @@ string nhapNgay(int x, int y, int length, string str, int color) {
         chr = _getch();
         if ((chr >= '0' && chr <= '9') && (vitri < length))
         {
-            str.push_back(char(chr));
-            cout << str.at(vitri);
+            temp[vitri] = (char(chr));
+            cout << temp[vitri];
             vitri++;
         }
         if ((vitri==2|| vitri == 5)&& chr!=8)
         {
-            str.push_back(char(47));
-            cout << str.at(vitri);
+            temp[vitri] = (char(47));
+            cout << temp[vitri];
             vitri++;
         }
         if (chr == 8 && vitri > 0)
         {
            vitri--;
-           str.pop_back();
+           temp[vitri] = '\0';
            gotoxy(x + vitri, y);
            if (vitri == 2 || vitri == 5)
            {
                cout << "/";
                
-               str.pop_back();
+               temp[vitri] = '\0';
                vitri--;
                gotoxy(x + vitri, y);
                cout << "_";
@@ -268,12 +241,16 @@ string nhapNgay(int x, int y, int length, string str, int color) {
            }
            gotoxy(x + vitri, y); 
         }
-        if (chr == 13 && vitri != 0 && str.length()==10 && ktNgay(str) )
+        if (chr == 13 && vitri ==10 && ktNgay(temp) )
         {
+            temp[vitri] = '\0';
+            str = temp;
+            delete[] temp;
 
             return str;
         }
     } while (chr != ESC);
+    delete[] temp;
     return "";
 }
 //

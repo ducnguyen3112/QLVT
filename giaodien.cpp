@@ -259,6 +259,7 @@ void duongKeDuoi(int y,int color) {
 	gotoxy(xkedoc6, y);
 	cout << char(217);
 }
+
 //in ra huong dan chuc nang them nhan vien
 void huongDanThemNhanVien(int color) {
 	set_color(color);
@@ -658,6 +659,20 @@ void duongKeDuoiThongKe(int y, int color) {
 	cout << char(193);
 	gotoxy(xkedoc6, y);
 	cout << char(217);
+}
+void duongKeNganCachThongKe(int y) {
+	gotoxy(xkedoc1, y);
+	cout << char(179);
+	gotoxy(70, y);
+	cout << char(179);
+	gotoxy(95, y);
+	cout << char(179);
+	gotoxy(120, y);
+	cout << char(179);
+	gotoxy(170, y);
+	cout << char(179);
+	gotoxy(xkedoc6, y);
+	cout << char(179);
 }
 void GiaoDienTop10VT() {
 	gotoxy(100, 4);
@@ -1192,9 +1207,9 @@ void giaoDienInHoaDon() {
 	cout << "IN HOA DON";
 	KhungTieude(108, 3, 30);
 	gotoxy(60, 8);
-	cout << "LOAI HD:";
-	gotoxy(80, 8);
 	cout << "MA HOA DON:";
+	gotoxy(90, 8);
+	cout << "LOAI HD:";
 	gotoxy(110, 8);
 	cout << "NGAY LAP HD:";
 	gotoxy(140, 8);
