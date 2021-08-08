@@ -164,6 +164,16 @@ void docFileHD(DSNV& dsnv) {
 	}
 	fin.close();
 }
+string biendoso(int i) {
+	char* so = new char[3];
+	if (i<=9)
+	{
+		so[0] = '0';
+		so[1] = char(48+i);
+		so[2] = '\0';
+	}
+	return so;
+}
 void ghiFileHD(DSNV dsnv) {
 	ofstream fout;
 	fout.open("dshd.txt" ,ios_base::out);
@@ -176,7 +186,24 @@ void ghiFileHD(DSNV dsnv) {
 			{
 			
 				fout << p->soHD << ',';
-				fout << p->ngayLap.ngay<<"/"<< p->ngayLap.thang << "/" << p->ngayLap.nam << ',';
+				if (p->ngayLap.ngay<10)
+				{
+					fout<<biendoso(p->ngayLap.ngay) << '/';
+				}
+				else
+				{
+					fout << p->ngayLap.ngay<<'/';
+				}
+
+				if (p->ngayLap.thang < 10)
+				{
+					fout << biendoso(p->ngayLap.thang) << '/';
+				}
+				else
+				{
+					fout << p->ngayLap.thang << '/';
+				}
+				fout << p->ngayLap.nam<<',';
 				fout << p->loai << endl;
 			}
 			fout << "-," << endl;

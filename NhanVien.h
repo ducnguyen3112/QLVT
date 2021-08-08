@@ -92,6 +92,7 @@ bool kT_NamNhuan(Date date);
 int ngay_Theo_Nam(Date date);
 int ngay_Theo_Thang(Date date);
 int demNgay(Date date);
+string biendoso(int i);
 
 void ghiFileCTHD(DSNV dsnv);
 void ghiFileHD(DSNV dsnv);
