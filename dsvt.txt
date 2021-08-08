@@ -5,7 +5,7 @@ Cai
 VT132
 Den ban
 Cai
-100
+98
 VT147
 Lo vi song
 Cai
@@ -17,7 +17,7 @@ Cai
 VT198
 May rua chen
 Cai
-0
+23
 VT200
 Dao
 Cai
@@ -33,7 +33,7 @@ Cai
 VT369
 May ep cam
 Cai
-50
+48
 VT379
 Binh ly thuy tinh
 Bo
@@ -45,7 +45,7 @@ Cai
 VT415
 Bep ga
 Cai
-0
+30
 VT448
 May chieu
 Cai
@@ -53,7 +53,7 @@ Cai
 VT565
 Ban ghe inox
 Bo
-25
+24
 VT518
 Tu lanh panasonic 188l
 Cai

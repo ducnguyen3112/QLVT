@@ -1025,13 +1025,13 @@ void SLVTXuat_TrongTG(DSNV dsnv, Date date1, Date date2, VatTu* dsvt[], int& nds
 		{
 			if ((demNgay(date1) <= demNgay(p->ngayLap)) && (demNgay(p->ngayLap) <= demNgay(date2)) && (p->loai == 'X'))
 			{
-				for (int j = 0; j < dsnv.ds[i]->dshd.head->ds_cthd.sl; j++)
+				for (int j = 0; j < p->ds_cthd.sl; j++)
 				{
 					for (int k = 0; k < nds; k++)
 					{
-						if ((dsnv.ds[i]->dshd.head->ds_cthd.hd[j].maVT) == dsvt[k]->maVT)
+						if ((p->ds_cthd.hd[j].maVT) == dsvt[k]->maVT)
 						{
-							dsvt[k]->SLT += dsnv.ds[i]->dshd.head->ds_cthd.hd[j].soluong;
+							dsvt[k]->SLT += p->ds_cthd.hd[j].soluong;
 						}
 					}				
 				}
