@@ -65,13 +65,10 @@ bool themNhanVien(DSNV& dsnv,int y) {
 		dsnv.sl++;
 		return true;
 }
-
-//Doc file nhan vien
-void docFileNhanVien(DSNV &dsnv) {
+void docFileNhanVien(DSNV& dsnv) {
 	ifstream fin;
 	fin.open("dsnv.txt", ios_base::in);
-	string str;
-	while (fin.eof()!=true)
+	while (fin.eof() != true)
 	{
 		dsnv.ds[dsnv.sl] = new NhanVien;
 		getline(fin, dsnv.ds[dsnv.sl]->maNV, '\n');
@@ -82,12 +79,42 @@ void docFileNhanVien(DSNV &dsnv) {
 		getline(fin, dsnv.ds[dsnv.sl]->hoNV, '\n');
 		getline(fin, dsnv.ds[dsnv.sl]->tenNV, '\n');
 		getline(fin, dsnv.ds[dsnv.sl]->phai, '\n');
-		string str;
-		
+
 		dsnv.sl++;
 	}
 	fin.close();
 }
+//Doc file nhan vien
+//void docFileNhanVien(DSNV &dsnv) {
+//	ifstream fin;
+//	fin.open("dsnv.txt", ios_base::in);
+//	char loai;
+//	string ngaylap;
+//	string sohoadon;
+//	string mavt;
+//
+//	while (fin.eof()!=true)
+//	{
+//		dsnv.ds[dsnv.sl] = new NhanVien;
+//		getline(fin, dsnv.ds[dsnv.sl]->maNV, '\n');
+//		if (dsnv.ds[dsnv.sl]->maNV.empty())
+//		{
+//			break;
+//		}
+//		getline(fin, dsnv.ds[dsnv.sl]->hoNV, '\n');
+//		getline(fin, dsnv.ds[dsnv.sl]->tenNV, '\n');
+//		getline(fin, dsnv.ds[dsnv.sl]->phai, '\n');
+//		getline(fin, sohoadon, '\n');
+//		getline(fin, ngaylap, '\n');
+//		fin >> loai;
+//		HoaDon* t = taoNodeHoaDon(dsnv, dsnv.sl, loai, ngaylap, sohoadon);
+//		themHoaDon(dsnv.ds[dsnv.sl]->dshd.head, t);
+//		string str;
+//		
+//		dsnv.sl++;
+//	}
+//	fin.close();
+//}
 //ghi file nhan vien
 void ghiFileNhanVien(DSNV dsnv) {
 	ofstream fout;
@@ -101,29 +128,146 @@ void ghiFileNhanVien(DSNV dsnv) {
 	}
 	fout.close();
 }
-void ghiFileCTHD(DSNV dsnv) {
+void docFileHD(DSNV& dsnv) {
+	ifstream fin;
+	fin.open("dshd.txt", ios_base::in);
+	string manv;
+	string mahd;
+	string ngaylap;
+	char loai;
+	int index;
+	HoaDon* t ;
+	while (fin.eof() != true)
+	{ 
+		t = createNodeHD();
+		getline(fin,manv, '\n');
+		index = ktTrungNV(manv, dsnv);
+		if (index>=0)
+		{
+			while (true)
+			{
+				getline(fin, mahd, ',');
+				if (mahd.length()<6)
+				{
+					break;
+				}
+				getline(fin, ngaylap, ',');
+				fin >> loai;
+				fin.ignore();
+				t = taoNodeHoaDon(dsnv, index, loai, ngaylap, mahd);
+				themHoaDon(dsnv.ds[index]->dshd.head, t);
+				dsnv.ds[index]->dshd.sl++;
+				
+			}
+			
+		}
+	}
+	fin.close();
+}
+void ghiFileHD(DSNV dsnv) {
 	ofstream fout;
-	fout.open("dscthd.txt");
+	fout.open("dshd.txt" ,ios_base::out);
 	for (int i = 0; i < dsnv.sl; i++)
 	{
-		fout << dsnv.ds[i]->maNV << endl;
-		for (HoaDon*  p = dsnv.ds[i]->dshd.head; p != NULL; p=p->next)
+		if (dsnv.ds[i]->dshd.head!=NULL)
 		{
-			fout << p->soHD << endl;
-			fout << p->ngayLap.ngay<<"/"<< p->ngayLap.thang << "/" << p->ngayLap.nam << endl;
-			fout << p->loai << endl;
-			for ( i = 0; i < p->ds_cthd.sl; i++)
+			fout << dsnv.ds[i]->maNV << endl;
+			for (HoaDon*  p = dsnv.ds[i]->dshd.head; p != NULL; p=p->next)
 			{
-				fout << p->ds_cthd.hd[i].maVT << endl;
-				fout << p->ds_cthd.hd[i].soluong << endl;
-				fout << p->ds_cthd.hd[i].dongia << endl;
-				fout << p->ds_cthd.hd[i].soluong << endl;
-				fout << p->ds_cthd.hd[i].VAT << endl;
+			
+				fout << p->soHD << ',';
+				fout << p->ngayLap.ngay<<"/"<< p->ngayLap.thang << "/" << p->ngayLap.nam << ',';
+				fout << p->loai << endl;
 			}
+			fout << "-," << endl;
 		}
+
 	}
 	fout.close();
 }
+void docFileCTHD(DSNV& dsnv) {
+	ifstream fin;
+	fin.open("dscthd.txt", ios_base::in);
+	string manv;
+	string mahd;
+	string ngaylap;
+	char loai;
+	int index;
+	int slvt;
+	int demhd;
+	while (fin.eof() != true)
+	{
+
+		getline(fin, manv, '\n');
+		index = ktTrungNV(manv, dsnv);
+		if (index >= 0)
+		{
+			demhd = 0;
+			while (demhd < dsnv.ds[index]->dshd.sl)
+			{
+				mahd = "";
+				getline(fin, mahd, '\n');
+				fin >> slvt;
+				fin.ignore();
+				for (HoaDon* p = dsnv.ds[index]->dshd.head; p != NULL; p=p->next)
+				{
+					
+					if (p->soHD==mahd)
+					{	
+						
+						while (p->ds_cthd.sl < slvt)
+						{
+							getline(fin, p->ds_cthd.hd[p->ds_cthd.sl].maVT, ',');
+							//cout << p->ds_cthd.hd[p->ds_cthd.sl].maVT;
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].dongia;
+							//cout << "dg:" << p->ds_cthd.hd[p->ds_cthd.sl].dongia << endl;
+							fin.ignore();
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].soluong;
+							//cout << "sl:" << p->ds_cthd.hd[p->ds_cthd.sl].soluong << endl;
+							fin.ignore();
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].VAT;
+							//cout << "vat:" << p->ds_cthd.hd[p->ds_cthd.sl].VAT << endl;
+							p->ds_cthd.sl++;
+							fin.ignore();
+						}
+						break;
+					}
+				}
+				demhd++;
+			}
+		}
+	}
+	fin.close();
+}
+void ghiFileCTHD(DSNV dsnv) {
+	ofstream fout;
+	fout.open("dscthd.txt", ios_base::out);
+	for (int i = 0; i < dsnv.sl; i++)
+	{
+
+		
+		if (dsnv.ds[i]->dshd.head != NULL)
+		{
+			fout << dsnv.ds[i]->maNV << endl;
+		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
+			{
+			fout << p->soHD << endl;
+			fout << p->ds_cthd.sl << endl;
+			for (int i = 0; i < p->ds_cthd.sl; i++)
+				{
+					fout << p->ds_cthd.hd[i].maVT << ',';
+					fout << p->ds_cthd.hd[i].dongia << ',';
+					fout << p->ds_cthd.hd[i].soluong << ',';
+					fout << p->ds_cthd.hd[i].VAT  << endl;
+					
+				}
+			}
+		}
+		
+	}
+	fout.close();
+}
+
 //Xuat ds nhan vien len bang
 void xuatDSNV(DSNV dsnv,int index) {
 	int i;

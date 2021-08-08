@@ -78,6 +78,7 @@ Date stodate(string  date);
 void xuatDSCTHD(DSCTHD& ds_cthd, tree t);
 void xuatDSHD_TrongTG(DSNV dsnv, Date date1, Date date2);
 bool kT_VT_CTDSHD(DSNV dsnv, VatTu* ds[], int index);
+HoaDon* createNodeHD();
 
 //Top10VT
 void chuyenMang_TopVT(tree t, VatTu* dsvt[], int& nds);
@@ -93,3 +94,6 @@ int ngay_Theo_Thang(Date date);
 int demNgay(Date date);
 
 void ghiFileCTHD(DSNV dsnv);
+void ghiFileHD(DSNV dsnv);
+void docFileHD(DSNV& dsnv);
+void docFileCTHD(DSNV& dsnv);
