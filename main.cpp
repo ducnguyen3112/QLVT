@@ -871,7 +871,8 @@ int main(){
 	DSVT dsvt;
 	docFileNhanVien(dsnv);
 	docFileVatTu(dsvt);
-	//docFileHD(dsnv);
+	docFileHD(dsnv);
+	docFileCTHD(dsnv);
 	khoiTaoManHinh();
 	GiaoDienChinh();
 	menu(1,dsnv, dsvt);

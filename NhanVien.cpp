@@ -193,20 +193,47 @@ void docFileCTHD(DSNV& dsnv) {
 	string ngaylap;
 	char loai;
 	int index;
+	int slvt;
+	int demhd;
 	while (fin.eof() != true)
 	{
+
 		getline(fin, manv, '\n');
 		index = ktTrungNV(manv, dsnv);
 		if (index >= 0)
 		{
-			while (true)
+			demhd = 0;
+			while (demhd < dsnv.ds[index]->dshd.sl)
 			{
-				getline(fin, mahd, ',');
-				if (mahd.length() < 6)
+				mahd = "";
+				getline(fin, mahd, '\n');
+				fin >> slvt;
+				fin.ignore();
+				for (HoaDon* p = dsnv.ds[index]->dshd.head; p != NULL; p=p->next)
 				{
-					break;
+					
+					if (p->soHD==mahd)
+					{	
+						
+						while (p->ds_cthd.sl < slvt)
+						{
+							getline(fin, p->ds_cthd.hd[p->ds_cthd.sl].maVT, ',');
+							//cout << p->ds_cthd.hd[p->ds_cthd.sl].maVT;
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].dongia;
+							//cout << "dg:" << p->ds_cthd.hd[p->ds_cthd.sl].dongia << endl;
+							fin.ignore();
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].soluong;
+							//cout << "sl:" << p->ds_cthd.hd[p->ds_cthd.sl].soluong << endl;
+							fin.ignore();
+							fin >> p->ds_cthd.hd[p->ds_cthd.sl].VAT;
+							//cout << "vat:" << p->ds_cthd.hd[p->ds_cthd.sl].VAT << endl;
+							p->ds_cthd.sl++;
+							fin.ignore();
+						}
+						break;
+					}
 				}
-				
+				demhd++;
 			}
 		}
 	}
@@ -225,6 +252,7 @@ void ghiFileCTHD(DSNV dsnv) {
 		for (HoaDon* p = dsnv.ds[i]->dshd.head; p != NULL; p = p->next)
 			{
 			fout << p->soHD << endl;
+			fout << p->ds_cthd.sl << endl;
 			for (int i = 0; i < p->ds_cthd.sl; i++)
 				{
 					fout << p->ds_cthd.hd[i].maVT << ',';
@@ -233,7 +261,6 @@ void ghiFileCTHD(DSNV dsnv) {
 					fout << p->ds_cthd.hd[i].VAT  << endl;
 					
 				}
-			fout  << "-," << endl;
 			}
 		}
 		

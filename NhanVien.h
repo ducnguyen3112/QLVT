@@ -96,3 +96,4 @@ int demNgay(Date date);
 void ghiFileCTHD(DSNV dsnv);
 void ghiFileHD(DSNV dsnv);
 void docFileHD(DSNV& dsnv);
+void docFileCTHD(DSNV& dsnv);
